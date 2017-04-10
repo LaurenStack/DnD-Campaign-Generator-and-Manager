@@ -2,12 +2,12 @@
   <div class="row">
     <div class="panel panel-default">
       <h1>D &amp; D Campaign Generator</h1>
+      <p>{{loggedInUser?.email}}</p>
       <p>Get started generating your campaign:</p>
 
       <div class="row">
         <div class="col-xs-4">
           <p>Generate a map</p>
-          <p *ngFor="let user of users | async">{{user.email}}</p>
         </div>
         <div class="col-xs-4">
           <p>Make monsters</p>
