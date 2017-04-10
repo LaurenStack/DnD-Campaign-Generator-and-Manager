@@ -1,2 +1,6 @@
 <h1>Map</h1>
-<canvas id="map" width="500px" height="500px"></canvas>
+<canvas id="map" width="500" height="500" (mousemove)="drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)"></canvas>
+
+<button (click)="clearGrid()">Clear </button>
+
+<input #newColor (load)="colorChange(newColor.value)" (change)="colorChange(newColor.value)" type="color" value="#a07828">
