@@ -1,0 +1,67 @@
+<div *ngFor="let monster of monsters | async">
+  <h4>{{monster.name}}</h4>
+  <p>Current Campaign Count {{monster.count}}</p>
+  <ul>
+    <li>Description: {{monster.description}}</li>
+    <li>Armor Class: {{monster.armor_class}}</li>
+    <li>Challenge: {{monster.challenge}}</li>
+    <li>Hit Points: {{monster.hit_points}}</li>
+    <li *ngIf="monster.languages[0]">Languages:
+      <ul>
+        <li *ngFor="let language of monster.languages">{{language}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.actions[0]">Actions:
+      <ul>
+        <li *ngFor="let action of monster.actions">{{action}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.legendary_actions[0]">Legendary Actions:
+      <ul>
+        <li *ngFor="let laction of monster.legendary_actions">{{laction}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.attack[0]">Attack:
+      <ul>
+        <li *ngFor="let thisattack of monster.attack">{{thisattack}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.condition_immunities[0]">Condition Immunities:
+      <ul>
+        <li *ngFor="let immunity of monster.condition_immunities">{{immunity}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.damage_immunities[0]">Damage Immunities:
+      <ul>
+        <li *ngFor="let dmgimmunity of monster.damage_immunities">{{dmgimmunity}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.damage_resistances[0]">Damage Resistances:
+      <ul>
+        <li *ngFor="let resistance of monster.damage_resistances">{{resistance}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.saving_throws[0]">Saving Throws:
+      <ul>
+        <li *ngFor="let throw of monster.saving_throws">{{throw}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.senses[0]">Senses:
+      <ul>
+        <li *ngFor="let sense of monster.senses">{{sense}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.skills[0]">Skills:
+      <ul>
+        <li *ngFor="let skill of monster.skills">{{skill}}</li>
+      </ul>
+    </li>
+    <li *ngIf="monster.speed">Speed: {{monster.speed}}</li>
+    <li *ngIf="monster.stats[0]">Stats:
+      <ul>
+        <li *ngFor="let stat of monster.stats">{{stat}}</li>
+      </ul>
+    </li>
+    <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
+  </ul>
+</div>
