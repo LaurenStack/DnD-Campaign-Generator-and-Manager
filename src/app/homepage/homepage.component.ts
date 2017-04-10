@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit {
       (auth) => {
       this.userService.getUserByEmail(auth.google.email).subscribe(res => {
         this.loggedInUser = res[0];
-        console.log(res[0]);
+        // this.userService.setLoggedInUser(res[0]);
       });
     }
     )

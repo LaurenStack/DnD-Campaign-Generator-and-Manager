@@ -5,6 +5,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class UserService {
   users: FirebaseListObservable<any[]>;
   monsters: FirebaseListObservable<any[]>;
+  loggedInUser: any;
 
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
@@ -13,6 +14,16 @@ export class UserService {
 
   getUsers() {
     return this.users;
+  }
+
+  logUser(){
+    console.log(this.loggedInUser)
+  }
+
+  setLoggedInUser(user) {
+    console.log("loggedInUser ran")
+    this.loggedInUser = user;
+    console.log(this.loggedInUser)
   }
 
   getUserByEmail(email: string) {
@@ -31,6 +42,30 @@ export class UserService {
 
   getAllMonsters() {
     return this.monsters;
+  }
+
+  addMonster(monster) {
+    var user;
+    var findUser
+    var monsters
+    this.getUserByEmail(this.loggedInUser).subscribe(response=>{
+      findUser = response[0]
+      this.getUserById(findUser.$key).subscribe(res => {
+        if(res.monsters[0]==""){
+          monsters = [monster];
+        }
+        else{
+          console.log(res.monsters)
+          // monsters = res.monsters.push(monster);
+        }
+        user = this.getUserById(findUser.$key);
+        user.update({
+          monsters: monsters
+        })
+      });
+    });
+
+    // user.update({ monsters: monster})
   }
 
 }

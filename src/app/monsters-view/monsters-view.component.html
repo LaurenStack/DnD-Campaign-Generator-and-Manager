@@ -1,5 +1,5 @@
 <p>
-  monsters-view works!
+  <button (click)="testClick()">Log</button>
 </p>
 <div *ngFor="let monster of monsters | async">
   <h4>{{monster.name}}</h4>
@@ -64,5 +64,6 @@
         <li *ngFor="let stat of monster.stats">{{stat}}</li>
       </ul>
     </li>
+    <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
   </ul>
 </div>
