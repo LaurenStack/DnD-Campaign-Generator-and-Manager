@@ -6,7 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { masterFirebaseConfig } from './api-keys';
 import { AngularFireModule} from 'angularfire2';
 import { AppComponent } from './app.component';
-import { AuthService } from './providers/auth.service';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
@@ -19,7 +20,7 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: HomepageComponent },
   { path: 'login', component: LoginPageComponent }
 ];
 
@@ -36,7 +37,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
