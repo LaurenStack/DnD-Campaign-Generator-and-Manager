@@ -8,13 +8,24 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   styleUrls: ['./monsters-view.component.css']
 })
 export class MonstersViewComponent implements OnInit {
-monsters: FirebaseListObservable<any[]>;
-showDetails: any;
+  monsters: FirebaseListObservable<any[]>;
+  showDetails: any;
+  alignType: string = "All";
+  creatureType: string = "All";
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.monsters = this.userService.getAllMonsters();
+    this.userService.getAllMonsters().subscribe(res=>{
+      var array = [];
+      for(var i=0;i<res.length;i++){
+        if(array.indexOf(res[i].type)==-1){
+          array.push(res[i].type)
+        }
+      }
+      console.log(array)
+    })
   }
 
   addMonster(monster) {
@@ -28,5 +39,15 @@ showDetails: any;
       this.showDetails = null;
     }
   }
+
+  changeAlign(val){
+    this.alignType = val;
+  }
+
+  changeType(val){
+    this.creatureType = val;
+  }
+
+
 
 }

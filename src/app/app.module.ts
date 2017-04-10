@@ -13,6 +13,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MonstersComponent } from './monsters/monsters.component';
 import { MonstersViewComponent } from './monsters-view/monsters-view.component';
+import { AlignmentPipe } from './alignment.pipe';
+import { TypePipe } from './type.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -36,7 +38,9 @@ const routes: Routes = [
     LoginPageComponent,
     HomepageComponent,
     MonstersComponent,
-    MonstersViewComponent
+    MonstersViewComponent,
+    AlignmentPipe,
+    TypePipe
   ],
   imports: [
     BrowserModule,

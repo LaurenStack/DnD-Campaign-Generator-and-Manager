@@ -1,4 +1,37 @@
-<div *ngFor="let monster of monsters | async">
+<select (change)="changeAlign($event.target.value)">
+  <option value="All">All</option>
+  <option value="Lawful Good">Lawful Good</option>
+  <option value="Neutral Good">Neutral Good</option>
+  <option value="Chaotic Good">Chaotic Good</option>
+  <option value="Lawful Neutral">Lawful Neutral</option>
+  <option value="Neutral">Neutral</option>
+  <option value="Chaotic Neutral">Chaotic Neutral</option>
+  <option value="Lawful Evil">Lawful Evil</option>
+  <option value="Neutral Evil">Neutral Evil</option>
+  <option value="Chaotic Evil">Chaotic Evil</option>
+  <option value="Unaligned">Unaligned</option>
+</select>
+
+<select (change)="changeType($event.target.value)">
+  <option value="All">All</option>
+  <option value="aberration">aberration</option>
+  <option value="humanoid">humanoid</option>
+  <option value="undead">undead</option>
+  <option value="dragon">dragon</option>
+  <option value="elemental">elemental</option>
+  <option value="monstrosity">monstrosity</option>
+  <option value="construct">construct</option>
+  <option value="beast">beast</option>
+  <option value="plant">plant</option>
+  <option value="fiend">fiend</option>
+  <option value="ooze">ooze</option>
+  <option value="fey">fey</option>
+  <option value="giant">giant</option>
+  <option value="celestial">celestial</option>
+  <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
+</select>
+<br><br>
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType">
   <div class="panel panel-default">
     <div class="panel panel-heading" (click)="displayDetails(monster)">
       <h3>{{monster.name}}</h3>
@@ -18,12 +51,11 @@
         <li *ngIf="monster.religion">Religion: {{monster.religion}}</li>
         <li>Hit Points: {{monster.hit_points}}</li>
         <li>Hit Dice: {{monster.hit_dice}}</li>
-        <li *ngIf="monster.alignment">Alignment: {{monster.alignment}}</li>
         <li *ngIf="monster.languages">Languages: {{monster.languages}}</li>
         <li>Stats:
           <ul>
             <li *ngIf="monster.charisma">Charisma: {{monster.charisma}} <span *ngIf="monster.charisma_save">| Charisma Save: {{monster.charisma_save}}</span></li>
-            <li *ngIf="monster.constitution">Constitution: {{monster.constitution}}<span *ngIf="monster.constitution_save"> | Charisma Save: {{monster.constitution_save}}</span></li>
+            <li *ngIf="monster.constitution">Constitution: {{monster.constitution}}<span *ngIf="monster.constitution_save"> | Constitution Save: {{monster.constitution_save}}</span></li>
             <li *ngIf="monster.dexterity">Dexterity: {{monster.dexterity}}<span *ngIf="monster.dexterity_save"> | Dexterity Save: {{monster.dexterity_save}}</span></li>
             <li *ngIf="monster.wisdom">Wisdom: {{monster.wisdom}}<span *ngIf="monster.wisdom_save"> | Wisdom Save: {{monster.wisdom_save}}</span></li>
             <li *ngIf="monster.intelligence">Intelligence: {{monster.intelligence}}</li>
