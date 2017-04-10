@@ -1,0 +1,21 @@
+DELETE THIS: /*this is for saving the initial details of terrain!*/
+
+{
+  "terrain":[
+    {
+      "name":"snow",
+      "public": true,
+      "sprite": null,
+      "hexcode":"#ffffff",
+      "user": "admin"
+    },
+    {
+      "name":"dirt",
+      "public": true,
+      "sprite":null,
+      "hexcode":"#D2691E",
+      "user": "admin"
+    }
+  ]
+
+}
