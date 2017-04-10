@@ -20,10 +20,13 @@ export class HomepageComponent implements OnInit {
     this.users = this.userService.getUsers();
     this.authService.af.auth.subscribe(
       (auth) => {
-      this.userService.getUserByEmail(auth.google.email).subscribe(res => {
-        this.loggedInUser = res[0];
-        // this.userService.setLoggedInUser(res[0]);
-      });
+        if (auth) {
+          this.userService.getUserByEmail(auth.google.email).subscribe(res => {
+            this.loggedInUser = res[0];
+            // this.userService.setLoggedInUser(res[0]);
+          });
+
+        }
     }
     )
   }

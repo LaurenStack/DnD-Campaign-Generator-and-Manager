@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
+
 
 
 
@@ -10,16 +12,31 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-
-  constructor(public authService: AuthService, private router:Router) { }
+  userEmail;
+  constructor(public authService: AuthService, public userService: UserService, private router:Router) { }
 
   ngOnInit() {
   }
 
   login() {
-  this.authService.loginWithGoogle().then((data) => {
-    this.router.navigate(['']);
-  })
-}
+      var foundUser = false;
+      this.authService.loginWithGoogle().then((data) => {
+        this.userService.getUsers().subscribe(res=> {
+          var len = res.length
+          for(var i = 0;i<len;i++){
+            if (data.auth.email === res[i].email) {
+              this.userEmail = data.auth.email;
+              foundUser = true;
+            }
+          }
+          if(!foundUser){
+            this.userService.addUser(data.auth.email, data.auth.displayName);
+            this.userEmail = data.auth.email;
+            foundUser = true;
+          }
+        })
+        this.router.navigate(['']);
+      })
+    }
 
 }

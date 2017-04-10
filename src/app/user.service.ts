@@ -71,4 +71,19 @@ export class UserService {
     });
   }
 
+  addUser(mail, name): void {
+
+    console.log("addUser ran");
+    this.users.push({
+      displayName: name,
+      email: mail,
+      maps: [""],
+      monsters: [""],
+      treasure: [""],
+      username: ""
+    })
+
+
+  }
+
 }
