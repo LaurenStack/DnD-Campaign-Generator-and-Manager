@@ -25,19 +25,20 @@ export class AppComponent {
           this.user_email = '';
           this.router.navigate(['login']);
         } else {
-          console.log(auth.google)
           this.isLoggedIn = true;
+          console.log(auth);
+          this.userService.setLoggedInUser(auth.google.email);
           this.user_displayName = auth.google.displayName;
           this.user_email = auth.google.email;
           console.log("Logged in");
-          this.router.navigate(['']);
+          // this.router.navigate(['']);
         }
       }
     );
   }
 
   logout() {
-    this.authService.logout();
     this.router.navigate(['login']);
+    this.authService.logout();
   }
 }
