@@ -5,6 +5,7 @@
         <a class="navbar-brand" href="/">DND Campaign Gen</a>
       </div>
       <div *ngIf="isLoggedIn">
+        <button class="btn btn-default navbar-right" (click)="logout()">Logout</button>
         <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>
       </div>
       <div *ngIf="!isLoggedIn">

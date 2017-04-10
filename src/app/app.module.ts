@@ -7,6 +7,7 @@ import { masterFirebaseConfig } from './api-keys';
 import { AngularFireModule} from 'angularfire2';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
@@ -36,7 +37,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
