@@ -9,6 +9,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class MonstersViewComponent implements OnInit {
 monsters: FirebaseListObservable<any[]>;
+showDetails: any;
 
   constructor(private userService: UserService) { }
 
@@ -18,6 +19,14 @@ monsters: FirebaseListObservable<any[]>;
 
   addMonster(monster) {
     this.userService.addMonster(monster);
+  }
+
+  displayDetails(monster) {
+    if (this.showDetails == null) {
+      this.showDetails = monster;
+    } else {
+      this.showDetails = null;
+    }
   }
 
 }
