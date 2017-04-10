@@ -16,10 +16,6 @@ export class UserService {
     return this.users;
   }
 
-  logUser(){
-    console.log(this.loggedInUser)
-  }
-
   setLoggedInUser(user) {
     console.log("loggedInUser ran")
     this.loggedInUser = user;
@@ -44,21 +40,41 @@ export class UserService {
     return this.monsters;
   }
 
+  // scrapeMonsters(monster){
+  //   monster.private = false;
+  //   monster.creator = "admin";
+  //   // console.log(monster);
+  //   this.monsters.push(monster)
+  // }
+
   addMonster(monster) {
     var user;
     var findUser
     var enemies
     var enemyArray=[]
     var addedMonster = false
+    var foundMonster = false;
     this.getUserByEmail(this.loggedInUser).subscribe(response=>{
       findUser = response[0]
       this.getUserById(findUser.$key).subscribe(res => {
         if(res.monsters[0]==""){
+          monster.count = 1;
           enemyArray = [monster];
         }
         else{
-          enemyArray = res.monsters;
-          enemyArray.push(monster);
+          for (var j = 0; j < res.monsters.length; j++) {
+            if (res.monsters[j].name == monster.name) {
+              res.monsters[j].count +=1;
+              foundMonster = true;
+            }
+          }
+          if (!foundMonster) {
+            enemyArray = res.monsters;
+            monster.count = 1;
+            enemyArray.push(monster);
+          } else {
+            enemyArray = res.monsters;
+          }
         }
         if(!addedMonster){
           user = this.getUserById(findUser.$key);

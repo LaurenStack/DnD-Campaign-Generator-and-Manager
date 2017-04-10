@@ -20,8 +20,4 @@ monsters: FirebaseListObservable<any[]>;
     this.userService.addMonster(monster);
   }
 
-  testClick(){
-    this.userService.logUser();
-  }
-
 }

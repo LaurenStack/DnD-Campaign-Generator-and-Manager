@@ -1,8 +1,6 @@
-<p>
-  <button (click)="testClick()">Log</button>
-</p>
 <div *ngFor="let monster of monsters | async">
   <h4>{{monster.name}}</h4>
+  <p>Current Campaign Count {{monster.count}}</p>
   <ul>
     <li>Description: {{monster.description}}</li>
     <li>Armor Class: {{monster.armor_class}}</li>
