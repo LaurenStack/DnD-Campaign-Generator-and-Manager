@@ -47,25 +47,28 @@ export class UserService {
   addMonster(monster) {
     var user;
     var findUser
-    var monsters
+    var enemies
+    var enemyArray=[]
+    var addedMonster = false
     this.getUserByEmail(this.loggedInUser).subscribe(response=>{
       findUser = response[0]
       this.getUserById(findUser.$key).subscribe(res => {
         if(res.monsters[0]==""){
-          monsters = [monster];
+          enemyArray = [monster];
         }
         else{
-          console.log(res.monsters)
-          // monsters = res.monsters.push(monster);
+          enemyArray = res.monsters;
+          enemyArray.push(monster);
         }
-        user = this.getUserById(findUser.$key);
-        user.update({
-          monsters: monsters
-        })
+        if(!addedMonster){
+          user = this.getUserById(findUser.$key);
+          user.update({
+            monsters: enemyArray
+          })
+          addedMonster = true;
+        }
       });
     });
-
-    // user.update({ monsters: monster})
   }
 
 }
