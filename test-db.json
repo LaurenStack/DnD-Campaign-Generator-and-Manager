@@ -8,5 +8,64 @@
       "treasure": [""],
       "username": ""
     }
+  ],
+  "monsters":[
+    {
+      "name": "Rug Of Smothering",
+      "armor class": "12",
+      "hit points": "33 (6d10)",
+      "speed": "10 ft",
+      "stats": { "str": "17 (+3)", "dex": "14 (+2)", "con": "10 (+0)", "int": "1 (-5)", "wis": "3 (-4)", "cha": "1 (-5)"},
+      "saving throws": [""],
+      "damage resistances": [""],
+      "damage immunities": ["poison", "psychic"],
+      "condition immunities": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned"],
+      "skills": ["Antimagic Susceptibility: The rug is incapacitated while in the area of antimagic field. If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for one minute.", "Damage Transfer: While it is grappling a creature, the rug takes only half damage dealt to it and the creature grappled by the rug takes the other half.", "False Appearance: While the rug remains motionless, it is indistinguishable from a normal rug."],
+      "senses": ["blindsight 60 ft (blind beyond this radius)", "passive Perception 6"],
+      "languages": [""],
+      "challenge": "2 (450 XP)",
+      "attack": [""],
+      "actions": ["Smother: Melee Weapon Attack +5 to hit, reach 5 ft.., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target. In addition, at the start of each of the target's turns, the target takes 10 (2d6 +3) bludgeoning damage."],
+      "legendary actions": [""],
+      "description": "Large construct, unaligned"
+    },
+    {
+      "name": "Ankheg",
+      "armor class": "14 (natural armor), 11 while prone",
+      "hit points": "39 (6d10 + 6)",
+      "speed": "30 ft.., burrow 10 ft",
+      "stats": { "str": "17 (+3)", "dex": "11(+0)", "con": "13 (+1)", "int": "1 (-5)", "wis": "13 (+1)", "cha": "6 (-2)"},
+      "saving throws": [""],
+      "damage resistances": [""],
+      "damage immunities": [""],
+      "condition immunities": [""],
+      "skills": [""],
+      "senses": ["darkvision 60 ft", "tremorsense 60 ft", "passive Perception 11"],
+      "languages": [""],
+      "challenge": "2 (450 XP)",
+      "attack": [""],
+      "actions": ["Bite: Melee Weapon Attack +5 to hit, reach 5ft, one target. Hit 9 (2d6 +3) slashing damage plus 3 (1d6) acid damage. If the target is a large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the Ankheg can bite only the grappled creature and has advantage on attack rolls to do so.", "Acid Spray (Recharge 6): The ankheg spits acid in a line that is 30 ft long and 5 ft wide provided that it has no creature grappled. Each creature in line must take DC 13 dexterity saving throw, taking 10 (3d6) acid damage on failed save, or half as much damage on a successful one."],
+      "legendary actions": [""],
+      "description": "Large monstrosity, unaligned"
+    },
+    {
+      "name": "Solar",
+      "armor class": "21 (natural armor)",
+      "hit points": "243 (18d10 + 144)",
+      "speed": "50 ft, fly 150 ft",
+      "stats": { "str": "26 (+8)", "dex": "22 (+6)", "con": "26 (+8)", "int": "25 (+7)", "wis": "25 (+7)", "cha": "30 (+10)"},
+      "saving throws": ["Int +14", "Wis +14", "Cha +17"],
+      "damage resistances": ["radiant", "bludgeoning", "piercing", "slashing from nonmagical weapons"],
+      "damage immunities": ["necrotic", "poison"],
+      "condition immunities": ["charmed", "exhaustion", "frightened", "poisoned"],
+      "skills": ["Perception +14"],
+      "senses": ["True Sight 120 ft", "Passive Perception 24"],
+      "languages": ["All, telepathy 120 ft"],
+      "challenge": "21 (33,000 XP)",
+      "attack": ["Angelic Weapons: The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals an extra 6d8 radiant damage (included in the attack).", "Diving Awareness: The solar knows if it hears a lie.", "Innate Spellcasting: The solar's spellcasting ability is Charisma (spell save DC 25). It can innately cast the following spells, requiring no material components: At will: detect evil and good, invisibility (self only), 3/day each: blade barrier, dispel evil and good, resurrection, 1/day each: commune, control weather", "Magic Resistance: The solar has advantage on saving throws against spells and other magical effects."],
+      "actions": ["Multiattack: The solar makes two great sword attacks.", "Greatsword: Melee Weapon Attack +15 to hit, reach 5 ft, one target. Hits 22 (4d6 +8) slashing damage plus 27 (6d8) radiant damage.", "Slaying Longbow: Ranged Weapon Attack +13 to hit, range 120/600 ft, one target. Hit 15 (2d8 +6) piercing damage plus 27 (6d8) radiant damage. If the target is a creature that has 100 points or fewer it must succeed on a DC 15 Constitution saving throw or die.", "Flying Sword: The solar releases its greatsword to hover magically in an unoccupied space within 5 feet of it. If the solar can see the sword, the solar can mentally command it as a bonus action to fly up to 50 ft and either make one attack against a target or return to the solar's hands. If the hovering sword is targeted by any effect, the solar is considered to be holding it. The hovering sword falls if the solar dies.", "Healing Touch (4/day): The solar touches another creature, the target magically regains 40 (8d8 +4) hit points and is freed from any curse, disease, poison, blindness, or deafness."],
+      "legendary actions": ["The solar can take 3 legendary actions choosing from the options below. Only one legendary option can be used at a time and only at the end of another creature's turn. The solar regains spent legendary actions at the start of its turn.", "Teleport: The solar magically teleports along with any equipment it is wearing or carrying up to 120 ft to an unoccupied space you can see.", "Searing Burse (costs 2 Actions): The solar emits a magical divine energy. Each creature of its choice in a 10 ft radius must make a DC 23 Dexterity saving throw taking 14 (4d6) fire damage plus 14 (4d6) radiant damage on a failed save, or half as much damage on a successful one.", "Blinding Gaze (Costs 3 Actions): The solar targets one creature it can see within 30 ft of it. If the target can see it, the target must success on a DC 15 Constitution saving throw or be blinded until magic such as the lesser restoration spell removes the blindness."],
+      "description": "Large celestial, lawful good"
+    }
   ]
 }

@@ -10,6 +10,8 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { MonstersComponent } from './monsters/monsters.component';
+import { MonstersViewComponent } from './monsters-view/monsters-view.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -21,14 +23,17 @@ export const firebaseConfig = {
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'login', component: LoginPageComponent }
+  { path: 'login', component: LoginPageComponent },
+  { path: 'monsters-view', component: MonstersViewComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    HomepageComponent
+    HomepageComponent,
+    MonstersComponent,
+    MonstersViewComponent
   ],
   imports: [
     BrowserModule,
