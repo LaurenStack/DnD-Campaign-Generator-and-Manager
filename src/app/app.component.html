@@ -1,3 +1,17 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">DND Campaign Gen</a>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>
+      </div>
+      <div *ngIf="!isLoggedIn">
+        <p class="navbar-text navbar-right">Logged Out</p>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+  <router-outlet></router-outlet>
+</div>
