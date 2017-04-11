@@ -8,8 +8,7 @@ import { Http, Response } from '@angular/http';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css'],
-  providers: [UserService]
+  styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
   users: FirebaseListObservable<any[]>;

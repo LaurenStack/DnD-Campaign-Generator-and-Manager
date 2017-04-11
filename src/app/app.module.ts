@@ -23,6 +23,7 @@ import { WeaponFilterPipe } from './weapon-filter.pipe';
 import { MountsFilterPipe } from './mounts-filter.pipe';
 import { AddMonsterComponent } from './add-monster/add-monster.component';
 import { AddItemComponent } from './add-item/add-item.component';
+import { CharactersComponent } from './characters/characters.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -57,7 +58,8 @@ const routes: Routes = [
     WeaponFilterPipe,
     MountsFilterPipe,
     AddMonsterComponent,
-    AddItemComponent
+    AddItemComponent,
+    CharactersComponent
   ],
   imports: [
     BrowserModule,
