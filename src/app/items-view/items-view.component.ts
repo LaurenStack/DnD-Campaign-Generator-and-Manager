@@ -13,6 +13,7 @@ export class ItemsViewComponent implements OnInit {
   toolsType: string = "All";
   weaponType: string = "All";
   mountsType: string = "All";
+  detailsShown: any;
 
   constructor(private userService: UserService) { }
 
@@ -53,6 +54,14 @@ export class ItemsViewComponent implements OnInit {
   }
   onMountsChange(value) {
     this.mountsType = value;
+  }
+
+  showItemDetails(clickedItem) {
+    if (this.detailsShown !== clickedItem) {
+      this.detailsShown = clickedItem;
+    } else {
+      this.detailsShown = null;
+    }
   }
 
 }

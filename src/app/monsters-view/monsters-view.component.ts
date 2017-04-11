@@ -33,7 +33,7 @@ export class MonstersViewComponent implements OnInit {
   }
 
   displayDetails(monster) {
-    if (this.showDetails == null) {
+    if (this.showDetails !== monster) {
       this.showDetails = monster;
     } else {
       this.showDetails = null;
