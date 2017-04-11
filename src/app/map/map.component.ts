@@ -11,17 +11,19 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class MapComponent implements OnInit {
   canvas = null;//: HTMLCanvasElement= null;
+  // canvasSide: = 800
   ctx: CanvasRenderingContext2D = null;
-  canvasWidth:number = 500;
-  canvasHeight:number = 500;
-  gridSize:number = 30;
-  tileHeight: number = this.canvasHeight/this.gridSize;
-  tileWidth: number = this.canvasWidth/this.gridSize;
+  gridWidth:number = 36;
+  gridHeight:number = 24;
+  canvasWidth:number = 900;
+  canvasHeight:number = 600;
+  tileHeight: number = this.canvasHeight/this.gridHeight;
+  tileWidth: number = this.canvasWidth/this.gridWidth;
   grid: Array<Array<any>> = [];
   renderInterval:number = null;
   drawing:boolean = false;
   terrain:object = {
-    hexcode:"rgba(200, 200, 200 , 0.5)",
+    hexcode:"rgba(100, 100, 100 , 0.5)",
     name:"blank tile",
     public: true,
     user:"admin"
@@ -32,11 +34,11 @@ export class MapComponent implements OnInit {
 
   constructor(private UserService: UserService) { }
 
-  fill(size){
+  fill(){
 
-    for(var x = 0; x < size; x ++){
+    for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
-      for(var y = 0; y < size; y++){
+      for(var y = 0; y < this.gridHeight; y++){
 
         this.grid[x].push({
           color:"rgba(200, 200, 200 , 0.5)",
@@ -45,7 +47,8 @@ export class MapComponent implements OnInit {
           x: x*this.tileWidth,
           y: y*this.tileHeight,
           stroke:"rgba(100, 100, 100,0.5)",
-          terrain:this.terrain
+          terrain:this.terrain,
+          room: null
         });
 
       }//end y loop
@@ -57,7 +60,7 @@ export class MapComponent implements OnInit {
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
 
-    this.fill(this.gridSize);
+    this.fill();
     this.start();
   }
 
@@ -76,9 +79,9 @@ export class MapComponent implements OnInit {
   start(){
     this.renderInterval = setInterval(fat=>{
       this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
-      for(var x = 0; x < this.gridSize; x ++){
+      for(var x = 0; x < this.gridWidth; x ++){
 
-        for(var y = 0; y < this.gridSize; y++){
+        for(var y = 0; y < this.gridHeight; y++){
           this.draw(this.grid[x][y])
         }//end y loop
       }//end x loop
@@ -90,7 +93,7 @@ export class MapComponent implements OnInit {
       var mapCanvas = this.canvas.getBoundingClientRect();
       var mouseX = eData.clientX - mapCanvas.left;
       var mouseY = eData.clientY - mapCanvas.top;
-      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridSize to this.tileWidth
+      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
       this.grid[mouseX][mouseY].terrain = this.terrain;
     }
@@ -100,7 +103,7 @@ export class MapComponent implements OnInit {
       var mapCanvas = this.canvas.getBoundingClientRect();
       var mouseX = eData.clientX - mapCanvas.left;
       var mouseY = eData.clientY - mapCanvas.top;
-      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridSize to this.tileWidth
+      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
       this.info = this.grid[mouseX][mouseY].terrain.name;
     }

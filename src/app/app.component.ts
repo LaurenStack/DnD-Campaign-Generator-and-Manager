@@ -10,7 +10,7 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'DnD Campaign Generator and Manager';
+  title = 'D&D Campaign Generator and Manager';
 
   private isLoggedIn: Boolean;
   private user_displayName: String;

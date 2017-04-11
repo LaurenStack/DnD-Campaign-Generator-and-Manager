@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 canvas {
-  
+
+}
+.terrain {
+  border: 3px double grey;
+  border-radius: 5px;
+  width:170px;
+  display:inline-block;
 }
