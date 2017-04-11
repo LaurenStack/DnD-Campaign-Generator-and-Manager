@@ -7,7 +7,29 @@
   <option value="Mounts and Vehicles">Mounts and Vehicles</option>
 </select>
 
-<div *ngFor="let item of items | async | itemType:type">
+<select *ngIf="type == 'Tools'" (change)="onToolsChange($event.target.value)">
+  <option value="All">All</option>
+  <option value="Artisan's Tools">Artisan's Tools</option>
+  <option value="Musical Instrument">Musical Instrument</option>
+  <option value="Gaming sets">Gaming sets</option>
+  <option value="">Miscellaneous</option>
+</select>
+
+<select *ngIf="type == 'Weapon'" (change)="onWeaponChange($event.target.value)">
+  <option value="All">All</option>
+  <option value="Martial Melee">Martial Melee</option>
+  <option value="Simple Melee">Simple Melee</option>
+  <option value="Martial Ranged">Martial Ranged</option>
+  <option value="Simple Ranged">Simple Ranged</option>
+</select>
+
+<select *ngIf="type == 'Mounts and Vehicles'" (change)="onMountsChange($event.target.value)">
+  <option value="All">All</option>
+  <option value="Tack, Harness, and Drawn Vehicles">Tack, Harness, and Drawn Vehicles</option>
+  <option value="Waterborne Vehicles">Waterborne Vehicles</option>
+</select>
+
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}">
       {{item.name}}

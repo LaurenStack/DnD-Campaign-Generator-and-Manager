@@ -18,6 +18,9 @@ import { TypePipe } from './type.pipe';
 import { ItemsViewComponent } from './items-view/items-view.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemTypePipe } from './item-type.pipe';
+import { ToolsFilterPipe } from './tools-filter.pipe';
+import { WeaponFilterPipe } from './weapon-filter.pipe';
+import { MountsFilterPipe } from './mounts-filter.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -47,7 +50,10 @@ const routes: Routes = [
     TypePipe,
     ItemsViewComponent,
     ItemsComponent,
-    ItemTypePipe
+    ItemTypePipe,
+    ToolsFilterPipe,
+    WeaponFilterPipe,
+    MountsFilterPipe
   ],
   imports: [
     BrowserModule,

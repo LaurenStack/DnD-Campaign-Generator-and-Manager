@@ -10,6 +10,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class ItemsViewComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   type: string = "all";
+  toolsType: string = "All";
+  weaponType: string = "All";
+  mountsType: string = "All";
 
   constructor(private userService: UserService) { }
 
@@ -38,6 +41,18 @@ export class ItemsViewComponent implements OnInit {
 
   onTypeChange(value) {
     this.type = value;
+    this.toolsType = "All";
+    this.mountsType = "All";
+    this.weaponType = "All";
+  }
+  onToolsChange(value) {
+    this.toolsType = value;
+  }
+  onWeaponChange(value) {
+    this.weaponType = value;
+  }
+  onMountsChange(value) {
+    this.mountsType = value;
   }
 
 }
