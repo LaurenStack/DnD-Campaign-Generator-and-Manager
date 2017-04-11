@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+import { Tree, Container, BSP } from '../procGenClasses';
+
 
 @Component({
   selector: 'app-map',
@@ -13,10 +15,12 @@ export class MapComponent implements OnInit {
   canvas = null;//: HTMLCanvasElement= null;
   // canvasSide: = 800
   ctx: CanvasRenderingContext2D = null;
+  gridSize = 36;
   gridWidth:number = 36;
-  gridHeight:number = 24;
+  gridHeight:number = 36;//was 24
   canvasWidth:number = 900;
-  canvasHeight:number = 600;
+  canvasHeight:number = 900;//was 600
+  square = 25;
   tileHeight: number = this.canvasHeight/this.gridHeight;
   tileWidth: number = this.canvasWidth/this.gridWidth;
   grid: Array<Array<any>> = [];
@@ -28,13 +32,15 @@ export class MapComponent implements OnInit {
     public: true,
     user:"admin"
   };// = {"#000"};
-  info:string = null;
+  info:string = "Initial Value";
 
   terrainArray:FirebaseListObservable<any[]>;
 
   constructor(private UserService: UserService) { }
 
   fill(){
+
+
 
     for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
@@ -53,32 +59,55 @@ export class MapComponent implements OnInit {
 
       }//end y loop
     }//end x loop
+
   }//end fill
 
+
+  mainContainer;
+  container_tree;
+  nIterations = 4;
+  BSP = new BSP;
   ngOnInit() {
     this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
 
+    this.mainContainer = new Container(0,0,this.canvasWidth, this.canvasHeight);
+
+    this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations);
+
     this.fill();
     this.start();
+
+  setTimeout(fat=>{
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
+
+  this.container_tree.paint(this.ctx);
+},1000)
+
+
   }
 
   draw(tile){
-    this.ctx.fillStyle = tile.terrain.hexcode;
-    // this.ctx.strokeStyle = "white";
-    this.ctx.strokeStyle = tile.stroke;
-    this.ctx.lineWidth = 1;
-    this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
-    this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
-    // this.ctx.stroke();
-    // this.ctx.closePath();
-    // this.ctx.
+    // this.ctx.fillStyle = tile.terrain.hexcode;
+    // // this.ctx.strokeStyle = "white";
+    // this.ctx.strokeStyle = tile.stroke;
+    // this.ctx.lineWidth = 1;
+    // this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
+    //
+    // this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
+    // // this.ctx.stroke();
+    // // this.ctx.closePath();
+    // // this.ctx.
+    //
+
+
   }
 
   start(){
     this.renderInterval = setInterval(fat=>{
-      this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
+      // this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
       for(var x = 0; x < this.gridWidth; x ++){
 
         for(var y = 0; y < this.gridHeight; y++){
