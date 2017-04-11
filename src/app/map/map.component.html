@@ -3,4 +3,57 @@
 
 <button (click)="clearGrid()">Clear </button>
 
+<div *ngFor="let terrain of terrainArray">
+  <input type="radio" value="{{terrain.name}}" name="{{terrain.name}}">
+  <label for="">{{terrain.name}}: {{terrain.colorSwatch}}</label>
+</div>
+
+
 <input #newColor (load)="colorChange(newColor.value)" (change)="colorChange(newColor.value)" type="color" value="#a07828">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <button value="stone">stone<span>__</span></button>
+<button value="wood">wood<span>__</span></button>
+<button value="water">water<span>__</span></button>
+<button value="sand">sand<span>__</span></button>
+<button value="cobblestone">cobblestone<span>__</span></button>
+<button value="mud">mud<span>__</span></button>
+<button value="swamp">swamp<span>__</span></button>
+<button value="bog">bog<span>__</span></button>
+<button value="marsh">marsh<span>__</span></button>
+<button value="ice">ice<span>__</span></button>
+<button value="snow">snow<span>__</span></button>
+<button value="straw">straw<span>__</span></button>
+<button value="quicksand">quicksand<span>__</span></button>
+<button value="grass">grass<span>__</span></button>
+<button value="dirt">dirt<span>__</span></button>
+<button value="lava">lava<span>__</span></button>
+<button value="roofing">roofing<span>__</span></button>
+<button value="burnt-material">burnt-material<span>__</span></button>
+<button value="roofing">roofing<span>__</span></button> -->
