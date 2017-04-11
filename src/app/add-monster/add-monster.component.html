@@ -3,41 +3,142 @@
 <div *ngIf="addFormShown">
   <div class="row">
     <div class="col-sm-6">
-      <label for="name">Creature Name:</label>
+      <label for="name">Creature Name*:</label>
       <input #name type="text">
     </div>
     <div class="col-sm-6">
-      <label for="alignment">Alignment:</label>
-      <input #alignment type="text">
+      <label for="alignment">Alignment*:</label>
+      <select #alignment>
+        <option value="Lawful Good">Lawful Good</option>
+        <option value="Neutral Good">Neutral Good</option>
+        <option value="Chaotic Good">Chaotic Good</option>
+        <option value="Lawful Neutral">Lawful Neutral</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Chaotic Neutral">Chaotic Neutral</option>
+        <option value="Lawful Evil">Lawful Evil</option>
+        <option value="Neutral Evil">Neutral Evil</option>
+        <option value="Chaotic Evil">Chaotic Evil</option>
+        <option value="Unaligned">Unaligned</option>
+      </select>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <label for="type">Type:</label>
-      <input #type type="text">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <label for="stats">Stats:</label>
-      <input #stats type="text">
-    </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <label for="challenge_rating">Challenge Rating:</label>
-      <input #challenge_rating type="text">
+      <label for="challenge_rating">Public or Private*:</label>
+      <input type="radio" name="pubpriv" value="public" (change)="onSelectionChange(entry)">Public<br>
+      <input type="radio" name="pubpriv" value="private" checked (change)="onSelectionChange(entry)">Private<br>
+      <!-- <input #public type="text"> -->
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <label for="hit_points">Hit Points:</label>
-      <input #hit_points type="text">
+      <label for="type">Type*:</label>
+      <select #type>
+        <option value="aberration">aberration</option>
+        <option value="humanoid">humanoid</option>
+        <option value="undead">undead</option>
+        <option value="dragon">dragon</option>
+        <option value="elemental">elemental</option>
+        <option value="monstrosity">monstrosity</option>
+        <option value="construct">construct</option>
+        <option value="beast">beast</option>
+        <option value="plant">plant</option>
+        <option value="fiend">fiend</option>
+        <option value="ooze">ooze</option>
+        <option value="fey">fey</option>
+        <option value="giant">giant</option>
+        <option value="celestial">celestial</option>
+        <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
+      </select>
     </div>
     <div class="col-sm-6">
-      <label for="hit_dice">Hit Dice:</label>
-      <input #hit_dice type="text">
+      <label for="armor_class">Armor Class*:</label>
+      <input #armorClass type="text">
     </div>
   </div>
-  <!-- <button (click)="addButtonClicked(name.value, disciplines.value, biography.value, profilePic.value, fullImage.value)" class="waves-effect waves-light btn">Submit!</button>
-  <button (click)="cancelMemberAdd()" class="waves-effect waves-light btn">Cancel</button> -->
+  <div class="row">
+    <p>Stats*</p>
+    <div class="col-sm-3">
+      <label for="stats">Constitution:</label>
+      <input #constitution type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Perception:</label>
+      <input #perception type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Intelligence:</label>
+      <input #intelligence type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Charisma:</label>
+      <input #charisma type="number">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <label for="stats">Dexterity:</label>
+      <input #dexterity type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Strength:</label>
+      <input #strength type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Wisdom:</label>
+      <input #wisdom type="number">
+    </div>
+    <div class="col-sm-3">
+      <label for="stats">Speed:</label>
+      <input #speed type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="challenge_rating">Challenge Rating*:</label>
+      <input #challengeRating type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="hit_points">Hit Points*:</label>
+      <input #hitPoints type="number">
+    </div>
+    <div class="col-sm-6">
+      <label for="hit_dice">Hit Dice*:</label>
+      <input #hitDice type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="damage_immunities">Damage Immunities:</label>
+      <input #damageImmunities type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="damage_resistances">Damage Resistances:</label>
+      <input #damageResistances type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="damage_vulnerabilities">Damage Vulnerabilities:</label>
+      <input #damageVulnerabilities type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="actions">Actions:</label>
+      <input #actions type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="legendary_actions">Legendary Actions (if applicable):</label>
+      <input #legendaryActions type="text">
+    </div>
+  </div>
+  <button (click)="addButtonClicked(name.value, alignment.value, type.value, armorClass.value, constitution.value, perception.value, intelligence.value, charisma.value, dexterity.value, strength.value, wisdom.value, speed.value, challengeRating.value, hitPoints.value, hitDice.value, damageImmunities.value, damageResistances.value, damageVulnerabilities.value, actions.value, legendaryActions.value)" class="btn btn-warning">Submit!</button>
+  <button (click)="cancelMonsterAdd()" class="btn btn-danger">Cancel</button>
 </div>

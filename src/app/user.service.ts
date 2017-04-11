@@ -151,8 +151,14 @@ export class UserService {
       treasure: [""],
       username: ""
     })
+  }
 
+  createMonster(newMonster) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res=>{
 
+      newMonster.creator = res[0].displayName;
+      this.monsters.push(newMonster);
+    })
   }
 
 }
