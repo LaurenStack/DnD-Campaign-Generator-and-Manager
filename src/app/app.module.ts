@@ -15,6 +15,8 @@ import { MonstersComponent } from './monsters/monsters.component';
 import { MonstersViewComponent } from './monsters-view/monsters-view.component';
 import { AlignmentPipe } from './alignment.pipe';
 import { TypePipe } from './type.pipe';
+import { ItemsViewComponent } from './items-view/items-view.component';
+import { ItemsComponent } from './items/items.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'createmap', component: MapComponent },
-  { path: 'monsters-view', component: MonstersViewComponent }
+  { path: 'monsters-view', component: MonstersViewComponent },
+  { path: 'items-view', component: ItemsViewComponent }
 ];
 
 @NgModule({
@@ -40,7 +43,9 @@ const routes: Routes = [
     MonstersComponent,
     MonstersViewComponent,
     AlignmentPipe,
-    TypePipe
+    TypePipe,
+    ItemsViewComponent,
+    ItemsComponent
   ],
   imports: [
     BrowserModule,

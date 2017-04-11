@@ -5,11 +5,13 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class UserService {
   users: FirebaseListObservable<any[]>;
   monsters: FirebaseListObservable<any[]>;
+  items: FirebaseListObservable<any[]>;
   loggedInUser: any;
 
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
+    this.items = angularFire.database.list('items');
   }
 
   getUsers() {
@@ -36,16 +38,29 @@ export class UserService {
     return this.angularFire.database.object('/users/' + userId);
   }
 
+  getItemById(itemId: string) {
+    return this.angularFire.database.object('/items/' + itemId);
+  }
+
   getAllMonsters() {
     return this.monsters;
+  }
+
+  getAllItems() {
+    return this.items;
   }
 
   // scrapeMonsters(monster){
   //   monster.private = false;
   //   monster.creator = "admin";
   //   // console.log(monster);
-  //   this.monsters.push(monster)
+  //   this.items.push(monster)
   // }
+
+  editItem(item){
+    var currentItem = this.getItemById(item.$key);
+    console.log(item);
+  }
 
   addMonster(monster) {
     var user;

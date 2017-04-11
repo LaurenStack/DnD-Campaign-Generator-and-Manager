@@ -17,15 +17,15 @@ export class MonstersViewComponent implements OnInit {
 
   ngOnInit() {
     this.monsters = this.userService.getAllMonsters();
-    this.userService.getAllMonsters().subscribe(res=>{
-      var array = [];
-      for(var i=0;i<res.length;i++){
-        if(array.indexOf(res[i].type)==-1){
-          array.push(res[i].type)
-        }
-      }
-      console.log(array)
-    })
+    // this.userService.getAllMonsters().subscribe(res=>{
+    //   var array = [];
+    //   for(var i=0;i<res.length;i++){
+    //     if(array.indexOf(res[i].type)==-1){
+    //       array.push(res[i].type)
+    //     }
+    //   }
+    //   console.log(array)
+    // })
   }
 
   addMonster(monster) {

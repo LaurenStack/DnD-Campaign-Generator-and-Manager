@@ -29,7 +29,7 @@ export class HomepageComponent implements OnInit {
 
         }
         //don't uncomment
-        //  this.http.get('http://www.dnd5eapi.co/api/monsters/').subscribe(data =>
+        //  this.http.get('http://www.dnd5eapi.co/api/equipment/').subscribe(data =>
         //   {
         //     console.log(data.json());
         //     var obj = data.json();
@@ -41,6 +41,8 @@ export class HomepageComponent implements OnInit {
         //       });
         //     })
         //   });
+
+
         //don't uncomment
 
 
