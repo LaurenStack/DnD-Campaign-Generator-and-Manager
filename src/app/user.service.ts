@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+
+
 @Injectable()
 export class UserService {
   users: FirebaseListObservable<any[]>;
   monsters: FirebaseListObservable<any[]>;
+  terrainArray: FirebaseListObservable<any[]>;
+
   loggedInUser: any;
 
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
+    this.terrainArray = angularFire.database.list('terrain');
   }
 
   getUsers() {
     return this.users;
+  }
+  getTerrain() {
+    return this.terrainArray;
   }
 
   setLoggedInUser(user) {

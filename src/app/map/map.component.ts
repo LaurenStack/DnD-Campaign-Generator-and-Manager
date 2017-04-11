@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  providers: [UserService]
 })
 export class MapComponent implements OnInit {
   canvas = null;//: HTMLCanvasElement= null;
@@ -16,9 +20,17 @@ export class MapComponent implements OnInit {
   grid: Array<Array<any>> = [];
   renderInterval:number = null;
   drawing:boolean = false;
-  color:string = "#000";
+  terrain:object = {
+    hexcode:"rgba(200, 200, 200 , 0.5)",
+    name:"blank tile",
+    public: true,
+    user:"admin"
+  };// = {"#000"};
+  info:string = null;
 
-  constructor() { }
+  terrainArray:FirebaseListObservable<any[]>;
+
+  constructor(private UserService: UserService) { }
 
   fill(size){
 
@@ -32,7 +44,8 @@ export class MapComponent implements OnInit {
           width: this.tileWidth,
           x: x*this.tileWidth,
           y: y*this.tileHeight,
-          stroke:"rgba(100, 100, 100,0.5)"
+          stroke:"rgba(100, 100, 100,0.5)",
+          terrain:this.terrain
         });
 
       }//end y loop
@@ -40,6 +53,7 @@ export class MapComponent implements OnInit {
   }//end fill
 
   ngOnInit() {
+    this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
 
@@ -48,7 +62,7 @@ export class MapComponent implements OnInit {
   }
 
   draw(tile){
-    this.ctx.fillStyle = tile.color;
+    this.ctx.fillStyle = tile.terrain.hexcode;
     // this.ctx.strokeStyle = "white";
     this.ctx.strokeStyle = tile.stroke;
     this.ctx.lineWidth = 1;
@@ -78,7 +92,17 @@ export class MapComponent implements OnInit {
       var mouseY = eData.clientY - mapCanvas.top;
       mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridSize to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
-      this.grid[mouseX][mouseY].color = this.color;
+      this.grid[mouseX][mouseY].terrain = this.terrain;
+    }
+  }
+  showInfo(eData) {
+    if(!this.drawing){
+      var mapCanvas = this.canvas.getBoundingClientRect();
+      var mouseX = eData.clientX - mapCanvas.left;
+      var mouseY = eData.clientY - mapCanvas.top;
+      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridSize to this.tileWidth
+      mouseY = Math.floor(mouseY/this.tileHeight);
+      this.info = this.grid[mouseX][mouseY].terrain.name;
     }
   }
 
@@ -94,7 +118,7 @@ export class MapComponent implements OnInit {
   }
 
   colorChange(e) {
-    this.color = e;
+    this.terrain = e;
     console.log(e);
   }
 
