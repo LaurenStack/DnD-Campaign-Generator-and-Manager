@@ -1,4 +1,13 @@
-<div *ngFor="let item of items | async">
+<select (change)="onTypeChange($event.target.value)">
+  <option value="all">All</option>
+  <option value="Weapon">Weapons</option>
+  <option value="Armor">Armor</option>
+  <option value="Adventuring Gear">Adventuring Gear</option>
+  <option value="Tools">Tools</option>
+  <option value="Mounts and Vehicles">Mounts and Vehicles</option>
+</select>
+
+<div *ngFor="let item of items | async | itemType:type">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}">
       {{item.name}}
@@ -27,7 +36,6 @@
         <li *ngIf="item.twoH_damage">2H Damage:
            ({{item.twoH_damage.dice_count}}d{{item.twoH_damage.dice_value}}) {{item.twoH_damage.damage_type}}
         </li>
-        <li *ngIf="item.equipment_category">Equipment Category: {{item.equipment_category}}</li>
         <li *ngIf="item.properties">Properties:
           <ul>
             <li *ngFor="let property of item.properties">{{property}}</li>

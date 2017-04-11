@@ -17,6 +17,7 @@ import { AlignmentPipe } from './alignment.pipe';
 import { TypePipe } from './type.pipe';
 import { ItemsViewComponent } from './items-view/items-view.component';
 import { ItemsComponent } from './items/items.component';
+import { ItemTypePipe } from './item-type.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -45,7 +46,8 @@ const routes: Routes = [
     AlignmentPipe,
     TypePipe,
     ItemsViewComponent,
-    ItemsComponent
+    ItemsComponent,
+    ItemTypePipe
   ],
   imports: [
     BrowserModule,

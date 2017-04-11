@@ -9,6 +9,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class ItemsViewComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
+  type: string = "all";
 
   constructor(private userService: UserService) { }
 
@@ -33,6 +34,10 @@ export class ItemsViewComponent implements OnInit {
 
   goTo(location: string): void{
     window.location.hash = location;
+  }
+
+  onTypeChange(value) {
+    this.type = value;
   }
 
 }
