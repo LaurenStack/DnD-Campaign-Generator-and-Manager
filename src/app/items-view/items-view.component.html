@@ -1,3 +1,5 @@
+<app-add-item></app-add-item>
+<br><br>
 <select (change)="onTypeChange($event.target.value)">
   <option value="all">All</option>
   <option value="Weapon">Weapons</option>
@@ -28,7 +30,7 @@
   <option value="Tack, Harness, and Drawn Vehicles">Tack, Harness, and Drawn Vehicles</option>
   <option value="Waterborne Vehicles">Waterborne Vehicles</option>
 </select>
-
+<br><br>
 <div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}" (click)="showItemDetails(item)">
