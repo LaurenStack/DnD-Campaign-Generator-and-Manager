@@ -149,7 +149,51 @@ export class UserService {
       maps: [""],
       monsters: [""],
       treasure: [""],
-      username: ""
+      username: "",
+      charOne: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charTwo: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charThree: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charFour: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      }
     })
   }
 
@@ -167,6 +211,17 @@ export class UserService {
       newItem.creator = res[0].displayName;
       this.items.push(newItem);
     })
+  }
+
+  updateCharOne(character) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charOne: character
+      });
+
+    });
   }
 
 }

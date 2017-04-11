@@ -1,21 +1,214 @@
 <div class="panel">
-  <div class="panel panel-header">
+  <div class="panel panel-heading">
     <h3>Characters</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel panel-body">
     <p>Campaign stats for playing characters:</p>
     <div class="row">
       <div class="col-xs-3">
-        Char1
+        <h3>Character One</h3>
+        <h4>{{loggedInUser?.charOne.name}}</h4>
+        <p>Type: {{loggedInUser?.charOne.type}}</p>
+        <p>Armor &amp; Weapons: {{loggedInUser?.charOne.armorWeapons}}</p>
+        <p>Health: {{loggedInUser?.charOne.health}}</p>
+        <p>Description: {{loggedInUser?.charOne.description}}</p>
+        <p>Copper: {{loggedInUser?.charOne.copper}}</p>
+        <p>Silver: {{loggedInUser?.charOne.silver}}</p>
+        <p>Gold: {{loggedInUser?.charOne.gold}}</p>
+        <p>Platinum: {{loggedInUser?.charOne.platinum}}</p>
+        <br><br>
+        <button (click)="editCharOne()" class="btn btn-success">Edit</button>
+        <div *ngIf="editOneFormShown == true">
+          <div class="row">
+            <label for="name">Character Name*:</label>
+            <input type="text" [(ngModel)]="loggedInUser.charOne.name">
+          </div>
+          <div class="row">
+            <label for="type">Type*:</label>
+            <select [(ngModel)]="loggedInUser.charOne.type">
+              <option value="Wizard">Wizard</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="armor_weapons">Armor &amp; Weapons:</label>
+            <input type="text" [(ngModel)]="loggedInUser.charOne.armorWeapons">
+          </div>
+          <div class="row">
+            <label for="health">Health*:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charOne.health">
+          </div>
+          <div class="row">
+            <label for="description">Description:</label>
+            <input [(ngModel)]="loggedInUser.charOne.description" type="text">
+          </div>
+          <button (click)="charOneClicked(loggedInUser.charOne)" class="btn btn-warning">Edit!</button>
+          <button (click)="charOneCancel()" class="btn btn-danger">Cancel</button>
+        </div>
       </div>
       <div class="col-xs-3">
-        Char2
+        <h3>Character One</h3>
+        <h4>{{loggedInUser?.charTwo.name}}</h4>
+        <p>Type: {{loggedInUser?.charTwo.type}}</p>
+        <p>Armor &amp; Weapons: {{loggedInUser?.charTwo.armorWeapons}}</p>
+        <p>Health: {{loggedInUser?.charTwo.health}}</p>
+        <p>Description: {{loggedInUser?.charTwo.description}}</p>
+        <p>Copper: {{loggedInUser?.charTwo.copper}}</p>
+        <p>Silver: {{loggedInUser?.charTwo.silver}}</p>
+        <p>Gold: {{loggedInUser?.charTwo.gold}}</p>
+        <p>Platinum: {{loggedInUser?.charTwo.platinum}}</p>
+        <br><br>
+        <button (click)="editCharTwo()" class="btn btn-success">Edit</button>
+        <div *ngIf="editTwoFormShown">
+          <div class="row">
+            <label for="name">Character Name*:</label>
+            <input [(ngModel)]="loggedInUser.charTwo.name" type="text">
+          </div>
+          <div class="row">
+            <label for="type">Type*:</label>
+            <select [(ngModel)]="loggedInUser.charTwo.type">
+              <option value="Wizard">Wizard</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="armor_weapons">Armor &amp; Weapons:</label>
+            <input type="text" [(ngModel)]="loggedInUser.charTwo.armorWeapons">
+          </div>
+          <div class="row">
+            <label for="health">Health*:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charTwo.health">
+          </div>
+          <div class="row">
+            <label for="description">Description:</label>
+            <input [(ngModel)]="loggedInUser.charTwo.description" type="text">
+          </div>
+          <button (click)="charTwoClicked(loggedInUser.charTwo)" class="btn btn-warning">Edit!</button>
+          <button (click)="charTwoCancel()" class="btn btn-danger">Cancel</button>
+        </div>
       </div>
       <div class="col-xs-3">
-        Char3
+        <h3>Character Three</h3>
+        <h4>{{loggedInUser?.charThree.name}}</h4>
+        <p>Type: {{loggedInUser?.charThree.type}}</p>
+        <p>Armor &amp; Weapons: {{loggedInUser?.charThree.armorWeapons}}</p>
+        <p>Health: {{loggedInUser?.charThree.health}}</p>
+        <p>Description: {{loggedInUser?.charThree.description}}</p>
+        <p>Copper: {{loggedInUser?.charThree.copper}}</p>
+        <p>Silver: {{loggedInUser?.charThree.silver}}</p>
+        <p>Gold: {{loggedInUser?.charThree.gold}}</p>
+        <p>Platinum: {{loggedInUser?.charThree.platinum}}</p>
+        <br><br>
+        <button (click)="editCharThree()" class="btn btn-success">Edit</button>
+        <div *ngIf="editThreeFormShown">
+          <div class="row">
+            <label for="name">Character Name*:</label>
+            <input [(ngModel)]="loggedInUser.charThree.name" type="text">
+          </div>
+          <div class="row">
+            <label for="type">Type*:</label>
+            <select [(ngModel)]="loggedInUser.charThree.type">
+              <option value="Wizard">Wizard</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="armor_weapons">Armor &amp; Weapons:</label>
+            <input type="text" [(ngModel)]="loggedInUser.charThree.armorWeapons">
+          </div>
+          <div class="row">
+            <label for="health">Health*:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charThree.health">
+          </div>
+          <div class="row">
+            <label for="description">Description:</label>
+            <input [(ngModel)]="loggedInUser.charThree.description" type="text">
+          </div>
+          <button (click)="charThreeClicked(loggedInUser.charThree)" class="btn btn-warning">Edit!</button>
+          <button (click)="charThreeCancel()" class="btn btn-danger">Cancel</button>
+        </div>
       </div>
       <div class="col-xs-3">
-        Char4
+        <h3>Character Four</h3>
+        <h4>{{loggedInUser?.charFour.name}}</h4>
+        <p>Type: {{loggedInUser?.charFour.type}}</p>
+        <p>Armor &amp; Weapons: {{loggedInUser?.charFour.armorWeapons}}</p>
+        <p>Health: {{loggedInUser?.charFour.health}}</p>
+        <p>Description: {{loggedInUser?.charFour.description}}</p>
+        <p>Copper: {{loggedInUser?.charFour.copper}}</p>
+        <p>Silver: {{loggedInUser?.charFour.silver}}</p>
+        <p>Gold: {{loggedInUser?.charFour.gold}}</p>
+        <p>Platinum: {{loggedInUser?.charFour.platinum}}</p>
+        <br><br>
+        <button (click)="editCharFour()" class="btn btn-success">Edit</button>
+        <div *ngIf="editFourFormShown">
+          <div class="row">
+            <label for="name">Character Name*:</label>
+            <input [(ngModel)]="loggedInUser.charFour.name" type="text">
+          </div>
+          <div class="row">
+            <label for="type">Type*:</label>
+            <select [(ngModel)]="loggedInUser.charFour.type">
+              <option value="Wizard">Wizard</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="armor_weapons">Armor &amp; Weapons:</label>
+            <input type="text" [(ngModel)]="loggedInUser.charFour.armorWeapons">
+          </div>
+          <div class="row">
+            <label for="health">Health*:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charFour.health">
+          </div>
+          <div class="row">
+            <label for="description">Description:</label>
+            <input [(ngModel)]="loggedInUser.charFour.description" type="text">
+          </div>
+          <button (click)="charFourClicked(loggedInUser.charFour)" class="btn btn-warning">Edit!</button>
+          <button (click)="charFourCancel()" class="btn btn-danger">Cancel</button>
+        </div>
       </div>
+    </div>
   </div>
 </div>
