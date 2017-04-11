@@ -17,11 +17,10 @@ export class AddMonsterComponent implements OnInit {
   }
 
   showAddForm() {
-    console.log('showform')
     this.addFormShown = true;
   }
 
-  addButtonClicked(Name, alignment, type, armorClass, constitution, perception, intelligence, charisma, dexterity, strength, wisdom, speed, challengeRating, hitPoints, hitDice, damageImmunities, damageResistances, damageVulnerabilities, actions, legendaryActions) {
+  addButtonClicked(Name, alignment, type, armorClass, languages, constitution, perception, intelligence, charisma, dexterity, strength, wisdom, speed, challengeRating, hitPoints, hitDice, damageImmunities, damageResistances, damageVulnerabilities, conditionImmunities, actions, legendaryActions) {
     if (!Name || !alignment || !type || !armorClass || !constitution || !perception || !intelligence || !charisma || !dexterity || !strength || !wisdom || !speed || !challengeRating || !hitPoints || !hitDice) {
       alert("Please complete all fields to create a monster!");
     }
@@ -31,6 +30,7 @@ export class AddMonsterComponent implements OnInit {
         name: Name,
         alignment: alignment,
         armor_class: parseInt(armorClass),
+        languages: languages,
         constitution: parseInt(constitution),
         perception: parseInt(perception),
         intelligence: parseInt(intelligence),
@@ -44,6 +44,7 @@ export class AddMonsterComponent implements OnInit {
         damage_immunities: damageImmunities,
         damage_resistances: damageResistances,
         damage_vulnerabilities: damageVulnerabilities,
+        condition_immunities: conditionImmunities,
         actions: actions,
         legendary_actions: legendaryActions,
         private: this.selectedEntry
@@ -59,6 +60,6 @@ export class AddMonsterComponent implements OnInit {
 
   onSelectionChange(entry) {
         this.selectedEntry = entry;
-    }
+  }
 
 }

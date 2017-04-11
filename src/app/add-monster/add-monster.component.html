@@ -27,7 +27,6 @@
       <label for="challenge_rating">Public or Private*:</label>
       <input type="radio" name="pubpriv" value="public" (change)="onSelectionChange(entry)">Public<br>
       <input type="radio" name="pubpriv" value="private" checked (change)="onSelectionChange(entry)">Private<br>
-      <!-- <input #public type="text"> -->
     </div>
   </div>
   <div class="row">
@@ -54,6 +53,12 @@
     <div class="col-sm-6">
       <label for="armor_class">Armor Class*:</label>
       <input #armorClass type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="languages">Languages:</label>
+      <input type="text" #languages>
     </div>
   </div>
   <div class="row">
@@ -122,9 +127,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <label for="damage_vulnerabilities">Damage Vulnerabilities:</label>
       <input #damageVulnerabilities type="text">
+    </div>
+    <div class="col-sm-6">
+      <label for="condition_immunities">Condition Immunities:</label>
+      <input #conditionImmunities type="text">
     </div>
   </div>
   <div class="row">
@@ -139,6 +148,6 @@
       <input #legendaryActions type="text">
     </div>
   </div>
-  <button (click)="addButtonClicked(name.value, alignment.value, type.value, armorClass.value, constitution.value, perception.value, intelligence.value, charisma.value, dexterity.value, strength.value, wisdom.value, speed.value, challengeRating.value, hitPoints.value, hitDice.value, damageImmunities.value, damageResistances.value, damageVulnerabilities.value, actions.value, legendaryActions.value)" class="btn btn-warning">Submit!</button>
+  <button (click)="addButtonClicked(name.value, alignment.value, type.value, armorClass.value, languages.value, constitution.value, perception.value, intelligence.value, charisma.value, dexterity.value, strength.value, wisdom.value, speed.value, challengeRating.value, hitPoints.value, hitDice.value, damageImmunities.value, damageResistances.value, damageVulnerabilities.value, conditionImmunities.value, actions.value, legendaryActions.value)" class="btn btn-warning">Submit!</button>
   <button (click)="cancelMonsterAdd()" class="btn btn-danger">Cancel</button>
 </div>

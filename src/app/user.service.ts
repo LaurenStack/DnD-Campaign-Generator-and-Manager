@@ -161,4 +161,12 @@ export class UserService {
     })
   }
 
+  createItem(newItem) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res=>{
+
+      newItem.creator = res[0].displayName;
+      this.items.push(newItem);
+    })
+  }
+
 }
