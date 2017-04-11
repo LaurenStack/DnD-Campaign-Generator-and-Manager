@@ -213,12 +213,42 @@ export class UserService {
     })
   }
 
-  updateCharOne(character) {
+  updateCharOne(characterObject) {
     this.getUserByEmail(this.loggedInUser).subscribe(res => {
       var userInFirebase = res[0];
       var currentUser = this.getUserById(userInFirebase.$key);
       currentUser.update({
-        charOne: character
+        charOne: characterObject
+      });
+
+    });
+  }
+  updateCharTwo(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charTwo: characterObject
+      });
+
+    });
+  }
+  updateCharThree(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charThree: characterObject
+      });
+
+    });
+  }
+  updateCharFour(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charFour: characterObject
       });
 
     });

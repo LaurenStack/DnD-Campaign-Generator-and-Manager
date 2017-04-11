@@ -52,12 +52,28 @@
             <label for="description">Description:</label>
             <input [(ngModel)]="loggedInUser.charOne.description" type="text">
           </div>
+          <div class="row">
+            <label for="copper">Copper:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charOne.copper">
+          </div>
+          <div class="row">
+            <label for="silver">Silver:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charOne.silver">
+          </div>
+          <div class="row">
+            <label for="gold">Gold:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charOne.gold">
+          </div>
+          <div class="row">
+            <label for="platinum">Platinum:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charOne.platinum">
+          </div>
           <button (click)="charOneClicked(loggedInUser.charOne)" class="btn btn-warning">Edit!</button>
           <button (click)="charOneCancel()" class="btn btn-danger">Cancel</button>
         </div>
       </div>
       <div class="col-xs-3">
-        <h3>Character One</h3>
+        <h3>Character Two</h3>
         <h4>{{loggedInUser?.charTwo.name}}</h4>
         <p>Type: {{loggedInUser?.charTwo.type}}</p>
         <p>Armor &amp; Weapons: {{loggedInUser?.charTwo.armorWeapons}}</p>
@@ -102,6 +118,22 @@
           <div class="row">
             <label for="description">Description:</label>
             <input [(ngModel)]="loggedInUser.charTwo.description" type="text">
+          </div>
+          <div class="row">
+            <label for="copper">Copper:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charTwo.copper">
+          </div>
+          <div class="row">
+            <label for="silver">Silver:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charTwo.silver">
+          </div>
+          <div class="row">
+            <label for="gold">Gold:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charTwo.gold">
+          </div>
+          <div class="row">
+            <label for="platinum">Platinum:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charTwo.platinum">
           </div>
           <button (click)="charTwoClicked(loggedInUser.charTwo)" class="btn btn-warning">Edit!</button>
           <button (click)="charTwoCancel()" class="btn btn-danger">Cancel</button>
@@ -154,6 +186,22 @@
             <label for="description">Description:</label>
             <input [(ngModel)]="loggedInUser.charThree.description" type="text">
           </div>
+          <div class="row">
+            <label for="copper">Copper:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charThree.copper">
+          </div>
+          <div class="row">
+            <label for="silver">Silver:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charThree.silver">
+          </div>
+          <div class="row">
+            <label for="gold">Gold:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charThree.gold">
+          </div>
+          <div class="row">
+            <label for="platinum">Platinum:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charThree.platinum">
+          </div>
           <button (click)="charThreeClicked(loggedInUser.charThree)" class="btn btn-warning">Edit!</button>
           <button (click)="charThreeCancel()" class="btn btn-danger">Cancel</button>
         </div>
@@ -204,6 +252,22 @@
           <div class="row">
             <label for="description">Description:</label>
             <input [(ngModel)]="loggedInUser.charFour.description" type="text">
+          </div>
+          <div class="row">
+            <label for="copper">Copper:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charFour.copper">
+          </div>
+          <div class="row">
+            <label for="silver">Silver:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charFour.silver">
+          </div>
+          <div class="row">
+            <label for="gold">Gold:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charFour.gold">
+          </div>
+          <div class="row">
+            <label for="platinum">Platinum:</label>
+            <input type="number" [(ngModel)]="loggedInUser.charFour.platinum">
           </div>
           <button (click)="charFourClicked(loggedInUser.charFour)" class="btn btn-warning">Edit!</button>
           <button (click)="charFourCancel()" class="btn btn-danger">Cancel</button>

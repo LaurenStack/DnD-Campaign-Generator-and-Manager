@@ -25,7 +25,6 @@ export class CharactersComponent implements OnInit {
       (auth) => {
         if (auth) {
           this.userService.getUserByEmail(auth.google.email).subscribe(res => {
-            console.log(res[0])
             this.loggedInUser = res[0];
           });
 
@@ -33,52 +32,44 @@ export class CharactersComponent implements OnInit {
       });
     }
 
+    charOneClicked(charObject) {
+      this.editOneFormShown = false;
+      this.userService.updateCharOne(charObject);
+    }
+    charTwoClicked(charObject) {
+      this.editTwoFormShown = false;
+      this.userService.updateCharTwo(charObject);
+    }
+    charThreeClicked(charObject) {
+      this.editThreeFormShown = false;
+      this.userService.updateCharThree(charObject);
+    }
+    charFourClicked(charObject) {
+      this.editFourFormShown = false;
+      this.userService.updateCharFour(charObject);
+    }
+
     editCharOne() {
       this.editOneFormShown = true;
     }
-
-    charOneClicked(charOne) {
-      this.editOneFormShown = false;
-      this.userService.updateCharOne(charOne);
-    }
-
     charOneCancel() {
       this.editOneFormShown = false;
     }
-
     editCharTwo() {
       this.editTwoFormShown = true;
     }
-
-    // charTwoClicked(charTwo) {
-    //   this.editOneFormShown = false;
-    // }
-
     charTwoCancel() {
       this.editTwoFormShown = false;
     }
-
     editCharThree() {
       this.editThreeFormShown = true;
     }
-
-    // charThreeClicked(charThree) {
-    //   this.editThreeFormShown = false;
-    // }
-
     charThreeCancel() {
       this.editThreeFormShown = false;
     }
-
-
     editCharFour() {
       this.editFourFormShown = true;
     }
-
-    // charFourClicked(charFour) {
-    //   this.editFourFormShown = false;
-    // }
-
     charFourCancel() {
       this.editFourFormShown = false;
     }
