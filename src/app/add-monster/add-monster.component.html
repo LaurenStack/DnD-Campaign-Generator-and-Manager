@@ -1,0 +1,43 @@
+<button class="btn btn-info" (click)="showAddForm()">Create Monster</button>
+<br><br>
+<div *ngIf="addFormShown">
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="name">Creature Name:</label>
+      <input #name type="text">
+    </div>
+    <div class="col-sm-6">
+      <label for="alignment">Alignment:</label>
+      <input #alignment type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="type">Type:</label>
+      <input #type type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="stats">Stats:</label>
+      <input #stats type="text">
+    </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="challenge_rating">Challenge Rating:</label>
+      <input #challenge_rating type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="hit_points">Hit Points:</label>
+      <input #hit_points type="text">
+    </div>
+    <div class="col-sm-6">
+      <label for="hit_dice">Hit Dice:</label>
+      <input #hit_dice type="text">
+    </div>
+  </div>
+  <!-- <button (click)="addButtonClicked(name.value, disciplines.value, biography.value, profilePic.value, fullImage.value)" class="waves-effect waves-light btn">Submit!</button>
+  <button (click)="cancelMemberAdd()" class="waves-effect waves-light btn">Cancel</button> -->
+</div>

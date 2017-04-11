@@ -5,11 +5,11 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-monsters',
-  templateUrl: './monsters.component.html',
-  styleUrls: ['./monsters.component.css']
+  selector: 'app-items',
+  templateUrl: './items.component.html',
+  styleUrls: ['./items.component.css']
 })
-export class MonstersComponent implements OnInit {
+export class ItemsComponent implements OnInit {
   loggedInUser: any;
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
@@ -24,4 +24,5 @@ export class MonstersComponent implements OnInit {
         }
       });
   }
+
 }
