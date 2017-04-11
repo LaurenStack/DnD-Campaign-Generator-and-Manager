@@ -64,4 +64,8 @@ export class ItemsViewComponent implements OnInit {
     }
   }
 
+  addItem(item) {
+    this.userService.addItem(item);
+  }
+
 }

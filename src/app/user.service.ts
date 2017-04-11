@@ -65,7 +65,6 @@ export class UserService {
   addMonster(monster) {
     var user;
     var findUser
-    var enemies
     var enemyArray=[]
     var addedMonster = false
     var foundMonster = false;
@@ -97,6 +96,45 @@ export class UserService {
             monsters: enemyArray
           })
           addedMonster = true;
+        }
+      });
+    });
+  }
+
+  addItem(item) {
+    var user;
+    var findUser
+    var itemsArray=[]
+    var addedItem = false
+    var foundItem = false;
+    this.getUserByEmail(this.loggedInUser).subscribe(response=>{
+      findUser = response[0]
+      this.getUserById(findUser.$key).subscribe(res => {
+        if(res.treasure[0]==""){
+          item.count = 1;
+          itemsArray = [item];
+        }
+        else{
+          for (var j = 0; j < res.treasure.length; j++) {
+            if (res.treasure[j].name == item.name) {
+              res.treasure[j].count +=1;
+              foundItem = true;
+            }
+          }
+          if (!foundItem) {
+            itemsArray = res.treasure;
+            item.count = 1;
+            itemsArray.push(item);
+          } else {
+            itemsArray = res.treasure;
+          }
+        }
+        if(!addedItem){
+          user = this.getUserById(findUser.$key);
+          user.update({
+            treasure: itemsArray
+          })
+          addedItem = true;
         }
       });
     });

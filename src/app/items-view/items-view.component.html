@@ -37,6 +37,7 @@
     <div class="panel panel-body" *ngIf="detailsShown == item">
       <p>Created by: {{item.creator}}</p>
       <p>Current Campaign Count {{item.count}}</p>
+      <button (click)="addItem(item)" class="btn btn-xs btn-info">Add to Campaign</button>
       <ul>
         <li *ngIf="item.category_range">Category Range: {{item.category_range}}</li>
         <li *ngIf="item.weapon_category">Weapon Category: {{item.weapon_category}}</li>

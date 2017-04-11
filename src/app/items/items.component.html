@@ -1,3 +1,5 @@
-<p>
-  items works!
-</p>
+<div *ngIf="loggedInUser">
+  <ul>
+    <li *ngFor="let item of loggedInUser.treasure">{{item.name}} (Count: {{item.count}})</li>
+  </ul>
+</div>
