@@ -1,67 +1,96 @@
-<div *ngFor="let monster of monsters | async">
-  <h4>{{monster.name}}</h4>
-  <p>Current Campaign Count {{monster.count}}</p>
-  <ul>
-    <li>Description: {{monster.description}}</li>
-    <li>Armor Class: {{monster.armor_class}}</li>
-    <li>Challenge: {{monster.challenge}}</li>
-    <li>Hit Points: {{monster.hit_points}}</li>
-    <li *ngIf="monster.languages[0]">Languages:
+<app-add-monster></app-add-monster>
+<br><br>
+<select (change)="changeAlign($event.target.value)">
+  <option value="All">All</option>
+  <option value="Lawful Good">Lawful Good</option>
+  <option value="Neutral Good">Neutral Good</option>
+  <option value="Chaotic Good">Chaotic Good</option>
+  <option value="Lawful Neutral">Lawful Neutral</option>
+  <option value="Neutral">Neutral</option>
+  <option value="Chaotic Neutral">Chaotic Neutral</option>
+  <option value="Lawful Evil">Lawful Evil</option>
+  <option value="Neutral Evil">Neutral Evil</option>
+  <option value="Chaotic Evil">Chaotic Evil</option>
+  <option value="Unaligned">Unaligned</option>
+</select>
+
+<select (change)="changeType($event.target.value)">
+  <option value="All">All</option>
+  <option value="aberration">aberration</option>
+  <option value="humanoid">humanoid</option>
+  <option value="undead">undead</option>
+  <option value="dragon">dragon</option>
+  <option value="elemental">elemental</option>
+  <option value="monstrosity">monstrosity</option>
+  <option value="construct">construct</option>
+  <option value="beast">beast</option>
+  <option value="plant">plant</option>
+  <option value="fiend">fiend</option>
+  <option value="ooze">ooze</option>
+  <option value="fey">fey</option>
+  <option value="giant">giant</option>
+  <option value="celestial">celestial</option>
+  <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
+</select>
+<br><br>
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType">
+  <div class="panel panel-default">
+    <div class="panel panel-heading" (click)="displayDetails(monster)">
+      <h3>{{monster.name}}</h3>
+
+    </div>
+    <div class="panel panel-body" *ngIf="showDetails == monster">
+      <p>Created by: {{monster.creator}}</p>
+      <p>Current Campaign Count {{monster.count}}</p>
+      <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
       <ul>
-        <li *ngFor="let language of monster.languages">{{language}}</li>
+        <li *ngIf="monster.alignment">Alignment: {{monster.alignment}}</li>
+        <li *ngIf="monster.armor_class">Armor Class: {{monster.armor_class}}</li>
+        <li *ngIf="monster.type">Type: {{monster.type}}</li>
+        <li *ngIf="monster.subtype">Subtype: {{monster.subtype}}</li>
+        <li *ngIf="monster.size">Size: {{monster.size}}</li>
+        <li>Challenge Rating: {{monster.challenge_rating}}</li>
+        <li *ngIf="monster.medicine">Medicine: {{monster.medicine}}</li>
+        <li *ngIf="monster.religion">Religion: {{monster.religion}}</li>
+        <li>Hit Points: {{monster.hit_points}}</li>
+        <li>Hit Dice: {{monster.hit_dice}}</li>
+        <li *ngIf="monster.languages">Languages: {{monster.languages}}</li>
+        <li>Stats:
+          <ul>
+            <li *ngIf="monster.charisma">Charisma: {{monster.charisma}} <span *ngIf="monster.charisma_save">| Charisma Save: {{monster.charisma_save}}</span></li>
+            <li *ngIf="monster.constitution">Constitution: {{monster.constitution}}<span *ngIf="monster.constitution_save"> | Constitution Save: {{monster.constitution_save}}</span></li>
+            <li *ngIf="monster.dexterity">Dexterity: {{monster.dexterity}}<span *ngIf="monster.dexterity_save"> | Dexterity Save: {{monster.dexterity_save}}</span></li>
+            <li *ngIf="monster.wisdom">Wisdom: {{monster.wisdom}}<span *ngIf="monster.wisdom_save"> | Wisdom Save: {{monster.wisdom_save}}</span></li>
+            <li *ngIf="monster.intelligence">Intelligence: {{monster.intelligence}}</li>
+            <li *ngIf="monster.perception">Perception: {{monster.perception}}</li>
+            <li *ngIf="monster.stealth">Stealth: {{monster.stealth}}</li>
+            <li *ngIf="monster.strength">Strength: {{monster.strength}}</li>
+            <li *ngIf="monster.speed">Speed: {{monster.speed}}</li>
+            <li *ngIf="monster.history">History: {{monster.history}}</li>
+          </ul>
+        </li>
+        <li *ngIf="monster.special_abilities">Special Abilities:
+          <ul>
+            <li *ngFor="let ability of monster.special_abilities">{{ability.name}} <span *ngIf="ability.attack_bonus">(Attack Bonus: {{ability.attack_bonus}})</span>: {{ability.desc}}</li>
+          </ul>
+        </li>
+        <li *ngIf="monster.senses">Senses: {{monster.senses}}</li>
+        <li *ngIf="monster.actions">Actions:
+          <ul>
+            <li *ngFor="let action of monster.actions">{{action.name}} <span *ngIf="action.attack_bonus">(Attack Bonus: {{action.attack_bonus}})</span>: {{action.desc}}</li>
+          </ul>
+        </li>
+        <li *ngIf="monster.legendary_actions">Legendary Actions:
+          <ul>
+            <li *ngFor="let Laction of monster.legendary_actions">{{Laction.name}} <span *ngIf="Laction.attack_bonus">(Attack Bonus: {{Laction.attack_bonus}})</span>: {{Laction.desc}}</li>
+          </ul>
+        </li>
+        <li *ngIf="monster.condition_immunities">Condition Immunities: {{monster.condition_immunities}}</li>
+        <li *ngIf="monster.damage_immunities">Damage Immunities: {{monster.damage_immunities}}</li>
+        <li *ngIf="monster.damage_resistances">Damage Resistances: {{monster.damage_resistances}}</li>
+        <li *ngIf="monster.damage_vulnerabilities">Damage Vulnerabilities: {{monster.damage_vulnerabilities}}</li>
       </ul>
-    </li>
-    <li *ngIf="monster.actions[0]">Actions:
-      <ul>
-        <li *ngFor="let action of monster.actions">{{action}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.legendary_actions[0]">Legendary Actions:
-      <ul>
-        <li *ngFor="let laction of monster.legendary_actions">{{laction}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.attack[0]">Attack:
-      <ul>
-        <li *ngFor="let thisattack of monster.attack">{{thisattack}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.condition_immunities[0]">Condition Immunities:
-      <ul>
-        <li *ngFor="let immunity of monster.condition_immunities">{{immunity}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.damage_immunities[0]">Damage Immunities:
-      <ul>
-        <li *ngFor="let dmgimmunity of monster.damage_immunities">{{dmgimmunity}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.damage_resistances[0]">Damage Resistances:
-      <ul>
-        <li *ngFor="let resistance of monster.damage_resistances">{{resistance}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.saving_throws[0]">Saving Throws:
-      <ul>
-        <li *ngFor="let throw of monster.saving_throws">{{throw}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.senses[0]">Senses:
-      <ul>
-        <li *ngFor="let sense of monster.senses">{{sense}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.skills[0]">Skills:
-      <ul>
-        <li *ngFor="let skill of monster.skills">{{skill}}</li>
-      </ul>
-    </li>
-    <li *ngIf="monster.speed">Speed: {{monster.speed}}</li>
-    <li *ngIf="monster.stats[0]">Stats:
-      <ul>
-        <li *ngFor="let stat of monster.stats">{{stat}}</li>
-      </ul>
-    </li>
-    <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
-  </ul>
+
+    </div>
+  </div>
 </div>

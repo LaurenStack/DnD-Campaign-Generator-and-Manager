@@ -13,6 +13,16 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MonstersComponent } from './monsters/monsters.component';
 import { MonstersViewComponent } from './monsters-view/monsters-view.component';
+import { AlignmentPipe } from './alignment.pipe';
+import { TypePipe } from './type.pipe';
+import { ItemsViewComponent } from './items-view/items-view.component';
+import { ItemsComponent } from './items/items.component';
+import { ItemTypePipe } from './item-type.pipe';
+import { ToolsFilterPipe } from './tools-filter.pipe';
+import { WeaponFilterPipe } from './weapon-filter.pipe';
+import { MountsFilterPipe } from './mounts-filter.pipe';
+import { AddMonsterComponent } from './add-monster/add-monster.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -26,7 +36,8 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'createmap', component: MapComponent },
-  { path: 'monsters-view', component: MonstersViewComponent }
+  { path: 'monsters-view', component: MonstersViewComponent },
+  { path: 'items-view', component: ItemsViewComponent }
 ];
 
 @NgModule({
@@ -36,7 +47,17 @@ const routes: Routes = [
     LoginPageComponent,
     HomepageComponent,
     MonstersComponent,
-    MonstersViewComponent
+    MonstersViewComponent,
+    AlignmentPipe,
+    TypePipe,
+    ItemsViewComponent,
+    ItemsComponent,
+    ItemTypePipe,
+    ToolsFilterPipe,
+    WeaponFilterPipe,
+    MountsFilterPipe,
+    AddMonsterComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,

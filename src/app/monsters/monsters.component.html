@@ -1,3 +1,5 @@
-<p>
-  monsters works!
-</p>
+<div *ngIf="loggedInUser">
+  <ul>
+    <li *ngFor="let monster of loggedInUser.monsters">{{monster.name}} (Count: {{monster.count}})</li>
+  </ul>
+</div>
