@@ -130,3 +130,29 @@ nav {
   margin-top: -20px;
   float: right;
 }
+
+.player-details {
+  background: rgba(80, 96, 128, 0.5);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  padding-left: 50px;
+}
+.characters-details {
+  background: rgba(80, 96, 128, 0.5);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  padding-left: 50px;
+}
+
+.user-items-list {
+  background: rgba(168, 172, 179, 0.5);
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.user-items-list li {
+  list-style: none;
+}
