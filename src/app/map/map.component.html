@@ -20,7 +20,8 @@
 <!-- <div id="test" *ngIf="this.info.length > 1">
 <h1>TESTING TESTING WOAH DUDE LOOK AT THIS TEST</h1>
 </div> -->
-<button (click)="clearGrid()">Clear </button>
+<button (click)="newMap()">New Map</button>
+
 <div id="editor">
   <div id="placementType">
     <label>Select What you want to edit</label>
@@ -36,10 +37,16 @@
       <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
     </div>
   </div>
-  <div id="entitySelector" *ngIf="editType == 'monster'">
-    <div id="monsterSelect" *ngFor="let monster of myMonsters | async" class="terrain">
+  <div id="monsterSelector" *ngIf="editType == 'monster'">
+    <div id="monsterSelect" *ngFor="let monster of myMonsters" class="terrain">
       <input type="radio" value="{{monster.name}}" name="monster" (click)="monsterChange(monster)">
       <label for="monster">{{monster.name}}: </label>
+    </div>
+  </div>
+  <div id="treasureSelector" *ngIf="editType == 'treasure'">
+    <div id="monsterSelect" *ngFor="let treasure of myTreasure" class="terrain">
+      <input type="radio" value="{{treasure.name}}" name="treasure" (click)="treasureChange(treasure)">
+      <label for="treasure">{{treasure.name}}: </label>
     </div>
   </div>
 </div>
