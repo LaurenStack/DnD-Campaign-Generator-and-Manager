@@ -1,5 +1,6 @@
 <app-add-item></app-add-item>
 <br><br>
+<input type="text" #search placeholder="Search" [(ngModel)]="searchbox" (input)="searchFilterItem(search.value)">
 <select (change)="onTypeChange($event.target.value)">
   <option value="all">All</option>
   <option value="Weapon">Weapons</option>
@@ -34,7 +35,7 @@
 <input type="checkbox" name="private" (click)="filterCreator()"> Created By Me&nbsp;&nbsp;
 <input type="checkbox" name="added" (click)="filterAddItem()"> <img src="../../assets/chest.png" class="item-inventory">
 <br><br>
-<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure">
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure  | monsterSearch:searchValue">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}" (click)="showItemDetails(item)">
       {{item.name}}
