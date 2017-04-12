@@ -268,4 +268,16 @@ export class UserService {
     });
   }
 
+  updateMonster(monstersArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        monsters: monstersArray
+      });
+
+      subscription.unsubscribe();
+    });
+  }
+
 }

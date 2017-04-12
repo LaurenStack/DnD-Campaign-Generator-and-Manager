@@ -1,5 +1,5 @@
 <div *ngIf="loggedInUser">
   <ul>
-    <li *ngFor="let item of loggedInUser.treasure">{{item.name}} (Count: {{item.count}})</li>
+    <li *ngFor="let item of loggedInUser.treasure">{{item.name}} (Count: {{item.count}}) <i class="fa fa-plus-square" aria-hidden="true"></i> <i class="fa fa-minus-square" aria-hidden="true"></i></li>
   </ul>
 </div>

@@ -24,4 +24,29 @@ export class MonstersComponent implements OnInit {
         }
       });
   }
+
+  updateCount(monster, amount) {
+    var updated = false;
+    var user = this.userService.getUserById(this.loggedInUser.$key);
+    user.subscribe(res => {
+      console.log("sub")
+      var monsterArray = res.monsters;
+      for (var i=0; i < monsterArray.length; i++) {
+        if (monsterArray[i].name == monster.name) {
+          monsterArray[i].count += amount;
+          if (monsterArray[i].count == 0) {
+            monsterArray.splice(i, 1);
+            if (monsterArray.length == 0) {
+              monsterArray = [""];
+            }
+          }
+        }
+      }
+      if(!updated){
+        console.log("ran")
+        this.userService.updateMonster(monsterArray, res.$key);
+        updated = true
+      }
+    });
+  }
 }
