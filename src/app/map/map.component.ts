@@ -45,6 +45,7 @@ export class MapComponent implements OnInit {
   constructor(private UserService: UserService, private authService: AuthService) { }
 
   fill(){
+    this.grid=[];
     for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
       for(var y = 0; y < this.gridHeight; y++){
@@ -213,6 +214,14 @@ export class MapComponent implements OnInit {
 
   newMap() {
     this.rooms= [];
+    this.terrain = {
+      hexcode: "rgba(100, 100, 100 , 0)",
+      name:"blank tile",
+      public: true,
+      monster:this.monster,
+      treasure: this.treasure,
+      user:"admin"
+    };
     this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
 
     this.ngOnInit();
