@@ -16,6 +16,7 @@ export class MonstersViewComponent implements OnInit {
   loggedInUser: any;
   createdFilter: boolean = false;
   addMonsters: boolean = false;
+  searchValue: string = "";
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -76,6 +77,10 @@ export class MonstersViewComponent implements OnInit {
       }
     }
     return count;
+  }
+
+  searchFilterMonster(val){
+    this.searchValue = val;
   }
 
 

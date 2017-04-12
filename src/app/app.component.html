@@ -9,6 +9,19 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="/">DND Campaign Gen</a>
       </div>
+      <div id="diceRoll" class="navbar-left">
+        <select #dice>
+          <option value="4">D4</option>
+          <option value="6">D6</option>
+          <option value="8">D8</option>
+          <option value="10">D10</option>
+          <option value="00">D00</option>
+          <option value="12">D12</option>
+          <option value="20">D20</option>
+        </select>
+        <button (click)="onRoll(dice.value)" class="btn btn-xs btn-default">Roll</button>&nbsp;&nbsp;
+        <span id="rollResult">{{diceRoll}}</span>
+      </div>
       <div *ngIf="isLoggedIn">
         <button class="btn btn-default navbar-right" (click)="logout()">Logout</button>
         <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>

@@ -25,3 +25,14 @@ canvas {
 .monster-inventory {
   max-height: 30px;
 }
+
+#diceRoll {
+  margin-left: 20%;
+  margin-top: 1.5%;
+}
+/*margin-left: */
+
+#rollResult {
+  /*font-size: 120%;*/
+  font-weight: bold;
+}

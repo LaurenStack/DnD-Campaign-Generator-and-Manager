@@ -1,5 +1,6 @@
 <app-add-monster></app-add-monster>
 <br><br>
+<input type="text" #search placeholder="Search" [(ngModel)]="searchbox" (input)="searchFilterMonster(search.value)">
 <select (change)="changeAlign($event.target.value)">
   <option value="All">All</option>
   <option value="Lawful Good">Lawful Good</option>
@@ -37,7 +38,7 @@
 <input type="checkbox" name="added" (click)="filterAdded()"> <img src="../../assets/dragon.png" class="monster-inventory">
 
 <br><br>
-<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters">
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters | monsterSearch:searchValue">
   <div class="panel panel-default">
     <div class="panel panel-heading" (click)="displayDetails(monster)">
       {{monster.name}}
