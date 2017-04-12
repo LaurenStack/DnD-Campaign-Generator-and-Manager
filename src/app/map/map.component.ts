@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-import { Tree, Container, BSP } from '../procGenClasses';
+import { Tree, Container, Room, BSP } from '../procGenClasses';
 
 
 @Component({
@@ -27,33 +27,33 @@ export class MapComponent implements OnInit {
   renderInterval:number = null;
   drawing:boolean = false;
   terrain:object = {
-    hexcode:"rgba(100, 100, 100 , 0.5)",
+    hexcode: "rgba(100, 100, 100 , 0)",
     name:"blank tile",
     public: true,
     user:"admin"
   };// = {"#000"};
   info:string = "Initial Value";
+  editType = "terrain";
 
   terrainArray:FirebaseListObservable<any[]>;
 
   constructor(private UserService: UserService) { }
 
   fill(){
-
-
-
     for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
       for(var y = 0; y < this.gridHeight; y++){
 
         this.grid[x].push({
-          color:"rgba(200, 200, 200 , 0.5)",
+          color: "rgba(200, 200, 200 , 0.5)",
           height: this.tileHeight,
           width: this.tileWidth,
           x: x*this.tileWidth,
           y: y*this.tileHeight,
           stroke:"rgba(100, 100, 100,0.5)",
           terrain:this.terrain,
+          monster: false,
+          treasure: false,
           room: null
         });
 
@@ -65,8 +65,9 @@ export class MapComponent implements OnInit {
 
   mainContainer;
   container_tree;
-  nIterations = 4;
+  nIterations = 4;//2
   BSP = new BSP;
+  rooms = [];
   ngOnInit() {
     this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
@@ -74,34 +75,52 @@ export class MapComponent implements OnInit {
 
     this.mainContainer = new Container(0,0,this.canvasWidth, this.canvasHeight);
 
-    this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations);
+    this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations, true, .45,.45);//last 3 arguements are DISCARD_BY_RATIO, W_RATIO, H_RATIO... will be set with variables when map is resized to final version
 
     this.fill();
     this.start();
 
   setTimeout(fat=>{
-    this.ctx.fillStyle = "#000000";
-    this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
+    // this.ctx.fillStyle = "#000000";
+    // this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
 
-  this.container_tree.paint(this.ctx);
-},1000)
+  // this.container_tree.paint(this.ctx, terrain);
+  var leaves = this.container_tree.getLeaves();
+  console.log(leaves);
+
+  for (var i = 0; i < leaves.length; i++) {
+    this.rooms.push(new Room(leaves[i]));
+  }
+  for (var i = 0; i < this.rooms.length; i++) {
+    this.rooms[i].paint(this.ctx, {
+      hexcode: "rgba(10, 10, 10 , 1)",
+      name:"blank tile",
+      public: true,
+      user:"admin"
+    });
+  }
+
+},10)
 
 
   }
 
   draw(tile){
-    // this.ctx.fillStyle = tile.terrain.hexcode;
-    // // this.ctx.strokeStyle = "white";
-    // this.ctx.strokeStyle = tile.stroke;
-    // this.ctx.lineWidth = 1;
-    // this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
-    //
-    // this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
-    // // this.ctx.stroke();
-    // // this.ctx.closePath();
-    // // this.ctx.
-    //
+    this.ctx.fillStyle = tile.terrain.hexcode;
+    // this.ctx.fillStyle = "#"+((1<<24)*Math.random()|0).toString(16);
+    if(tile.monster){
 
+    } else if( tile.treasure){
+
+    } else 
+    this.ctx.strokeStyle = tile.stroke;
+    this.ctx.lineWidth = 1;
+    this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
+
+    this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
+    // this.ctx.stroke();
+    // this.ctx.closePath();
+    // this.ctx.
 
   }
 
@@ -114,7 +133,11 @@ export class MapComponent implements OnInit {
           this.draw(this.grid[x][y])
         }//end y loop
       }//end x loop
+
+
+
     },20);
+
   }
 
   drawTile(eData) {
@@ -124,7 +147,14 @@ export class MapComponent implements OnInit {
       var mouseY = eData.clientY - mapCanvas.top;
       mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
-      this.grid[mouseX][mouseY].terrain = this.terrain;
+
+      if(this.editType === "terrain"){
+        this.grid[mouseX][mouseY].terrain = this.terrain;
+      } else if(this.editType === "monster"){
+        this.grid[mouseX][mouseY].monster = true;
+      } else if(this.editType === "monster"){
+        this.grid[mouseX][mouseY].treasure = true;
+      }
     }
   }
   showInfo(eData) {
@@ -152,6 +182,12 @@ export class MapComponent implements OnInit {
   colorChange(e) {
     this.terrain = e;
     console.log(e);
+  }
+
+  saveMap(name){
+
+    this.UserService.saveMap(name, this.rooms, this.grid);
+
   }
 
 }

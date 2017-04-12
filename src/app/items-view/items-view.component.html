@@ -30,15 +30,19 @@
   <option value="Tack, Harness, and Drawn Vehicles">Tack, Harness, and Drawn Vehicles</option>
   <option value="Waterborne Vehicles">Waterborne Vehicles</option>
 </select>
+
+<input type="checkbox" name="private" (click)="filterCreator()"> Created By Me&nbsp;&nbsp;
+<input type="checkbox" name="added" (click)="filterAddItem()"> <img src="../../assets/chest.png" class="item-inventory">
 <br><br>
-<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType">
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}" (click)="showItemDetails(item)">
       {{item.name}}
+      <img src="../../assets/chest.png" *ngIf="findUserItems(item)" class="chest-icons">
     </div>
     <div class="panel panel-body" *ngIf="detailsShown == item">
       <p>Created by: {{item.creator}}</p>
-      <p>Current Campaign Count {{item.count}}</p>
+      <p *ngIf="findUserItems(item)">Current Campaign Count {{findUserItems(item)}}</p>
       <button (click)="addItem(item)" class="btn btn-xs btn-info">Add to Campaign</button>
       <ul>
         <li *ngIf="item.category_range">Category Range: {{item.category_range}}</li>

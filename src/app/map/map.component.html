@@ -1,4 +1,11 @@
-<h1>Map</h1>
+<form >
+  <h3>Save your map here when you are happy with it.</h3>
+  <div class="form-group">
+    <label>Map Name:</label>
+    <input #mapName >
+  </div>
+  <button (click)="saveMap(mapName.value)">Save</button>
+</form>
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 
 <a href="https://eskerda.com/bsp-dungeon-generation/">This is a link to the tutorial we're using for proc gen.</a>
@@ -6,11 +13,20 @@
 
 <h3>Terrain: {{info}}</h3>
 <button (click)="clearGrid()">Clear </button>
-
-<div id="palatte">
-  <div *ngFor="let terrain of terrainArray | async" class="terrain">
-    <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
-    <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+<div id="editor">
+  <div id="placementType">
+    <label>Select What you want to edit</label>
+    <select [value]=editType>
+      <option value="terrain">Terrain</option>
+      <option value="monsters">Monsters</option>
+      <option value="treasure">Treasure/loot</option>
+    </select>
+  </div>
+  <div id="palatte">
+    <div *ngFor="let terrain of terrainArray | async" class="terrain">
+      <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
+      <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+    </div>
   </div>
 </div>
 

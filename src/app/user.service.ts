@@ -15,7 +15,6 @@ export class UserService {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
     this.terrainArray = angularFire.database.list('terrain');
-    this.items = angularFire.database.list('items');
   }
 
   getUsers() {
@@ -39,6 +38,13 @@ export class UserService {
       }
     })
     return user;
+  }
+
+  findUserMonsters() {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      return res[0].monsters;
+      // return this.getUserById(user.$key);
+    })
   }
 
   getUserById(userId: string) {
@@ -67,6 +73,27 @@ export class UserService {
   editItem(item){
     var currentItem = this.getItemById(item.$key);
     console.log(item);
+  }
+
+  saveMap(name,rooms, grid){
+    var hasRun = false;
+    var map = {
+      name: name,
+      rooms: rooms,
+      grid: grid
+    }
+    var user;
+    var findUser;
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(response=>{
+      findUser = response[0];
+      user = this.getUserById(findUser.$key);
+      if(findUser.maps[0] === ""){
+        findUser.maps = [];
+      }
+      findUser.maps.push(map);
+      user.update({maps:findUser.maps});
+      subscription.unsubscribe();
+    });
   }
 
   addMonster(monster) {
@@ -258,6 +285,30 @@ export class UserService {
         charFour: characterObject
       });
 
+    });
+  }
+
+  updateMonster(monstersArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        monsters: monstersArray
+      });
+
+      subscription.unsubscribe();
+    });
+  }
+
+  updateItem(itemsArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        treasure: itemsArray
+      });
+
+      subscription.unsubscribe();
     });
   }
 

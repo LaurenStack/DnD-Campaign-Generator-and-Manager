@@ -21,27 +21,37 @@ export class AddItemComponent implements OnInit {
   }
 
   addButtonClicked(name, type, weaponRange, range, weight, damage, costQuantity, costCurrency, description) {
-    if (!name || !type || !weight || !costQuantity || !costCurrency) {
-      alert("Please complete all required fields to create an item!");
-    }
-    else {
-      this.addFormShown = false;
-      var newItem = {
-        name: name,
-        type: type,
-        weapon_range: weaponRange,
-        range: range,
-        weight: weight,
-        damage: damage,
-        cost: {
-          quantity: parseInt(costQuantity),
-          unit: costCurrency},
-        description: description,
-        private: this.selectedEntry
+    this.userService.getAllItems().subscribe(res => {
+      var foundName: boolean = false;
+      for (var i=0;i<res.length;i++) {
+        if (res[i].name == name) {
+          foundName = true;
+          alert("Sorry that name is taken, please choose a different name!");
+        }
       }
-      this.userService.createItem(newItem);
-    }
-
+      if (foundName == false) {
+        if (!name || !type || !weight || !costQuantity || !costCurrency) {
+          alert("Please complete all required fields to create an item!");
+        }
+        else {
+          this.addFormShown = false;
+          var newItem = {
+            name: name,
+            type: type,
+            weapon_range: weaponRange,
+            range: range,
+            weight: weight,
+            damage: damage,
+            cost: {
+              quantity: parseInt(costQuantity),
+              unit: costCurrency},
+            description: description,
+            private: this.selectedEntry
+          }
+          this.userService.createItem(newItem);
+        }
+      }
+    })
   }
 
   cancelItemAdd() {
