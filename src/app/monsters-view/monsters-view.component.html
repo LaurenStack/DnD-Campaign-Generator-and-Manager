@@ -33,10 +33,12 @@
   <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
 </select>
 
+<input type="checkbox" name="private" (click)="filterCreated()"> Created By Me
+
 <br><br>
 <h5>In your inventory: <img src="../../assets/dragon.png" class="monster-inventory"></h5>
 <br><br>
-<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType">
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName">
   <div class="panel panel-default">
     <div class="panel panel-heading" (click)="displayDetails(monster)">
       {{monster.name}}

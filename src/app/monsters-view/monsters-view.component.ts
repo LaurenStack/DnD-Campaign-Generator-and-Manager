@@ -14,6 +14,7 @@ export class MonstersViewComponent implements OnInit {
   alignType: string = "All";
   creatureType: string = "All";
   loggedInUser: any;
+  createdFilter: boolean = false
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -47,6 +48,15 @@ export class MonstersViewComponent implements OnInit {
 
   changeType(val){
     this.creatureType = val;
+  }
+
+  filterCreated(){
+    console.log(this.createdFilter)
+    if(this.createdFilter == false){
+      this.createdFilter = true
+    }else{
+      this.createdFilter = false;
+    }
   }
 
   findUserMonster(monster) {
