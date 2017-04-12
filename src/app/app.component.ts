@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   title = 'D&D Campaign Generator and Manager';
+  diceRoll: number;
 
   private isLoggedIn: Boolean;
   private user_displayName: String;
@@ -35,6 +36,36 @@ export class AppComponent {
         }
       }
     );
+  }
+
+  onRoll(diceType) {
+    var min;
+    var max;
+    var roll;
+    if(diceType == "4"){
+      min = 1;
+      max = 4;
+    }else if(diceType == "6"){
+      min = 1;
+      max = 6;
+    }else if(diceType == "8"){
+      min = 1;
+      max = 8;
+    }else if(diceType == "10" || diceType == "00"){
+      min = 0;
+      max = 9;
+    }else if(diceType == "12"){
+      min = 1;
+      max = 12;
+    }else if(diceType == "20"){
+      min = 1;
+      max = 20;
+    }
+    this.diceRoll = Math.round(Math.random() * (max - min)) + min;
+    if(diceType == "00"){
+      this.diceRoll = this.diceRoll * 10;
+    }
+    return this.diceRoll;
   }
 
   logout() {
