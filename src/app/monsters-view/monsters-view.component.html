@@ -32,6 +32,8 @@
   <option value="celestial">celestial</option>
   <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
 </select>
+
+
 <br><br>
 <div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType">
   <div class="panel panel-default">
@@ -41,7 +43,7 @@
     </div>
     <div class="panel panel-body" *ngIf="showDetails == monster">
       <p>Created by: {{monster.creator}}</p>
-      <p>Current Campaign Count {{monster.count}}</p>
+      <p *ngIf="findUserMonster(monster)">Current Campaign Count {{findUserMonster(monster)}}</p>
       <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
       <ul>
         <li *ngIf="monster.alignment">Alignment: {{monster.alignment}}</li>

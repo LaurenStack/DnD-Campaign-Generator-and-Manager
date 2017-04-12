@@ -41,6 +41,13 @@ export class UserService {
     return user;
   }
 
+  findUserMonsters() {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      return res[0].monsters;
+      // return this.getUserById(user.$key);
+    })
+  }
+
   getUserById(userId: string) {
     return this.angularFire.database.object('/users/' + userId);
   }

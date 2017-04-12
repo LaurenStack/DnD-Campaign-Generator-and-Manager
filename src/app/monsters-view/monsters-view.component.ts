@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
@@ -12,20 +13,20 @@ export class MonstersViewComponent implements OnInit {
   showDetails: any;
   alignType: string = "All";
   creatureType: string = "All";
+  loggedInUser: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.monsters = this.userService.getAllMonsters();
-    // this.userService.getAllMonsters().subscribe(res=>{
-    //   var array = [];
-    //   for(var i=0;i<res.length;i++){
-    //     if(array.indexOf(res[i].type)==-1){
-    //       array.push(res[i].type)
-    //     }
-    //   }
-    //   console.log(array)
-    // })
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth) {
+          this.userService.getUserByEmail(auth.google.email).subscribe(res => {
+            this.loggedInUser = res[0];
+          });
+        }
+    })
   }
 
   addMonster(monster) {
@@ -46,6 +47,14 @@ export class MonstersViewComponent implements OnInit {
 
   changeType(val){
     this.creatureType = val;
+  }
+
+  findUserMonster(monster) {
+    for (var i =0; i<this.loggedInUser.monsters.length; i++) {
+      if (this.loggedInUser.monsters[i].name == monster.name) {
+        return this.loggedInUser.monsters[i].count;
+      }
+    }
   }
 
 

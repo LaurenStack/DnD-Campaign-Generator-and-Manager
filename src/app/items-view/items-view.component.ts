@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
+
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
@@ -14,8 +16,9 @@ export class ItemsViewComponent implements OnInit {
   weaponType: string = "All";
   mountsType: string = "All";
   detailsShown: any;
+  loggedInUser: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.items = this.userService.getAllItems();
@@ -33,6 +36,14 @@ export class ItemsViewComponent implements OnInit {
         })
       }
       console.log(array)
+    })
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth) {
+          this.userService.getUserByEmail(auth.google.email).subscribe(res => {
+            this.loggedInUser = res[0];
+          });
+        }
     })
   }
 
@@ -66,6 +77,14 @@ export class ItemsViewComponent implements OnInit {
 
   addItem(item) {
     this.userService.addItem(item);
+  }
+
+  findUserItems(item) {
+    for (var i =0; i<this.loggedInUser.treasure.length; i++) {
+      if (this.loggedInUser.treasure[i].name == item.name) {
+        return this.loggedInUser.treasure[i].count;
+      }
+    }
   }
 
 }
