@@ -24,6 +24,10 @@ import { MountsFilterPipe } from './mounts-filter.pipe';
 import { AddMonsterComponent } from './add-monster/add-monster.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { CharactersComponent } from './characters/characters.component';
+import { CreatorPipe } from './creator.pipe';
+import { AddedMonstersPipe } from './added-monsters.pipe';
+import { ItemCreatorPipe } from './item-creator.pipe';
+import { ItemsAddedPipe } from './items-added.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -59,7 +63,11 @@ const routes: Routes = [
     MountsFilterPipe,
     AddMonsterComponent,
     AddItemComponent,
-    CharactersComponent
+    CharactersComponent,
+    CreatorPipe,
+    AddedMonstersPipe,
+    ItemCreatorPipe,
+    ItemsAddedPipe
   ],
   imports: [
     BrowserModule,
