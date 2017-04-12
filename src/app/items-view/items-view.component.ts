@@ -19,6 +19,7 @@ export class ItemsViewComponent implements OnInit {
   loggedInUser: any;
   creatorFilter: boolean = false;
   addItems: boolean = false;
+  searchValue: string = "";
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -106,6 +107,10 @@ export class ItemsViewComponent implements OnInit {
     }else{
       this.addItems = false;
     }
+  }
+
+  searchFilterItem(val){
+    this.searchValue = val;
   }
 
 

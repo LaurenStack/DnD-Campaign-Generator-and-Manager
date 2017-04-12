@@ -14,6 +14,7 @@ export class UserService {
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
+    this.items = angularFire.database.list('items');
     this.terrainArray = angularFire.database.list('terrain');
   }
 
