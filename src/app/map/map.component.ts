@@ -26,10 +26,12 @@ export class MapComponent implements OnInit {
   grid: Array<Array<any>> = [];
   renderInterval:number = null;
   drawing:boolean = false;
+  monster = {name:"none"};
   terrain:object = {
     hexcode: "rgba(100, 100, 100 , 0)",
     name:"blank tile",
     public: true,
+    monster:this.monster,
     user:"admin"
   };// = {"#000"};
   info:string = "Initial Value";
@@ -68,7 +70,16 @@ export class MapComponent implements OnInit {
   nIterations = 4;//2
   BSP = new BSP;
   rooms = [];
+
+  myMonsters:FirebaseListObservable<any[]>;
+
+  mToken = null;
+  tToken = null;
   ngOnInit() {
+    this.myMonsters = this.UserService.getAllMonsters();
+    this.mToken = document.getElementById("mToken");
+    this.tToken = document.getElementById("tToken");
+
     this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
@@ -105,14 +116,15 @@ export class MapComponent implements OnInit {
 
   }
 
+  setEditType(type:string){
+    this.editType = type.toString();
+    console.log(this.editType)
+
+  }
+
   draw(tile){
     this.ctx.fillStyle = tile.terrain.hexcode;
     // this.ctx.fillStyle = "#"+((1<<24)*Math.random()|0).toString(16);
-    if(tile.monster){
-
-    } else if( tile.treasure){
-
-    } else 
     this.ctx.strokeStyle = tile.stroke;
     this.ctx.lineWidth = 1;
     this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
@@ -121,6 +133,14 @@ export class MapComponent implements OnInit {
     // this.ctx.stroke();
     // this.ctx.closePath();
     // this.ctx.
+    if(tile.monster){
+      this.ctx.drawImage(this.mToken, tile.x, tile.y, tile.width, tile.height);
+    } else if(tile.treasure){
+      this.ctx.drawImage(this.tToken, tile.x, tile.y, tile.width, tile.height);
+
+    }
+
+
 
   }
 
@@ -150,9 +170,12 @@ export class MapComponent implements OnInit {
 
       if(this.editType === "terrain"){
         this.grid[mouseX][mouseY].terrain = this.terrain;
+        console.log("draw terrain");
       } else if(this.editType === "monster"){
-        this.grid[mouseX][mouseY].monster = true;
-      } else if(this.editType === "monster"){
+        console.log("draw monster");
+        this.grid[mouseX][mouseY].monster = this.monster;
+      } else if(this.editType === "treasure"){
+        console.log("draw treasure")
         this.grid[mouseX][mouseY].treasure = true;
       }
     }
@@ -164,7 +187,8 @@ export class MapComponent implements OnInit {
       var mouseY = eData.clientY - mapCanvas.top;
       mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
-      this.info = this.grid[mouseX][mouseY].terrain.name;
+      this.info = this.grid[mouseX][mouseY].terrain.name + ", "+ this.grid[mouseX][mouseY].monster.name +", "+ this.grid[mouseX][mouseY].treasure;
+      console.log(this.grid[mouseX][mouseY]);
     }
   }
 
@@ -178,7 +202,9 @@ export class MapComponent implements OnInit {
       this.drawTile(e);
     }
   }
-
+  monsterChange(e){
+    this.monster = e;
+  }
   colorChange(e) {
     this.terrain = e;
     console.log(e);
