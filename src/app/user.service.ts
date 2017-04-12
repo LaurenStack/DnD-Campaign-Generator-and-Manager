@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
+
+
 @Injectable()
 export class UserService {
   users: FirebaseListObservable<any[]>;
   monsters: FirebaseListObservable<any[]>;
+  terrainArray: FirebaseListObservable<any[]>;
+  items: FirebaseListObservable<any[]>;
   loggedInUser: any;
 
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
+    this.terrainArray = angularFire.database.list('terrain');
+    this.items = angularFire.database.list('items');
   }
 
   getUsers() {
     return this.users;
+  }
+  getTerrain() {
+    return this.terrainArray;
   }
 
   setLoggedInUser(user) {
@@ -36,21 +45,33 @@ export class UserService {
     return this.angularFire.database.object('/users/' + userId);
   }
 
+  getItemById(itemId: string) {
+    return this.angularFire.database.object('/items/' + itemId);
+  }
+
   getAllMonsters() {
     return this.monsters;
+  }
+
+  getAllItems() {
+    return this.items;
   }
 
   // scrapeMonsters(monster){
   //   monster.private = false;
   //   monster.creator = "admin";
   //   // console.log(monster);
-  //   this.monsters.push(monster)
+  //   this.items.push(monster)
   // }
+
+  editItem(item){
+    var currentItem = this.getItemById(item.$key);
+    console.log(item);
+  }
 
   addMonster(monster) {
     var user;
     var findUser
-    var enemies
     var enemyArray=[]
     var addedMonster = false
     var foundMonster = false;
@@ -87,6 +108,45 @@ export class UserService {
     });
   }
 
+  addItem(item) {
+    var user;
+    var findUser
+    var itemsArray=[]
+    var addedItem = false
+    var foundItem = false;
+    this.getUserByEmail(this.loggedInUser).subscribe(response=>{
+      findUser = response[0]
+      this.getUserById(findUser.$key).subscribe(res => {
+        if(res.treasure[0]==""){
+          item.count = 1;
+          itemsArray = [item];
+        }
+        else{
+          for (var j = 0; j < res.treasure.length; j++) {
+            if (res.treasure[j].name == item.name) {
+              res.treasure[j].count +=1;
+              foundItem = true;
+            }
+          }
+          if (!foundItem) {
+            itemsArray = res.treasure;
+            item.count = 1;
+            itemsArray.push(item);
+          } else {
+            itemsArray = res.treasure;
+          }
+        }
+        if(!addedItem){
+          user = this.getUserById(findUser.$key);
+          user.update({
+            treasure: itemsArray
+          })
+          addedItem = true;
+        }
+      });
+    });
+  }
+
   addUser(mail, name): void {
 
     console.log("addUser ran");
@@ -96,10 +156,109 @@ export class UserService {
       maps: [""],
       monsters: [""],
       treasure: [""],
-      username: ""
+      username: "",
+      charOne: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charTwo: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charThree: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      },
+      charFour: {
+        name: "",
+        type: "",
+        health: 10,
+        description: "",
+        armorWeapons: "",
+        copper: 0,
+        silver: 0,
+        gold: 0,
+        platinum: 0
+      }
     })
+  }
 
+  createMonster(newMonster) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res=>{
 
+      newMonster.creator = res[0].displayName;
+      this.monsters.push(newMonster);
+    })
+  }
+
+  createItem(newItem) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res=>{
+
+      newItem.creator = res[0].displayName;
+      this.items.push(newItem);
+    })
+  }
+
+  updateCharOne(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charOne: characterObject
+      });
+
+    });
+  }
+  updateCharTwo(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charTwo: characterObject
+      });
+
+    });
+  }
+  updateCharThree(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charThree: characterObject
+      });
+
+    });
+  }
+  updateCharFour(characterObject) {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userInFirebase.$key);
+      currentUser.update({
+        charFour: characterObject
+      });
+
+    });
   }
 
 }

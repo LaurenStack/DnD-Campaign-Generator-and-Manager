@@ -8,8 +8,7 @@ import { Http, Response } from '@angular/http';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css'],
-  providers: [UserService]
+  styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
   users: FirebaseListObservable<any[]>;
@@ -29,7 +28,7 @@ export class HomepageComponent implements OnInit {
 
         }
         //don't uncomment
-        //  this.http.get('http://www.dnd5eapi.co/api/monsters/').subscribe(data =>
+        //  this.http.get('http://www.dnd5eapi.co/api/equipment/').subscribe(data =>
         //   {
         //     console.log(data.json());
         //     var obj = data.json();
@@ -41,6 +40,8 @@ export class HomepageComponent implements OnInit {
         //       });
         //     })
         //   });
+
+
         //don't uncomment
 
 

@@ -1,30 +1,50 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
+import { Tree, Container, BSP } from '../procGenClasses';
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  providers: [UserService]
 })
 export class MapComponent implements OnInit {
   canvas = null;//: HTMLCanvasElement= null;
+  // canvasSide: = 800
   ctx: CanvasRenderingContext2D = null;
-  canvasWidth:number = 500;
-  canvasHeight:number = 500;
-  gridSize:number = 30;
-  tileHeight: number = this.canvasHeight/this.gridSize;
-  tileWidth: number = this.canvasWidth/this.gridSize;
+  gridSize = 36;
+  gridWidth:number = 36;
+  gridHeight:number = 36;//was 24
+  canvasWidth:number = 900;
+  canvasHeight:number = 900;//was 600
+  square = 25;
+  tileHeight: number = this.canvasHeight/this.gridHeight;
+  tileWidth: number = this.canvasWidth/this.gridWidth;
   grid: Array<Array<any>> = [];
   renderInterval:number = null;
   drawing:boolean = false;
-  color:string = "#000";
+  terrain:object = {
+    hexcode:"rgba(100, 100, 100 , 0.5)",
+    name:"blank tile",
+    public: true,
+    user:"admin"
+  };// = {"#000"};
+  info:string = "Initial Value";
 
-  constructor() { }
+  terrainArray:FirebaseListObservable<any[]>;
 
-  fill(size){
+  constructor(private UserService: UserService) { }
 
-    for(var x = 0; x < size; x ++){
+  fill(){
+
+
+
+    for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
-      for(var y = 0; y < size; y++){
+      for(var y = 0; y < this.gridHeight; y++){
 
         this.grid[x].push({
           color:"rgba(200, 200, 200 , 0.5)",
@@ -32,39 +52,65 @@ export class MapComponent implements OnInit {
           width: this.tileWidth,
           x: x*this.tileWidth,
           y: y*this.tileHeight,
-          stroke:"rgba(100, 100, 100,0.5)"
+          stroke:"rgba(100, 100, 100,0.5)",
+          terrain:this.terrain,
+          room: null
         });
 
       }//end y loop
     }//end x loop
+
   }//end fill
 
+
+  mainContainer;
+  container_tree;
+  nIterations = 4;
+  BSP = new BSP;
   ngOnInit() {
+    this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
 
-    this.fill(this.gridSize);
+    this.mainContainer = new Container(0,0,this.canvasWidth, this.canvasHeight);
+
+    this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations);
+
+    this.fill();
     this.start();
+
+  setTimeout(fat=>{
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
+
+  this.container_tree.paint(this.ctx);
+},1000)
+
+
   }
 
   draw(tile){
-    this.ctx.fillStyle = tile.color;
-    // this.ctx.strokeStyle = "white";
-    this.ctx.strokeStyle = tile.stroke;
-    this.ctx.lineWidth = 1;
-    this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
-    this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
-    // this.ctx.stroke();
-    // this.ctx.closePath();
-    // this.ctx.
+    // this.ctx.fillStyle = tile.terrain.hexcode;
+    // // this.ctx.strokeStyle = "white";
+    // this.ctx.strokeStyle = tile.stroke;
+    // this.ctx.lineWidth = 1;
+    // this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
+    //
+    // this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
+    // // this.ctx.stroke();
+    // // this.ctx.closePath();
+    // // this.ctx.
+    //
+
+
   }
 
   start(){
     this.renderInterval = setInterval(fat=>{
-      this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
-      for(var x = 0; x < this.gridSize; x ++){
+      // this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
+      for(var x = 0; x < this.gridWidth; x ++){
 
-        for(var y = 0; y < this.gridSize; y++){
+        for(var y = 0; y < this.gridHeight; y++){
           this.draw(this.grid[x][y])
         }//end y loop
       }//end x loop
@@ -76,9 +122,19 @@ export class MapComponent implements OnInit {
       var mapCanvas = this.canvas.getBoundingClientRect();
       var mouseX = eData.clientX - mapCanvas.left;
       var mouseY = eData.clientY - mapCanvas.top;
-      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridSize to this.tileWidth
+      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
-      this.grid[mouseX][mouseY].color = this.color;
+      this.grid[mouseX][mouseY].terrain = this.terrain;
+    }
+  }
+  showInfo(eData) {
+    if(!this.drawing){
+      var mapCanvas = this.canvas.getBoundingClientRect();
+      var mouseX = eData.clientX - mapCanvas.left;
+      var mouseY = eData.clientY - mapCanvas.top;
+      mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
+      mouseY = Math.floor(mouseY/this.tileHeight);
+      this.info = this.grid[mouseX][mouseY].terrain.name;
     }
   }
 
@@ -94,7 +150,7 @@ export class MapComponent implements OnInit {
   }
 
   colorChange(e) {
-    this.color = e;
+    this.terrain = e;
     console.log(e);
   }
 

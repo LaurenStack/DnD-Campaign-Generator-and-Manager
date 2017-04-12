@@ -1,0 +1,77 @@
+<button class="btn btn-info" (click)="showAddForm()">Create Item</button>
+<br><br>
+<div *ngIf="addFormShown">
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="name">Item Name*:</label>
+      <input #name type="text">
+    </div>
+    <div class="col-sm-6">
+      <label for="type">Type*:</label>
+      <select #type>
+        <option value="Weapon">Weapons</option>
+        <option value="Armor">Armor</option>
+        <option value="Adventuring Gear">Adventuring Gear</option>
+        <option value="Tools">Tools</option>
+        <option value="Mounts and Vehicles">Mounts and Vehicles</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="challenge_rating">Public or Private*:</label>
+      <input type="radio" name="pubpriv" value="public" (change)="onSelectionChange(entry)">Public<br>
+      <input type="radio" name="pubpriv" value="private" checked (change)="onSelectionChange(entry)">Private<br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="weapon_range">Weapon Range(if applicable):</label>
+      <select #weaponRange>
+        <option value="Martial Melee">Martial Melee</option>
+        <option value="Simple Melee">Simple Melee</option>
+        <option value="Martial Ranged">Martial Ranged</option>
+        <option value="Simple Ranged">Simple Ranged</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+      <label for="range">Range (if applicable):</label>
+      <input #range type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="weight">Weight*:</label>
+      <input type="text" #weight>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="damage">Damage:</label>
+      <input #damage type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="cost">Cost quantity*:</label>
+      <input #costQuantity type="number">
+    </div>
+    <div class="col-sm-6">
+      <label for="cost">Currency*:</label>
+      <select #costCurrency>
+        <option value="cp">cp</option>
+        <option value="sp">sp</option>
+        <option value="gp">gp</option>
+        <option value="pp">pp</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="description">Description:</label>
+      <input #description type="text">
+    </div>
+  </div>
+  <button (click)="addButtonClicked(name.value, type.value, weaponRange.value, range.value, weight.value, damage.value, costQuantity.value, costCurrency.value, description.value)" class="btn btn-warning">Submit!</button>
+  <button (click)="cancelItemAdd()" class="btn btn-danger">Cancel</button>
+</div>

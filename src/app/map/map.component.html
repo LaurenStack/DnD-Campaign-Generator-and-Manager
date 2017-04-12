@@ -1,59 +1,17 @@
 <h1>Map</h1>
-<canvas id="map" width="500" height="500" (mousemove)="drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)"></canvas>
+<canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 
+<a href="https://eskerda.com/bsp-dungeon-generation/">This is a link to the tutorial we're using for proc gen.</a>
+
+
+<h3>Terrain: {{info}}</h3>
 <button (click)="clearGrid()">Clear </button>
 
-<div *ngFor="let terrain of terrainArray">
-  <input type="radio" value="{{terrain.name}}" name="{{terrain.name}}">
-  <label for="">{{terrain.name}}: {{terrain.colorSwatch}}</label>
+<div id="palatte">
+  <div *ngFor="let terrain of terrainArray | async" class="terrain">
+    <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
+    <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+  </div>
 </div>
 
-
 <input #newColor (load)="colorChange(newColor.value)" (change)="colorChange(newColor.value)" type="color" value="#a07828">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <button value="stone">stone<span>__</span></button>
-<button value="wood">wood<span>__</span></button>
-<button value="water">water<span>__</span></button>
-<button value="sand">sand<span>__</span></button>
-<button value="cobblestone">cobblestone<span>__</span></button>
-<button value="mud">mud<span>__</span></button>
-<button value="swamp">swamp<span>__</span></button>
-<button value="bog">bog<span>__</span></button>
-<button value="marsh">marsh<span>__</span></button>
-<button value="ice">ice<span>__</span></button>
-<button value="snow">snow<span>__</span></button>
-<button value="straw">straw<span>__</span></button>
-<button value="quicksand">quicksand<span>__</span></button>
-<button value="grass">grass<span>__</span></button>
-<button value="dirt">dirt<span>__</span></button>
-<button value="lava">lava<span>__</span></button>
-<button value="roofing">roofing<span>__</span></button>
-<button value="burnt-material">burnt-material<span>__</span></button>
-<button value="roofing">roofing<span>__</span></button> -->
