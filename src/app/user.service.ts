@@ -280,4 +280,16 @@ export class UserService {
     });
   }
 
+  updateItem(itemsArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        treasure: itemsArray
+      });
+
+      subscription.unsubscribe();
+    });
+  }
+
 }

@@ -25,4 +25,28 @@ export class ItemsComponent implements OnInit {
       });
   }
 
+  updateCount(item, amount) {
+    var updated = false;
+    var user = this.userService.getUserById(this.loggedInUser.$key);
+    user.subscribe(res => {
+      var itemArray = res.treasure;
+      for (var i=0; i < itemArray.length; i++) {
+        if (itemArray[i].name == item.name) {
+          itemArray[i].count += amount;
+          if (itemArray[i].count == 0) {
+            itemArray.splice(i, 1);
+            if (itemArray.length == 0) {
+              itemArray = [""];
+            }
+          }
+        }
+      }
+      if(!updated){
+        console.log("ran")
+        this.userService.updateItem(itemArray, res.$key);
+        updated = true
+      }
+    });
+  }
+
 }
