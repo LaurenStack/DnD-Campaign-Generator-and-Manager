@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AuthService } from '../auth.service';
-
+import { Router } from '@angular/router';
 import { Tree, Container, Room, BSP } from '../procGenClasses';
 
 
@@ -42,7 +42,9 @@ export class MapComponent implements OnInit {
 
   terrainArray:FirebaseListObservable<any[]>;
 
-  constructor(private UserService: UserService, private authService: AuthService) { }
+  currentRoute = this.route.url;
+
+  constructor(private UserService: UserService, private authService: AuthService, private route: Router) { }
 
   fill(){
     this.grid=[];
@@ -106,30 +108,48 @@ export class MapComponent implements OnInit {
 
     this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations, true, .45,.45);//last 3 arguements are DISCARD_BY_RATIO, W_RATIO, H_RATIO... will be set with variables when map is resized to final version
 
-    this.fill();
-    this.start();
+    if(this.currentRoute === "/createmap"){
+      this.fill();
+      this.start();
 
-  setTimeout(fat=>{
-    // this.ctx.fillStyle = "#000000";
-    // this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
+      setTimeout(fat=>{
+        // this.ctx.fillStyle = "#000000";
+        // this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
 
-  // this.container_tree.paint(this.ctx, terrain);
-  var leaves = this.container_tree.getLeaves();
-  console.log(leaves);
+        // this.container_tree.paint(this.ctx, terrain);
+        var leaves = this.container_tree.getLeaves();
+        console.log(leaves);
 
-  for (var i = 0; i < leaves.length; i++) {
-    this.rooms.push(new Room(leaves[i]));
-  }
-  for (var i = 0; i < this.rooms.length; i++) {
-    this.rooms[i].paint(this.ctx, {
-      hexcode: "rgba(10, 10, 10 , 1)",
-      name:"blank tile",
-      public: true,
-      user:"admin"
-    });
-  }
+        for (var i = 0; i < leaves.length; i++) {
+          this.rooms.push(new Room(leaves[i]));
+        }
+        for (var i = 0; i < this.rooms.length; i++) {
+          this.rooms[i].paint(this.ctx, {
+            hexcode: "rgba(10, 10, 10 , 1)",
+            name:"blank tile",
+            public: true,
+            user:"admin"
+          });
+        }
 
-},10)
+      },10)
+
+    } else if(this.currentRoute === "map/:i"){
+      //get map from service
+      var map = {name:"", grid:[[]], rooms:[]}
+      this.grid = map.grid;
+      this.rooms = map.rooms;
+      //this.name = map.name
+      this.start();
+      for (var i = 0; i < this.rooms.length; i++) {
+        this.rooms[i].paint(this.ctx, {
+          hexcode: "rgba(10, 10, 10 , 1)",
+          name:"blank tile",
+          public: true,
+          user:"admin"
+        });
+      }
+    }
 
 
   }
