@@ -20,7 +20,7 @@ export class AddMonsterComponent implements OnInit {
     this.addFormShown = true;
   }
 
-  addButtonClicked(Name, alignment, type, armorClass, languages, constitution, perception, intelligence, charisma, dexterity, strength, wisdom, speed, challengeRating, hitPoints, hitDice, damageImmunities, damageResistances, damageVulnerabilities, conditionImmunities, actions, legendaryActions) {
+  addButtonClicked(Name, alignment, type, armorClass, languages, constitution, perception, intelligence, charisma, dexterity, strength, wisdom, speed, challengeRating, hitPoints, hitDice, damageImmunities, damageResistances, damageVulnerabilities, conditionImmunities) {
     this.userService.getAllMonsters().subscribe(res => {
       var foundName: boolean = false;
       for (var i=0;i<res.length;i++) {
@@ -54,8 +54,6 @@ export class AddMonsterComponent implements OnInit {
             damage_resistances: damageResistances,
             damage_vulnerabilities: damageVulnerabilities,
             condition_immunities: conditionImmunities,
-            actions: actions,
-            legendary_actions: legendaryActions,
             private: this.selectedEntry
           }
           this.userService.createMonster(newMonster);
