@@ -18,12 +18,12 @@ export class MonstersViewComponent implements OnInit {
   constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.monsters = this.userService.getAllMonsters();
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth) {
           this.userService.getUserByEmail(auth.google.email).subscribe(res => {
             this.loggedInUser = res[0];
+            this.monsters = this.userService.getAllMonsters();
           });
         }
     })
@@ -50,11 +50,13 @@ export class MonstersViewComponent implements OnInit {
   }
 
   findUserMonster(monster) {
+    var count;
     for (var i =0; i<this.loggedInUser.monsters.length; i++) {
       if (this.loggedInUser.monsters[i].name == monster.name) {
-        return this.loggedInUser.monsters[i].count;
+        count = this.loggedInUser.monsters[i].count;
       }
     }
+    return count;
   }
 
 

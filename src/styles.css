@@ -13,7 +13,15 @@ canvas {
   max-width: 20px;
   float: right;
 }
+.dragon-icons {
+  max-height: 30px;
+  float: right;
+}
 
 .item-inventory {
   max-width: 20px;
+}
+
+.monster-inventory {
+  max-height: 30px;
 }

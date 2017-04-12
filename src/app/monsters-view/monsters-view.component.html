@@ -33,13 +33,14 @@
   <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
 </select>
 
-
+<br><br>
+<h5>In your inventory: <img src="../../assets/dragon.png" class="monster-inventory"></h5>
 <br><br>
 <div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType">
   <div class="panel panel-default">
     <div class="panel panel-heading" (click)="displayDetails(monster)">
-      <h3>{{monster.name}}</h3>
-
+      {{monster.name}}
+      <img src="../../assets/dragon.png" *ngIf="findUserMonster(monster)" class="dragon-icons">
     </div>
     <div class="panel panel-body" *ngIf="showDetails == monster">
       <p>Created by: {{monster.creator}}</p>
