@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
@@ -12,20 +13,22 @@ export class MonstersViewComponent implements OnInit {
   showDetails: any;
   alignType: string = "All";
   creatureType: string = "All";
+  loggedInUser: any;
+  createdFilter: boolean = false;
+  addMonsters: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.monsters = this.userService.getAllMonsters();
-    // this.userService.getAllMonsters().subscribe(res=>{
-    //   var array = [];
-    //   for(var i=0;i<res.length;i++){
-    //     if(array.indexOf(res[i].type)==-1){
-    //       array.push(res[i].type)
-    //     }
-    //   }
-    //   console.log(array)
-    // })
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth) {
+          this.userService.getUserByEmail(auth.google.email).subscribe(res => {
+            this.loggedInUser = res[0];
+            this.monsters = this.userService.getAllMonsters();
+          });
+        }
+    })
   }
 
   addMonster(monster) {
@@ -46,6 +49,33 @@ export class MonstersViewComponent implements OnInit {
 
   changeType(val){
     this.creatureType = val;
+  }
+
+  filterCreated(){
+    console.log(this.createdFilter)
+    if(this.createdFilter == false){
+      this.createdFilter = true
+    }else{
+      this.createdFilter = false;
+    }
+  }
+
+  filterAdded(){
+    if(this.addMonsters == false){
+      this.addMonsters = true
+    }else{
+      this.addMonsters = false;
+    }
+  }
+
+  findUserMonster(monster) {
+    var count;
+    for (var i =0; i<this.loggedInUser.monsters.length; i++) {
+      if (this.loggedInUser.monsters[i].name == monster.name) {
+        count = this.loggedInUser.monsters[i].count;
+      }
+    }
+    return count;
   }
 
 
