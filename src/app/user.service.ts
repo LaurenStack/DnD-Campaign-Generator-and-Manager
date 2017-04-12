@@ -40,6 +40,13 @@ export class UserService {
     return user;
   }
 
+  findUserMonsters() {
+    this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      return res[0].monsters;
+      // return this.getUserById(user.$key);
+    })
+  }
+
   getUserById(userId: string) {
     return this.angularFire.database.object('/users/' + userId);
   }
@@ -278,6 +285,30 @@ export class UserService {
         charFour: characterObject
       });
 
+    });
+  }
+
+  updateMonster(monstersArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        monsters: monstersArray
+      });
+
+      subscription.unsubscribe();
+    });
+  }
+
+  updateItem(itemsArray, userKey) {
+    var subscription = this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      var userInFirebase = res[0];
+      var currentUser = this.getUserById(userKey);
+      currentUser.update({
+        treasure: itemsArray
+      });
+
+      subscription.unsubscribe();
     });
   }
 
