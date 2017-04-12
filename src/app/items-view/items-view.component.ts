@@ -17,6 +17,8 @@ export class ItemsViewComponent implements OnInit {
   mountsType: string = "All";
   detailsShown: any;
   loggedInUser: any;
+  creatorFilter: boolean = false;
+  addItems: boolean = false;
 
   constructor(private userService: UserService, private authService: AuthService) { }
 
@@ -87,6 +89,23 @@ export class ItemsViewComponent implements OnInit {
         }
       }
       return count;
+  }
+
+  filterCreator(){
+    console.log(this.creatorFilter)
+    if(this.creatorFilter == false){
+      this.creatorFilter = true
+    }else{
+      this.creatorFilter = false;
+    }
+  }
+
+  filterAddItem(){
+    if(this.addItems == false){
+      this.addItems = true
+    }else{
+      this.addItems = false;
+    }
   }
 
 

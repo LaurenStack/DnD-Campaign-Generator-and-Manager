@@ -26,6 +26,8 @@ import { AddItemComponent } from './add-item/add-item.component';
 import { CharactersComponent } from './characters/characters.component';
 import { CreatorPipe } from './creator.pipe';
 import { AddedMonstersPipe } from './added-monsters.pipe';
+import { ItemCreatorPipe } from './item-creator.pipe';
+import { ItemsAddedPipe } from './items-added.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -63,7 +65,9 @@ const routes: Routes = [
     AddItemComponent,
     CharactersComponent,
     CreatorPipe,
-    AddedMonstersPipe
+    AddedMonstersPipe,
+    ItemCreatorPipe,
+    ItemsAddedPipe
   ],
   imports: [
     BrowserModule,

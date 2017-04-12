@@ -30,10 +30,13 @@
   <option value="Tack, Harness, and Drawn Vehicles">Tack, Harness, and Drawn Vehicles</option>
   <option value="Waterborne Vehicles">Waterborne Vehicles</option>
 </select>
+
+<input type="checkbox" name="private" (click)="filterCreator()"> Created By Me<br>
+<input type="checkbox" name="added" (click)="filterAddItem()"> Currently Added
 <br><br>
 <h5>In your inventory: <img src="../../assets/chest.png" class="item-inventory"></h5>
 <br><br>
-<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType">
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}" (click)="showItemDetails(item)">
       {{item.name}}
