@@ -1,4 +1,6 @@
-<app-add-monster></app-add-monster>
+<div class="add-monstersct">
+  <app-add-monster></app-add-monster>
+</div>
 <br><br>
 <input type="text" #search placeholder="Search" [(ngModel)]="searchbox" (input)="searchFilterMonster(search.value)">
 <select (change)="changeAlign($event.target.value)">
@@ -38,14 +40,14 @@
 <input type="checkbox" name="added" (click)="filterAdded()"> <img src="../../assets/dragon.png" class="monster-inventory">
 
 <br><br>
-<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters | monsterSearch:searchValue">
-  <div class="panel panel-default">
-    <div class="panel panel-heading" (click)="displayDetails(monster)">
-      {{monster.name}}
-      <img src="../../assets/dragon.png" *ngIf="findUserMonster(monster)" class="dragon-icons">
-    </div>
-    <div class="panel panel-body" *ngIf="showDetails == monster">
-      <p>Created by: {{monster.creator}}</p>
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters | monsterSearch:searchValue" [style.background-image]="'url(' + '../../assets/lizard2.jpg' + ')'" class="monster-heading" (click)="displayDetails(monster)">
+  <div>
+    <img src="../../assets/dragon.png" *ngIf="findUserMonster(monster)" class="dragon-icons">
+    <h4>{{monster.name}}</h4>
+  </div>
+  <div class="monster-body" *ngIf="showDetails == monster">
+    <div class="panel-text">
+      <p class="creator-name">Created by: {{monster.creator}}</p>
       <p *ngIf="findUserMonster(monster)">Current Campaign Count {{findUserMonster(monster)}}</p>
       <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
       <ul>
@@ -95,7 +97,6 @@
         <li *ngIf="monster.damage_resistances">Damage Resistances: {{monster.damage_resistances}}</li>
         <li *ngIf="monster.damage_vulnerabilities">Damage Vulnerabilities: {{monster.damage_vulnerabilities}}</li>
       </ul>
-
     </div>
   </div>
 </div>
