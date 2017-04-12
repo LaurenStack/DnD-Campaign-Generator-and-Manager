@@ -81,7 +81,7 @@ export class ItemsViewComponent implements OnInit {
 
   findUserItems(item) {
     for (var i =0; i<this.loggedInUser.treasure.length; i++) {
-      if (this.loggedInUser.treasure[i].name == item.name) {
+      if (this.loggedInUser.treasure[i].name== item.name) {
         return this.loggedInUser.treasure[i].count;
       }
     }
