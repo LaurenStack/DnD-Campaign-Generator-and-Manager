@@ -43,6 +43,7 @@ export class UserService {
 
   findUserMonsters() {
     this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      console.log(res[0].monsters);
       return res[0].monsters;
       // return this.getUserById(user.$key);
     })

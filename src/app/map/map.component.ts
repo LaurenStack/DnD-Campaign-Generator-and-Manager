@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AuthService } from '../auth.service';
 
 import { Tree, Container, Room, BSP } from '../procGenClasses';
 
@@ -9,7 +10,7 @@ import { Tree, Container, Room, BSP } from '../procGenClasses';
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  providers: [UserService]
+  providers: [UserService, AuthService]
 })
 export class MapComponent implements OnInit {
   canvas = null;//: HTMLCanvasElement= null;
@@ -27,11 +28,13 @@ export class MapComponent implements OnInit {
   renderInterval:number = null;
   drawing:boolean = false;
   monster = {name:"none"};
+  treasure = {name:"none"};
   terrain:object = {
     hexcode: "rgba(100, 100, 100 , 0)",
     name:"blank tile",
     public: true,
     monster:this.monster,
+    treasure: this.treasure,
     user:"admin"
   };// = {"#000"};
   info:string = "Initial Value";
@@ -39,7 +42,7 @@ export class MapComponent implements OnInit {
 
   terrainArray:FirebaseListObservable<any[]>;
 
-  constructor(private UserService: UserService) { }
+  constructor(private UserService: UserService, private authService: AuthService) { }
 
   fill(){
     for(var x = 0; x < this.gridWidth; x ++){
@@ -71,12 +74,26 @@ export class MapComponent implements OnInit {
   BSP = new BSP;
   rooms = [];
 
-  myMonsters:FirebaseListObservable<any[]>;
+  myMonsters: any;//:FirebaseListObservable<any[]>;
+  myTreasure:any;
 
   mToken = null;
   tToken = null;
+
+  loggedInUser;
   ngOnInit() {
-    this.myMonsters = this.UserService.getAllMonsters();
+    this.authService.af.auth.subscribe(
+      (auth) => {
+        if (auth) {
+          this.UserService.getUserByEmail(auth.google.email).subscribe(res => {
+            this.loggedInUser = res[0];
+            this.myMonsters = this.loggedInUser.monsters;
+            this.myTreasure = this.loggedInUser.treasure;
+          });
+        }
+    });
+
+    // this.myMonsters = this.UserService.findUserMonsters();
     this.mToken = document.getElementById("mToken");
     this.tToken = document.getElementById("tToken");
 
@@ -119,6 +136,7 @@ export class MapComponent implements OnInit {
   setEditType(type:string){
     this.editType = type.toString();
     console.log(this.editType)
+    console.log(this.myMonsters);
 
   }
 
@@ -173,10 +191,11 @@ export class MapComponent implements OnInit {
         console.log("draw terrain");
       } else if(this.editType === "monster"){
         console.log("draw monster");
+        console.log(this.monster);
         this.grid[mouseX][mouseY].monster = this.monster;
       } else if(this.editType === "treasure"){
         console.log("draw treasure")
-        this.grid[mouseX][mouseY].treasure = true;
+        this.grid[mouseX][mouseY].treasure = this.treasure;
       }
     }
   }
@@ -187,13 +206,16 @@ export class MapComponent implements OnInit {
       var mouseY = eData.clientY - mapCanvas.top;
       mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
-      this.info = this.grid[mouseX][mouseY].terrain.name + ", "+ this.grid[mouseX][mouseY].monster.name +", "+ this.grid[mouseX][mouseY].treasure;
+      this.info = this.grid[mouseX][mouseY].terrain.name + ", "+ this.grid[mouseX][mouseY].monster.name +", "+ this.grid[mouseX][mouseY].treasure.name;
       console.log(this.grid[mouseX][mouseY]);
     }
   }
 
-  clearGrid() {
-    location.reload();
+  newMap() {
+    this.rooms= [];
+    this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
+
+    this.ngOnInit();
   }
 
   isDrawing(bool, e){
@@ -204,6 +226,9 @@ export class MapComponent implements OnInit {
   }
   monsterChange(e){
     this.monster = e;
+  }
+  treasureChange(e){
+    this.treasure = e;
   }
   colorChange(e) {
     this.terrain = e;
