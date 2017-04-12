@@ -31,10 +31,13 @@
   <option value="Waterborne Vehicles">Waterborne Vehicles</option>
 </select>
 <br><br>
+<h5>In your inventory: <img src="../../assets/chest.png" class="item-inventory"></h5>
+<br><br>
 <div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType">
   <div class="panel panel-default">
     <div class="panel panel-heading" id="{{item.name}}" (click)="showItemDetails(item)">
       {{item.name}}
+      <img src="../../assets/chest.png" *ngIf="findUserItems(item)" class="chest-icons">
     </div>
     <div class="panel panel-body" *ngIf="detailsShown == item">
       <p>Created by: {{item.creator}}</p>

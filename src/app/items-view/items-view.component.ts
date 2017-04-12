@@ -21,7 +21,6 @@ export class ItemsViewComponent implements OnInit {
   constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.items = this.userService.getAllItems();
     this.userService.getAllItems().subscribe(res=>{
       var array = [];
       for(var i=0;i<res.length;i++){
@@ -42,6 +41,7 @@ export class ItemsViewComponent implements OnInit {
         if (auth) {
           this.userService.getUserByEmail(auth.google.email).subscribe(res => {
             this.loggedInUser = res[0];
+            this.items = this.userService.getAllItems();
           });
         }
     })
@@ -80,11 +80,14 @@ export class ItemsViewComponent implements OnInit {
   }
 
   findUserItems(item) {
-    for (var i =0; i<this.loggedInUser.treasure.length; i++) {
-      if (this.loggedInUser.treasure[i].name== item.name) {
-        return this.loggedInUser.treasure[i].count;
+    var count;
+      for (var i =0; i<this.loggedInUser.treasure.length; i++) {
+        if (this.loggedInUser.treasure[i].name== item.name) {
+          count = this.loggedInUser.treasure[i].count;
+        }
       }
-    }
+      return count;
   }
+
 
 }
