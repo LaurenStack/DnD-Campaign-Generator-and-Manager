@@ -38,6 +38,7 @@ export class MapComponent implements OnInit {
 
   tempArray = terrainArray;
   myTerrain = JSON.parse(JSON.stringify(terrainArray)).map(terrain=>{
+    //kinda really actually a hack
     let tmpImage = new Image(16,16);
     tmpImage.src=terrain.img;
     terrain.img = tmpImage;
