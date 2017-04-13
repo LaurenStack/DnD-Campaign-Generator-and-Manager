@@ -35,7 +35,7 @@
 <input type="checkbox" name="private" (click)="filterCreator()"> Created By Me&nbsp;&nbsp;
 <input type="checkbox" name="added" (click)="filterAddItem()"> <img src="../../assets/chest.png" class="item-inventory">
 <br><br>
-<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure  | monsterSearch:searchValue" [style.background-image]="'url(' + '../../assets/armor2.jpg' + ')'" class="item-heading" (click)="showItemDetails(item)">
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure  | monsterSearch:searchValue" [style.background-image]="'url(' + '../assets/' + putDashes(item.type) + '.png' + ')'" class="item-heading" (click)="showItemDetails(item)">
   <div>
     <img src="../../assets/chest.png" *ngIf="findUserItems(item)" class="chest-icons">
     <h4 class="item-name">{{item.name}}</h4>

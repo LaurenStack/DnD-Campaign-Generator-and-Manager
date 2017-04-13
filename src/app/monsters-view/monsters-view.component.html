@@ -19,84 +19,104 @@
 
 <select (change)="changeType($event.target.value)">
   <option value="All">All</option>
-  <option value="aberration">aberration</option>
-  <option value="humanoid">humanoid</option>
-  <option value="undead">undead</option>
-  <option value="dragon">dragon</option>
-  <option value="elemental">elemental</option>
-  <option value="monstrosity">monstrosity</option>
-  <option value="construct">construct</option>
-  <option value="beast">beast</option>
-  <option value="plant">plant</option>
-  <option value="fiend">fiend</option>
-  <option value="ooze">ooze</option>
-  <option value="fey">fey</option>
-  <option value="giant">giant</option>
-  <option value="celestial">celestial</option>
-  <option value="swarm of Tiny beasts">swarm of Tiny beasts</option>
+  <option value="aberration"><img src='../../assets/aberration-icon.png' class="monster-icons"> aberration</option>
+  <option value="humanoid"><img src='../../assets/humanoid-icon.png' class="monster-icons"> humanoid</option>
+  <option value="undead"><img src='../../assets/undead-icon.png' class="monster-icons"> undead</option>
+  <option value="dragon"><img src='../../assets/dragon-icon.png' class="monster-icons"> dragon</option>
+  <option value="elemental"><img src='../../assets/elemental-icon.png' class="monster-icons"> elemental</option>
+  <option value="monstrosity"><img src='../../assets/monstrosity-icon.png' class="monster-icons"> monstrosity</option>
+  <option value="construct"><img src='../../assets/construct-icon.png' class="monster-icons"> construct</option>
+  <option value="beast"><img src='../../assets/beast-icon.png' class="monster-icons"> beast</option>
+  <option value="plant"><img src='../../assets/plant-icon.png' class="monster-icons"> plant</option>
+  <option value="fiend"><img src='../../assets/fiend-icon.png' class="monster-icons"> fiend</option>
+  <option value="ooze"><img src='../../assets/ooze-icon.png' class="monster-icons"> ooze</option>
+  <option value="fey"><img src='../../assets/fey-icon.png' class="monster-icons"> fey</option>
+  <option value="giant"><img src='../../assets/giant-icon.png' class="monster-icons"> giant</option>
+  <option value="celestial"><img src='../../assets/celestial-icon.png' class="monster-icons"> celestial</option>
+  <option value="swarmofTinybeasts"><img src='../../assets/swam-icon.png' class="monster-icons"> swarm of Tiny beasts</option>
 </select>
 
 <input type="checkbox" name="private" (click)="filterCreated()"> Created By Me&nbsp;&nbsp;
-<input type="checkbox" name="added" (click)="filterAdded()"> <img src="../../assets/dragon.png" class="monster-inventory">
+<input type="checkbox" name="added" (click)="filterAdded()"> <img src="../../assets/dragon-red.png" class="monster-inventory">
 
 <br><br>
-<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters | monsterSearch:searchValue" [style.background-image]="'url(' + '../../assets/lizard2.jpg' + ')'" class="monster-heading" (click)="displayDetails(monster)">
+<div *ngFor="let monster of monsters | async | alignment:alignType | type:creatureType | creator:createdFilter:loggedInUser?.displayName | addedMonsters:addMonsters:loggedInUser?.monsters | monsterSearch:searchValue" [style.background-image]="'url(' + '../../assets/' + monster.type + '.png' + ')'" class="monster-heading" (click)="displayDetails(monster)">
   <div>
-    <img src="../../assets/dragon.png" *ngIf="findUserMonster(monster)" class="dragon-icons">
-    <h4>{{monster.name}}</h4>
+    <img src="../../assets/dragon-red.png" *ngIf="findUserMonster(monster)" class="dragon-icons">
+    <h4 class="monster-name-display">
+      <img src='../../assets/dragon-icon.png' *ngIf="monster.type == 'dragon'" class="monster-icons">
+      <img src='../../assets/aberration-icon.png' *ngIf="monster.type == 'aberration'" class="monster-icons">
+      <img src='../../assets/humanoid-icon.png' *ngIf="monster.type == 'humanoid'" class="monster-icons">
+      <img src='../../assets/celestial-icon.png' *ngIf="monster.type == 'celestial'" class="monster-icons">
+      <img src='../../assets/beast-icon.png' *ngIf="monster.type == 'beast'" class="monster-icons">
+      <img src='../../assets/construct-icon.png' *ngIf="monster.type == 'construct'" class="monster-icons">
+      <img src='../../assets/elemental-icon.png' *ngIf="monster.type == 'elemental'" class="monster-icons">
+      <img src='../../assets/fey-icon.png' *ngIf="monster.type == 'fey'" class="monster-icons">
+      <img src='../../assets/fiend-icon.png' *ngIf="monster.type == 'fiend'" class="monster-icons">
+      <img src='../../assets/giant-icon.png' *ngIf="monster.type == 'giant'" class="monster-icons">
+      <img src='../../assets/monstrosity-icon.png' *ngIf="monster.type == 'monstrosity'" class="monster-icons">
+      <img src='../../assets/ooze-icon.png' *ngIf="monster.type == 'ooze'" class="monster-icons">
+      <img src='../../assets/plant-icon.png' *ngIf="monster.type == 'plant'" class="monster-icons">
+      <img src='../../assets/swam-icon.png' *ngIf="monster.type == 'swarmofTinybeasts'" class="monster-icons">
+      <img src='../../assets/undead-icon.png' *ngIf="monster.type == 'undead'" class="monster-icons">
+      {{monster.name}}</h4>
   </div>
   <div class="monster-body" *ngIf="showDetails == monster">
     <div class="panel-text">
       <p class="creator-name">Created by: {{monster.creator}}</p>
       <p *ngIf="findUserMonster(monster)">Current Campaign Count {{findUserMonster(monster)}}</p>
       <button (click)="addMonster(monster)" class="btn btn-xs btn-success">Add to Campaign</button>
-      <ul>
-        <li *ngIf="monster.alignment">Alignment: {{monster.alignment}}</li>
-        <li *ngIf="monster.armor_class">Armor Class: {{monster.armor_class}}</li>
-        <li *ngIf="monster.type">Type: {{monster.type}}</li>
-        <li *ngIf="monster.subtype">Subtype: {{monster.subtype}}</li>
-        <li *ngIf="monster.size">Size: {{monster.size}}</li>
-        <li>Challenge Rating: {{monster.challenge_rating}}</li>
-        <li *ngIf="monster.medicine">Medicine: {{monster.medicine}}</li>
-        <li *ngIf="monster.religion">Religion: {{monster.religion}}</li>
-        <li>Hit Points: {{monster.hit_points}}</li>
-        <li>Hit Dice: {{monster.hit_dice}}</li>
-        <li *ngIf="monster.languages">Languages: {{monster.languages}}</li>
-        <li>Stats:
-          <ul>
-            <li *ngIf="monster.charisma">Charisma: {{monster.charisma}} <span *ngIf="monster.charisma_save">| Charisma Save: {{monster.charisma_save}}</span></li>
-            <li *ngIf="monster.constitution">Constitution: {{monster.constitution}}<span *ngIf="monster.constitution_save"> | Constitution Save: {{monster.constitution_save}}</span></li>
-            <li *ngIf="monster.dexterity">Dexterity: {{monster.dexterity}}<span *ngIf="monster.dexterity_save"> | Dexterity Save: {{monster.dexterity_save}}</span></li>
-            <li *ngIf="monster.wisdom">Wisdom: {{monster.wisdom}}<span *ngIf="monster.wisdom_save"> | Wisdom Save: {{monster.wisdom_save}}</span></li>
-            <li *ngIf="monster.intelligence">Intelligence: {{monster.intelligence}}</li>
-            <li *ngIf="monster.perception">Perception: {{monster.perception}}</li>
-            <li *ngIf="monster.stealth">Stealth: {{monster.stealth}}</li>
-            <li *ngIf="monster.strength">Strength: {{monster.strength}}</li>
-            <li *ngIf="monster.speed">Speed: {{monster.speed}}</li>
-            <li *ngIf="monster.history">History: {{monster.history}}</li>
-          </ul>
-        </li>
-        <li *ngIf="monster.special_abilities">Special Abilities:
-          <ul>
-            <li *ngFor="let ability of monster.special_abilities">{{ability.name}} <span *ngIf="ability.attack_bonus">(Attack Bonus: {{ability.attack_bonus}})</span>: {{ability.desc}}</li>
-          </ul>
-        </li>
-        <li *ngIf="monster.senses">Senses: {{monster.senses}}</li>
-        <li *ngIf="monster.actions">Actions:
-          <ul>
-            <li *ngFor="let action of monster.actions">{{action.name}} <span *ngIf="action.attack_bonus">(Attack Bonus: {{action.attack_bonus}})</span>: {{action.desc}}</li>
-          </ul>
-        </li>
-        <li *ngIf="monster.legendary_actions">Legendary Actions:
-          <ul>
-            <li *ngFor="let Laction of monster.legendary_actions">{{Laction.name}} <span *ngIf="Laction.attack_bonus">(Attack Bonus: {{Laction.attack_bonus}})</span>: {{Laction.desc}}</li>
-          </ul>
-        </li>
-        <li *ngIf="monster.condition_immunities">Condition Immunities: {{monster.condition_immunities}}</li>
-        <li *ngIf="monster.damage_immunities">Damage Immunities: {{monster.damage_immunities}}</li>
-        <li *ngIf="monster.damage_resistances">Damage Resistances: {{monster.damage_resistances}}</li>
-        <li *ngIf="monster.damage_vulnerabilities">Damage Vulnerabilities: {{monster.damage_vulnerabilities}}</li>
-      </ul>
+      <br>
+      <div class="row">
+        <div class="col-sm-6">
+          <br>
+          <p *ngIf="monster.alignment"><span class="property-titles">Alignment</span>: {{monster.alignment}}&nbsp;&nbsp;<span *ngIf="monster.armor_class">|&nbsp;&nbsp;<span class="property-titles">Armor Class</span>: {{monster.armor_class}}</span></p>
+          <p *ngIf="monster.type"><span class="property-titles">Type</span>: {{monster.type}}&nbsp;&nbsp;<span *ngIf="monster.subtype">|&nbsp;&nbsp;<span class="property-titles">Subtype</span>: {{monster.subtype}}</span></p>
+          <p *ngIf="monster.size"><span class="property-titles">Size</span>: {{monster.size}}&nbsp;&nbsp;<span>|&nbsp;&nbsp;<span class="property-titles">Challenge Rating</span>: {{monster.challenge_rating}}</span></p>
+          <p *ngIf="monster.medicine"><span class="property-titles">Medicine</span>: {{monster.medicine}}&nbsp;&nbsp;<span *ngIf="monster.religion">|&nbsp;&nbsp;<span class="property-titles">Religion</span>: {{monster.religion}}</span></p>
+          <p><span class="property-titles">Hit Points</span>: {{monster.hit_points}}&nbsp;&nbsp;<span>|&nbsp;&nbsp;<span class="property-titles">Hit Dice</span>: {{monster.hit_dice}}</span></p>
+          <p *ngIf="monster.languages"><span class="property-titles">Languages</span>: {{monster.languages}}</p>
+          <div>Stats:
+            <div *ngIf="monster.charisma"><span class="property-titles">Charisma</span>: {{monster.charisma}} <span *ngIf="monster.charisma_save">| <span class="property-titles">Charisma Save</span>: {{monster.charisma_save}}</span></div>
+            <div *ngIf="monster.constitution"><span class="property-titles">Constitution</span>: {{monster.constitution}}<span *ngIf="monster.constitution_save"> | <span class="property-titles">Constitution Save</span>: {{monster.constitution_save}}</span></div>
+            <div *ngIf="monster.dexterity"><span class="property-titles">Dexterity</span>: {{monster.dexterity}}<span *ngIf="monster.dexterity_save"> | <span class="property-titles">Dexterity Save</span>: {{monster.dexterity_save}}</span></div>
+            <div *ngIf="monster.wisdom"><span class="property-titles">Wisdom</span>: {{monster.wisdom}}<span *ngIf="monster.wisdom_save"> | <span class="property-titles">Wisdom Save</span>: {{monster.wisdom_save}}</span></div>
+            <div *ngIf="monster.intelligence"><span class="property-titles">Intelligence</span>: {{monster.intelligence}}</div>
+            <div *ngIf="monster.perception"><span class="property-titles">Perception</span>: {{monster.perception}}</div>
+            <div *ngIf="monster.stealth"><span class="property-titles">Stealth</span>: {{monster.stealth}}</div>
+            <div *ngIf="monster.strength"><span class="property-titles">Strength</span>: {{monster.strength}}</div>
+            <div *ngIf="monster.speed"><span class="property-titles">Speed</span>: {{monster.speed}}</div>
+            <div *ngIf="monster.history"><span class="property-titles">History</span>: {{monster.history}}</div>
+          </div>
+        </div>
+        <br>
+        <div class="col-sm-6">
+          <div *ngIf="monster.special_abilities"><span class="property-titles">Special Abilities</span>:
+            <br><br>
+              <p *ngFor="let ability of monster.special_abilities">{{ability.name}} <span *ngIf="ability.attack_bonus">(Attack Bonus: {{ability.attack_bonus}})</span>: {{ability.desc}}</p>
+          </div>
+          <p *ngIf="monster.senses"><span class="property-titles">Senses</span>: {{monster.senses}}</p>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6">
+          <div *ngIf="monster.actions"><span class="property-titles">Actions</span>:
+            <br><br>
+            <p *ngFor="let action of monster.actions">{{action.name}} <span *ngIf="action.attack_bonus">(Attack Bonus: {{action.attack_bonus}})</span>: {{action.desc}}</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div *ngIf="monster.legendary_actions"><span class="property-titles">Legendary Actions</span>:
+            <br><br>
+              <p *ngFor="let Laction of monster.legendary_actions">{{Laction.name}} <span *ngIf="Laction.attack_bonus">(Attack Bonus: {{Laction.attack_bonus}})</span>: {{Laction.desc}}</p>
+          </div>
+          <p *ngIf="monster.condition_immunities">Condition Immunities: {{monster.condition_immunities}}</p>
+          <p *ngIf="monster.damage_immunities">Damage Immunities: {{monster.damage_immunities}}</p>
+          <p *ngIf="monster.damage_resistances">Damage Resistances: {{monster.damage_resistances}}</p>
+          <p *ngIf="monster.damage_vulnerabilities">Damage Vulnerabilities: {{monster.damage_vulnerabilities}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
