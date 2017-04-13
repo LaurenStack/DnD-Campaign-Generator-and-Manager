@@ -10,6 +10,14 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">DND Campaign Gen</a>
+      <span class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Maps</a></li>
+          <li><a href="#">Browse Items</a></li>
+          <li><a href="#">Browse Monsters</a></li>
+        </ul>
+      </span>
     </div>
 
 
@@ -26,11 +34,11 @@
       <div *ngIf="!isLoggedIn">
         <button id="logOutIn" (click)="login()">Login</button>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <div id="diceRoll" class="nav navbar-nav">
-      </div>
-      <ul class="nav navbar-nav">
+      <!-- <div id="diceRoll" class="nav navbar-nav">
+      </div> -->
+      <ul class="nav navbar-nav" id="nav-center">
         <br>
-        <li><select #dice>
+        <li id="rollHolder"><select #dice>
           <option value="4">D4</option>
           <option value="6">D6</option>
           <option value="8">D8</option>
@@ -40,8 +48,9 @@
           <option value="20">D20</option>
         </select>
         <button (click)="onRoll(dice.value)" class="btn btn-xs btn-default">Roll</button>&nbsp;&nbsp;
-        <span id="rollResult">{{diceRoll}}</span>
+        <div id="rollResult">{{diceRoll}}</div>
         </li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- <div id="login-details"> -->
