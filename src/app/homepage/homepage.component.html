@@ -1,29 +1,35 @@
-<div class="container">
+<div class="player-details">
   <div class="row">
-    <div class="panel panel-default">
+    <div>
       <h1>D &amp; D Campaign Generator</h1>
       <p>{{loggedInUser?.email}}</p>
       <p>Get started generating your campaign:</p>
 
       <div class="row">
         <div class="col-xs-4">
-          <p>Generate a map</p>
+          <a routerLink="createmap">Generate a map</a>
         </div>
         <div class="col-xs-4">
           <a routerLink="monsters-view">Browse Monsters</a>
           <br><br>
-          <p>Your monsters:</p>
-          <app-monsters></app-monsters>
+          <div class="user-items-list">
+            <p>Your monsters:</p>
+            <app-monsters></app-monsters>
+          </div>
         </div>
         <div class="col-xs-4">
           <a routerLink="items-view">Browse Items</a>
           <br><br>
-          <p>Your items:</p>
-          <app-items></app-items>
+          <div class="user-items-list">
+            <p>Your items:</p>
+            <app-items></app-items>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="characters-details">
   <div class="row">
     <app-characters></app-characters>
   </div>

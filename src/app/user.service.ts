@@ -14,6 +14,7 @@ export class UserService {
   constructor(private angularFire: AngularFire) {
     this.users = angularFire.database.list('users');
     this.monsters = angularFire.database.list('monsters');
+    this.items = angularFire.database.list('items');
     this.terrainArray = angularFire.database.list('terrain');
   }
 
@@ -42,6 +43,7 @@ export class UserService {
 
   findUserMonsters() {
     this.getUserByEmail(this.loggedInUser).subscribe(res => {
+      console.log(res[0].monsters);
       return res[0].monsters;
       // return this.getUserById(user.$key);
     })

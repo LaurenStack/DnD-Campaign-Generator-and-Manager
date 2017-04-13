@@ -1,3 +1,8 @@
+<div id="devStuff" style="display:none">
+  <img src="../../assets/mToken.jpg" id="mToken" >
+  <img src="../../assets/tToken.png" id="tToken" >
+</div>
+
 <form >
   <h3>Save your map here when you are happy with it.</h3>
   <div class="form-group">
@@ -12,20 +17,36 @@
 
 
 <h3>Terrain: {{info}}</h3>
-<button (click)="clearGrid()">Clear </button>
+<!-- <div id="test" *ngIf="this.info.length > 1">
+<h1>TESTING TESTING WOAH DUDE LOOK AT THIS TEST</h1>
+</div> -->
+<button (click)="newMap()">New Map</button>
+
 <div id="editor">
   <div id="placementType">
     <label>Select What you want to edit</label>
-    <select [value]=editType>
+    <select #editTypeInput (change)="setEditType(editTypeInput.value)">
       <option value="terrain">Terrain</option>
-      <option value="monsters">Monsters</option>
+      <option value="monster">Monsters</option>
       <option value="treasure">Treasure/loot</option>
     </select>
   </div>
-  <div id="palatte">
-    <div *ngFor="let terrain of terrainArray | async" class="terrain">
+  <div id="palatte" *ngIf="editType == 'terrain'">
+    <div *ngFor="let terrain of terrainArray | async"  class="terrain">
       <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
       <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+    </div>
+  </div>
+  <div id="monsterSelector" *ngIf="editType == 'monster'">
+    <div id="monsterSelect" *ngFor="let monster of myMonsters" class="terrain">
+      <input type="radio" value="{{monster.name}}" name="monster" (click)="monsterChange(monster)">
+      <label for="monster">{{monster.name}}: </label>
+    </div>
+  </div>
+  <div id="treasureSelector" *ngIf="editType == 'treasure'">
+    <div id="monsterSelect" *ngFor="let treasure of myTreasure" class="terrain">
+      <input type="radio" value="{{treasure.name}}" name="treasure" (click)="treasureChange(treasure)">
+      <label for="treasure">{{treasure.name}}: </label>
     </div>
   </div>
 </div>
