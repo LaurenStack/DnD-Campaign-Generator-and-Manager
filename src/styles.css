@@ -1,7 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  border-radius: 0 !important;
+}
+
+body {
+  /*background-image: url('/../assets/mapgenbackground1.jpg');*/
+  background-size: 110%;
+  background-repeat: no-repeat;
+}
+
 canvas {
 
 }
+
 .terrain {
   border: 3px double grey;
   border-radius: 5px;
@@ -30,6 +42,52 @@ canvas {
   max-height: 30px;
 }
 
+.navbar {
+  position: absolute;
+  top: -100px;
+  width: 90%;
+  left: 5%;
+}
+
+.navbar-default {
+  background-color: #CDC491 !important;
+  border-color: #CDC491 !important;
+}
+
+.navbar-text {
+  position: absolute;
+  top: 3%;
+  left: 65%;
+}
+
+#logo {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-top: -5%;
+  margin-bottom: -100px;
+  /*position: absolute;
+  margin: relative;*/
+}
+
+#logOutIn {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 92%;
+  top: 28%;
+}
+
+#logOutIn:hover {
+  color: red;
+}
+
+#paper-bkg {
+  position: absolute;
+  margin: relative;
+  top: -100vh;
+  
 .monster-box {
 }
 
