@@ -1,16 +1,23 @@
+<div class="content">
+ <div class="container">
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">DND Campaign Gen</a>
+    </div>
 
-<h1>
-  <a routerLink="createmap">{{title}}</a>
-</h1>
-
-<div class="container">
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">DND Campaign Gen</a>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <div id="diceRoll" class="nav navbar-nav">
       </div>
-      <div id="diceRoll" class="navbar-left">
-        <select #dice>
+      <ul class="nav navbar-nav">
+        <br>
+        <li><select #dice>
           <option value="4">D4</option>
           <option value="6">D6</option>
           <option value="8">D8</option>
@@ -21,16 +28,23 @@
         </select>
         <button (click)="onRoll(dice.value)" class="btn btn-xs btn-default">Roll</button>&nbsp;&nbsp;
         <span id="rollResult">{{diceRoll}}</span>
-      </div>
-      <div *ngIf="isLoggedIn">
-        <button class="btn btn-default navbar-right" (click)="logout()">Logout</button>
-        <p class="navbar-text navbar-right">Logged In: {{user_displayName}} ({{user_email}})<p>
-      </div>
-      <div *ngIf="!isLoggedIn">
-        <p class="navbar-text navbar-right">Logged Out</p>
-      </div>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <div id="login-details"> -->
+          <!-- <div *ngIf="!isLoggedIn"> -->
+            <li *ngIf="!isLoggedIn">Logged Out</li>
+          <!-- </div> -->
+          <!-- <div *ngIf="isLoggedIn"> -->
+            <li *ngIf="isLoggedIn">{{user_displayName}} ({{user_email}}) &nbsp;</li>
+            <li *ngIf="isLoggedIn"><button (click)="logout()">Logout</button></li>
+          <!-- </div> -->
+        <!-- </div> -->
+      </ul>
     </div>
-  </nav>
-  <br><br>
-  <router-outlet></router-outlet>
+  </div>
+</nav>
+    <br><br>
+    <router-outlet></router-outlet>
+  </div>
 </div>
