@@ -9,7 +9,9 @@ import { UserService } from './user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
+  userEmail;
   title = 'D&D Campaign Generator and Manager';
   diceRoll: number;
 
@@ -72,4 +74,25 @@ export class AppComponent {
     this.router.navigate(['login']);
     this.authService.logout();
   }
+
+  login() {
+      var foundUser = false;
+      this.authService.loginWithGoogle().then((data) => {
+        this.userService.getUsers().subscribe(res=> {
+          var len = res.length
+          for(var i = 0;i<len;i++){
+            if (data.auth.email === res[i].email) {
+              this.userEmail = data.auth.email;
+              foundUser = true;
+            }
+          }
+          if(!foundUser){
+            this.userService.addUser(data.auth.email, data.auth.displayName);
+            this.userEmail = data.auth.email;
+            foundUser = true;
+          }
+        })
+        this.router.navigate(['']);
+      })
+    }
 }

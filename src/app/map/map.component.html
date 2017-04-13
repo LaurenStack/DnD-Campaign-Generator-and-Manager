@@ -9,7 +9,7 @@
     <label>Map Name:</label>
     <input #mapName >
   </div>
-  <button (click)="saveMap(mapName.value)">Save</button>
+  <button id="saveButton" class="btn-xs" (click)="saveMap(mapName.value)">Save</button>
 </form>
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 

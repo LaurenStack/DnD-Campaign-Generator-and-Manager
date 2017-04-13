@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 * {
-  border-radius: 0 !important;
+  border-radius: 1.4 !important;
 }
 
 body {
@@ -17,8 +17,18 @@ nav {
   background: #CDC491 !important;
   border-radius: 10px;
   vertical-align: middle;
-  padding: 20px;
+  padding-top: 20px;
+  /*padding: 10px;*/
   border: #CDC491 !important;
+}
+
+.btn {
+  background: none;
+}
+
+.btn-xs {
+  background: none;
+  border: none;
 }
 
 .terrain {
@@ -127,16 +137,18 @@ nav {
   left: 65%;
 }
 
-#logOutIn {
+.logOutIn {
   background: none;
   border: none;
-  position: absolute;
-  left: 92%;
-  top: 28%;
+  margin-top: 15px;
+  color: grey;
+  /*text-transform: uppercase;*/
+  /*left: 92%;*/
+  /*top: 28%;*/
 }
 
-#logOutIn:hover {
-  color: red;
+.logOutIn:hover {
+  color: white;
 }
 
 
@@ -191,12 +203,54 @@ nav {
   float: right;
 }
 
-#diceRoll {
-  margin-left: 20%;
-  margin-top: -20px;
+#displayName {
+  margin-top: 17px;
 }
-/*margin-left: */
+
+#diceRoll {
+  position: relative;
+  margin-left: 20%;
+  margin-top: -16px;
+}
+
+#diceRoller {
+  position: relative;
+  margin-left: 20%;
+  margin-top: -10.5px;
+}
+
+#menu {
+  text-transform: uppercase;
+  color: grey;
+  position: relative;;
+  top: 16px;
+  padding-right: 10px;
+}
 
 #rollResult {
   font-weight: bold;
+}
+
+#rollBtn {
+  position: relative;
+  top: -31px;
+  left: 70px;
+  border: none;
+}
+
+#diceImg {
+  max-width: 19px;
+}
+
+#saveButton {
+  /*margin-top: -px;*/
+  /*margin-left: 30%;*/
+  font-size: 13px;
+  background: #AEB1BA;
+  border: solid #8F9199 1px;
+}
+
+#saveButton:hover {
+  background: #C4C6CC;
+  border: solid #B5B8C0 1px;
 }
