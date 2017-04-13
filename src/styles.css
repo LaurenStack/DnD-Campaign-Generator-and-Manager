@@ -1,20 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-  border-radius: 0 !important;
+  border-radius: 1.4 !important;
 }
 
 body {
-  /*background-image: url('/../assets/mapgenbackground1.jpg');*/
-  background-size: 110%;
-  background-repeat: no-repeat;
+  background: url('assets/topography.png');
 }
 
-canvas {
-
+nav {
+  /*opacity: 0.7;*/
+  /*background: #8E927C;*/
+  height: 50px !important;
+  position: relative;
+  bottom: 10px;
+  background: #CDC491 !important;
+  border-radius: 10px;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-bottom: 100px;
+  border: #CDC491 !important;
+  z-index: 1;
 }
 
-.monster-icons {
+.btn {
+  background: none;
+}
+
+.btn-xs {
+  background: none;
+  border: none;
+}
+
+.monster-icons, .item-icons {
   max-height: 50px;
 }
 
@@ -53,9 +71,11 @@ canvas {
 
 .navbar {
   position: absolute;
-  top: -100px;
+  top: 300px;
   width: 90%;
   left: 5%;
+  padding-bottom: -50px !important;
+  height: 55px;
 }
 
 .navbar-default {
@@ -96,9 +116,6 @@ canvas {
   position: absolute;
   margin: relative;
   top: -100vh;
-}
-
-.monster-box {
 }
 
 .monster-heading {
@@ -158,37 +175,133 @@ canvas {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
+  color: black;
+  background: rgba(181, 194, 205, 0.6);
+}
+
+.navbar-default {
+  background-color: #CDC491 !important;
+  border-color: #CDC491 !important;
+}
+
+.navbar-text {
+  position: absolute;
+  top: 3%;
+  left: 65%;
+}
+
+.logOutIn {
+  background: none;
+  position: relative;
+  border: none;
+  top: -50px;
+  color: grey;
+  text-transform: uppercase;
+  left: 90%;
+}
+
+.logOutIn:hover {
   color: white;
-  background: rgba(183, 133, 115, 0.6);
 }
 
-#diceRoll {
-  margin-left: 20%;
-  margin-top: -20px;
-}
-/*margin-left: */
-
-#rollResult {
-  font-weight: bold;
-}
 
 .creator-name {
   float: right;
 }
 
-.content {
-  background: url('assets/paper.jpg');
+/*.content {
   width: 100%;
   height: 100%;
   top: 0;
+}*/
+
+
+.player-details {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  padding-left: 50px;
+  background: url('assets/bg.png');
+  border: solid 1px gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #175389;
+  text-shadow: 3px 3px 5px white;
 }
 
-nav {
-  opacity: 0.7;
-  background: rgba(188, 105, 73, 0.5);
-  border-radius: 10px;
-  vertical-align: middle;
-  padding: 20px;
+.player-details a {
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-size: 130%;
+}
+.player-details a:hover {
+  color: black;
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.characters-details {
+  background: rgba(80, 96, 128, 0.7);
+  border-radius: 20px;
+  padding: 15px;
+  margin: 10px;
+  background: url('assets/warrior.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid black;
+}
+
+.char-section {
+  background: rgba(181, 194, 205, 0.7);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px;
+}
+
+.user-items-list {
+  color: black;
+  text-shadow: none;
+  margin-left: 5px;
+  background: rgba(168, 172, 179, 0.5);
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.user-items-list p {
+  font-size: 120%;
+}
+
+.chosen-name {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.fa {
+  cursor: pointer;
+  font-size: 150%;
+}
+
+.fa-plus-square {
+  color: green;
+}
+
+.fa-minus-square {
+  color: red;
+}
+
+.char-property {
+  font-weight: bold;
+  font-size: 120%;
+}
+
+#logo {
+  max-width: 80%;
+  margin-left: 10.5%;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 #login-details {
@@ -196,32 +309,62 @@ nav {
   float: right;
 }
 
-.player-details {
-  background: rgba(80, 96, 128, 0.5);
-  border-radius: 10px;
-  padding: 15px;
-  margin: 10px;
-  padding-left: 50px;
-}
-.characters-details {
-  background: rgba(80, 96, 128, 0.5);
-  border-radius: 10px;
-  padding: 15px;
-  margin: 10px;
-  padding-left: 50px;
+#displayName {
+  position: relative;
+  top: -29px;
+  right: 80px;
 }
 
-.user-items-list {
-  background: rgba(168, 172, 179, 0.5);
-  border: solid 1px black;
-  padding: 10px;
-  margin: 10px;
+#diceRoller {
+  position: relative;
+  left: 40%;
+  top: -58px;
 }
 
-.user-items-list li {
-  list-style: none;
+#rollHolder {
+  position: relative;
+  left: 62%;
+  top: -58px;
 }
 
+#menu {
+  text-transform: uppercase;
+  color: grey;
+  position: relative;;
+  top: 16px;
+  padding-right: 10px;
+}
+
+#rollResult {
+  font-weight: bold;
+}
+
+#rollBtn {
+  position: relative;
+  top: -58px;
+  left: 45px;
+  border: none;
+
+}
+
+#diceImg {
+  max-width: 19px;
+}
+
+#saveButton {
+  /*margin-top: -px;*/
+  /*margin-left: 30%;*/
+  font-size: 13px;
+  background: #AEB1BA;
+  border: solid #8F9199 1px;
+}
+
+#saveButton:hover {
+  background: #C4C6CC;
+  border: solid #B5B8C0 1px;
+}
+
+/*
 .navbar-header .dropdown {
   top: 13px;
   font-size: 20px;
@@ -235,7 +378,7 @@ nav {
 
 #rollholder {
   min-width: 200px;
-}
+}*/
 
 .navbar ul {
   width: 200px;
@@ -247,16 +390,4 @@ nav {
 
 .navbar-brand {
   font-size: 25px;
-}
-
-.characters-section {
-  background: url('assets/false_covenant.jpg');
-  border: solid 1px gray;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid black;
-  opacity: 0.6;
 }

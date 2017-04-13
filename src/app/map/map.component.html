@@ -12,17 +12,16 @@
     <label>Map Name:</label>
     <input #mapName >
   </div>
-  <button (click)="saveMap(mapName.value)">Save</button>
+  <button id="saveButton" class="btn-xs" (click)="saveMap(mapName.value)">Save</button>
 </form>
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
+
 
 <button (click)="toggleRooms()">Toggle overlay</button>
 
 
+
 <h3>Terrain: {{info}}</h3>
-<!-- <div id="test" *ngIf="this.info.length > 1">
-<h1>TESTING TESTING WOAH DUDE LOOK AT THIS TEST</h1>
-</div> -->
 <button (click)="newMap()">New Map</button>
 
 <div id="editor">

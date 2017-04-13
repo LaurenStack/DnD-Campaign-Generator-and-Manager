@@ -9,6 +9,7 @@ import { UserService } from './user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   userEmail;
   title = 'D&D Campaign Generator and Manager';

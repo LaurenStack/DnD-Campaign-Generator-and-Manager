@@ -1,72 +1,42 @@
-<!-- <div class="content">
- <div class="container">
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">DND Campaign Gen</a>
-      <span class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Maps</a></li>
-          <li><a href="#">Browse Items</a></li>
-          <li><a href="#">Browse Monsters</a></li>
-        </ul>
-      </span>
-    </div>
-  </nav>-->
-
-
-
-
+<div class="content">
+  <img id="logo" src="../assets/logo.png"/>
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">DND Campaign Gen</a>
       </div>
       <div *ngIf="isLoggedIn">
-        <button id="logOutIn" (click)="logout()">Logout</button>
-        <p class="navbar-text navbar-right">Logged In: {{user_displayName}}<p>
-      </div>
-      <div *ngIf="!isLoggedIn">
-        <button id="logOutIn" (click)="login()">Login</button>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <!-- <div id="diceRoll" class="nav navbar-nav">
-      </div> -->
-      <ul class="nav navbar-nav" id="nav-center">
-        <br>
-        <li id="rollHolder"><select #dice>
-          <option value="4">D4</option>
-          <option value="6">D6</option>
-          <option value="8">D8</option>
-          <option value="10">D10</option>
-          <option value="00">D00</option>
-          <option value="12">D12</option>
-          <option value="20">D20</option>
-        </select>
-        <button (click)="onRoll(dice.value)" class="btn btn-xs btn-default">Roll</button>&nbsp;&nbsp;
-        <div id="rollResult">{{diceRoll}}</div>
-        </li>
+        <button class="logOutIn" (click)="logout()">Logout</button>
+        </div>
+        <div *ngIf="isLoggedIn">
+          <button class="logOutIn" (click)="login()">Login</button>
+        </div>
+            <!-- <div id="diceRoll" class="nav navbar-nav">
+          </div> -->
+          <ul class="nav navbar-nav" id="nav-center">
+            <br>
+            <li><select id="diceRoller" class="btn" #dice>
+              <!-- <li id="rollHolder"><select #dice> -->
+              <option value="4">D4</option>
+              <option value="6">D6</option>
+              <option value="8">D8</option>
+              <option value="10">D10</option>
+              <option value="00">D00</option>
+              <option value="12">D12</option>
+              <option value="20">D20</option>
+            </select>
+            <button id="rollBtn"(click)="onRoll(dice.value)" class="btn btn-default"><img id="diceImg" src="/../assets/dice-six-faces-five.png" alt=""></button>&nbsp;&nbsp;
+            <span id="rollResult">{{diceRoll}}</span>
+          </li>
 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <!-- <div id="login-details"> -->
-          <!-- <div *ngIf="!isLoggedIn"> -->
-            <li *ngIf="!isLoggedIn">Logged Out</li>
-          <!-- </div> -->
-          <!-- <div *ngIf="isLoggedIn"> -->
-            <li *ngIf="isLoggedIn">{{user_displayName}} ({{user_email}}) &nbsp;</li>
-            <li *ngIf="isLoggedIn"><button (click)="logout()">Logout</button></li>
-          <!-- </div> -->
-        <!-- </div> -->
-      </ul>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li *ngIf="!isLoggedIn"><button class="logOutIn" (click)="login()">Logout</button></li>
+          <li *ngIf="isLoggedIn" id="displayName">{{user_displayName}} &nbsp;  &nbsp;</li>
+          <li *ngIf="isLoggedIn"><button class="logOutIn" (click)="logout()">Logout</button></li>
+        </ul>
     </div>
-  </div>
+  </nav>
 
 
   <div class="container">

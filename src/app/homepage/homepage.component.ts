@@ -49,4 +49,8 @@ export class HomepageComponent implements OnInit {
     )
   }
 
+  goTo(location: string): void{
+    window.location.hash = location;
+  }
+
 }

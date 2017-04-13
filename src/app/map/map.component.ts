@@ -251,23 +251,23 @@ export class MapComponent implements OnInit {
   start(){
     this.renderInterval = setInterval(fat=>{
       // this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
-      for(var x = 0; x < this.gridWidth; x ++){
-
-        for(var y = 0; y < this.gridHeight; y++){
-          this.draw(this.grid[x][y])
-        }//end y loop
-      }//end x loop
       if(this.showRooms){
 
         for (var i = 0; i < this.rooms.length; i++) {
           this.rooms[i].paint(this.ctx, {
-            hexcode: "rgba(10, 10, 10 , 0.5)",
+            hexcode: "rgba(10, 10, 10 , 1)",
             name:"blank tile",
             public: true,
             user:"admin"
           });
         }
       }
+      for(var x = 0; x < this.gridWidth; x ++){
+
+        for(var y = 0; y < this.gridHeight; y++){
+          this.draw(this.grid[x][y])
+        }//end y loop
+      }//end x loop
 
 
 
