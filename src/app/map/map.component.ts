@@ -122,6 +122,23 @@ export class MapComponent implements OnInit {
             this.loggedInUser = res[0];
             this.myMonsters = this.loggedInUser.monsters;
             this.myTreasure = this.loggedInUser.treasure;
+            if(this.currentRoute.indexOf("/map/") >= 0){
+              //get map from service
+              var map = this.loggedInUser.maps[this.route.url.substring(this.route.url.lastIndexOf("/")+1)]
+              this.grid = map.grid;
+              this.rooms = map.rooms;
+              console.log(map);
+              //this.name = map.name
+              // this.start();
+              // for (var i = 0; i < this.rooms.length; i++) {
+              //   this.rooms[i].paint(this.ctx, {
+              //     hexcode: "rgba(10, 10, 10 , 1)",
+              //     name:"blank tile",
+              //     public: true,
+              //     user:"admin"
+              //   });
+              // }
+            }
           });
         }
     });
@@ -164,21 +181,6 @@ export class MapComponent implements OnInit {
 
       },10)
 
-    } else if(this.currentRoute === "map/:i"){
-      //get map from service
-      var map = {name:"", grid:[[]], rooms:[]}
-      this.grid = map.grid;
-      this.rooms = map.rooms;
-      //this.name = map.name
-      this.start();
-      for (var i = 0; i < this.rooms.length; i++) {
-        this.rooms[i].paint(this.ctx, {
-          hexcode: "rgba(10, 10, 10 , 1)",
-          name:"blank tile",
-          public: true,
-          user:"admin"
-        });
-      }
     }
 
 
@@ -311,8 +313,26 @@ export class MapComponent implements OnInit {
   }
 
   saveMap(name){
+    let savedMap = [];
+    let x = 0;
+    let y = 0;
+    this.grid.forEach(row=>{
+      savedMap.push([]);
+      row.forEach(tile=>{
+        let path = "../../assets/tiles/" + tile.terrain.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
+        let savedTile = JSON.parse(JSON.stringify(tile));
+        savedTile.terrain.img = path;
+        console.log(savedTile);
+        // tile.terrain.img = tile.terrain.img.src;
+        //JSON.parse(JSON.stringify(object));
+        savedMap[x].push(savedTile);
 
-    this.UserService.saveMap(name, this.rooms, this.grid);
+        y++;
+      });
+      x++;
+    });
+    console.log(savedMap);
+    this.UserService.saveMap(name, this.rooms, savedMap);
 
   }
 
