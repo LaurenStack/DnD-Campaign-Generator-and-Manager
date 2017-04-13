@@ -12,6 +12,19 @@
       <a class="navbar-brand" href="/">DND Campaign Gen</a>
     </div>
 
+
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">DND Campaign Gen</a>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <button id="logOutIn" (click)="logout()">Logout</button>
+        <p class="navbar-text navbar-right">Logged In: {{user_displayName}}<p>
+      </div>
+      <div *ngIf="!isLoggedIn">
+        <button id="logOutIn" (click)="login()">Login</button>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <div id="diceRoll" class="nav navbar-nav">
       </div>
@@ -42,9 +55,8 @@
         <!-- </div> -->
       </ul>
     </div>
-  </div>
-</nav>
-    <br><br>
-    <router-outlet></router-outlet>
-  </div>
+  </nav>
+  <div class="container">
+  <br><br>
+  <router-outlet></router-outlet>
 </div>
