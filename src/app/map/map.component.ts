@@ -137,6 +137,15 @@ export class MapComponent implements OnInit {
 
                 row.forEach(tile=>{
                   let tmpImage = new Image(16,16);
+                  if(tile.monster){
+                    let monImage = new Image(16,16);
+                    console.log(tile.monster.img);
+                    monImage.src = tile.monster.img;
+                    tile.monster.img = monImage;
+                  }
+                  if(tile.treasure){
+                    tile.treasure.img = this.tToken;
+                  }
                   tmpImage.src=tile.terrain.img;
                   tile.terrain.img = tmpImage;
 
@@ -214,6 +223,7 @@ export class MapComponent implements OnInit {
 
   draw(tile){
     // console.log(tile.terrain.img);
+    this.ctx.globalAlpha = 0.5
 
     this.ctx.fillStyle = tile.terrain.hexcode;
     // this.ctx.fillStyle = "#"+((1<<24)*Math.random()|0).toString(16);
@@ -233,6 +243,7 @@ export class MapComponent implements OnInit {
     }
 
 
+    this.ctx.globalAlpha = 1;
 
   }
 
@@ -338,11 +349,18 @@ export class MapComponent implements OnInit {
     this.grid.forEach(row=>{
       savedMap.push([]);
       row.forEach(tile=>{
-        let monsterImgPath = "../../assets/" + tile.monster.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
         let terrainImgPath = "../../assets/tiles/" + tile.terrain.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
         let savedTile = JSON.parse(JSON.stringify(tile));
         savedTile.terrain.img = terrainImgPath;
-        savedTile.monster.img = monsterImgPath;
+
+        if(savedTile.monster){
+          if(!savedTile.monster.type){
+            savedTile.type = "dragon";
+          }
+          let monsterImgPath = "../../assets/"+ savedTile.monster.type + "-icon.png";
+          savedTile.monster.img = monsterImgPath;
+          console.log(monsterImgPath);
+        }
 
         console.log(savedTile);
         // tile.terrain.img = tile.terrain.img.src;
@@ -366,5 +384,6 @@ export class MapComponent implements OnInit {
 
     return monster.img.src;
   }
+
 
 }
