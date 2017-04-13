@@ -14,7 +14,7 @@ canvas {
 }
 
 .chest-icons {
-  max-width: 20px;
+  max-width: 30px;
   float: right;
 }
 .dragon-icons {
@@ -23,7 +23,7 @@ canvas {
 }
 
 .item-inventory {
-  max-width: 20px;
+  max-width: 30px;
 }
 
 .monster-inventory {
@@ -155,4 +155,31 @@ nav {
 
 .user-items-list li {
   list-style: none;
+}
+
+.navbar-header .dropdown {
+  top: 13px;
+  font-size: 20px;
+}
+
+#rollResult {
+  width: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+#rollholder {
+  min-width: 200px;
+}
+
+.navbar ul {
+  width: 200px;
+}
+
+#nav-center {
+  margin-left: 20%;
+}
+
+.navbar-brand {
+  font-size: 25px;
 }
