@@ -1,6 +1,9 @@
 <div id="devStuff" style="display:none">
   <img src="../../assets/mToken.jpg" id="mToken" >
   <img src="../../assets/tToken.png" id="tToken" >
+  <!-- <img src="../../assets/blank.png" id="blankTile" > -->
+
+  <!-- <img class="tile-imgs" *ngFor="let tile of terrainArray"> -->
 </div>
 
 <form >
@@ -32,9 +35,9 @@
     </select>
   </div>
   <div id="palatte" *ngIf="editType == 'terrain'">
-    <div *ngFor="let terrain of terrainArray | async"  class="terrain">
+    <div *ngFor="let terrain of myTerrain"  class="terrain">
       <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
-      <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+      <label for="terrain">{{terrain.name}}: <img id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
     </div>
   </div>
   <div id="monsterSelector" *ngIf="editType == 'monster'">
