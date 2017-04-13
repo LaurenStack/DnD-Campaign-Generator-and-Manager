@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'createmap', component: MapComponent },
+  { path: 'my-maps', component: MapListComponent },
   { path: 'map/:i', component: MapComponent },
   { path: 'monsters-view', component: MonstersViewComponent },
   { path: 'items-view', component: ItemsViewComponent }

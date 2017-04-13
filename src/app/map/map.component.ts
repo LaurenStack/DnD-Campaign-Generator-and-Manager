@@ -93,7 +93,6 @@ export class MapComponent implements OnInit {
   ngOnInit() {
 
     // this.tempImage = document.getElementById("blankTile");
-    this.tempImage.src = '../../assets/blank.png';
 
 
     // let tmpArray = [];
@@ -105,6 +104,7 @@ export class MapComponent implements OnInit {
     // this.terrainImgArray = tmpArray;
 
 
+    this.tempImage.src = '../../assets/tiles/blank.png';
     this.terrain = {
       img: this.tempImage,
       hexcode: "rgba(100, 100, 100 , 0)",
