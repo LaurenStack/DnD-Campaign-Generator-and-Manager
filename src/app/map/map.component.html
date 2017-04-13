@@ -1,6 +1,9 @@
 <div id="devStuff" style="display:none">
-  <img src="../../assets/mToken.jpg" id="mToken" >
+  <img src="../../assets/dragon.png" id="mToken" >
   <img src="../../assets/tToken.png" id="tToken" >
+  <!-- <img src="../../assets/blank.png" id="blankTile" > -->
+
+  <!-- <img class="tile-imgs" *ngFor="let tile of terrainArray"> -->
 </div>
 
 <form >
@@ -13,13 +16,9 @@
 </form>
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 
-<a href="https://eskerda.com/bsp-dungeon-generation/">This is a link to the tutorial we're using for proc gen.</a>
 
 
 <h3>Terrain: {{info}}</h3>
-<!-- <div id="test" *ngIf="this.info.length > 1">
-<h1>TESTING TESTING WOAH DUDE LOOK AT THIS TEST</h1>
-</div> -->
 <button (click)="newMap()">New Map</button>
 
 <div id="editor">
@@ -32,9 +31,9 @@
     </select>
   </div>
   <div id="palatte" *ngIf="editType == 'terrain'">
-    <div *ngFor="let terrain of terrainArray | async"  class="terrain">
+    <div *ngFor="let terrain of myTerrain"  class="terrain">
       <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
-      <label for="terrain">{{terrain.name}}: <span [ngStyle]="{'background-color': terrain.hexcode, 'color': terrain.hexcode}">__</span></label>
+      <label for="terrain">{{terrain.name}}: <img id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
     </div>
   </div>
   <div id="monsterSelector" *ngIf="editType == 'monster'">

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AuthService } from '../auth.service';
-
+import { Router } from '@angular/router';
 import { Tree, Container, Room, BSP } from '../procGenClasses';
+import { terrainArray } from '../terrainArray';
 
 
 @Component({
@@ -29,22 +30,29 @@ export class MapComponent implements OnInit {
   drawing:boolean = false;
   monster = {name:"none"};
   treasure = {name:"none"};
-  terrain:object = {
-    hexcode: "rgba(100, 100, 100 , 0)",
-    name:"blank tile",
-    public: true,
-    monster:this.monster,
-    treasure: this.treasure,
-    user:"admin"
-  };// = {"#000"};
+
+  tempImage = new Image(16,16);
   info:string = "Initial Value";
   editType = "terrain";
 
-  terrainArray:FirebaseListObservable<any[]>;
+  tempArray = terrainArray;
+  myTerrain = JSON.parse(JSON.stringify(terrainArray)).map(terrain=>{
+    //kinda really actually a hack
+    let tmpImage = new Image(16,16);
+    tmpImage.src=terrain.img;
+    terrain.img = tmpImage;
+    return terrain;
+  });
+  terrain = this.myTerrain[0];// = {"#000"};
 
-  constructor(private UserService: UserService, private authService: AuthService) { }
+
+
+  currentRoute = this.route.url;
+
+  constructor(private UserService: UserService, private authService: AuthService, private route: Router) { }
 
   fill(){
+    this.grid=[];
     for(var x = 0; x < this.gridWidth; x ++){
       this.grid.push([]);
       for(var y = 0; y < this.gridHeight; y++){
@@ -81,7 +89,28 @@ export class MapComponent implements OnInit {
   tToken = null;
 
   loggedInUser;
+  terrainImgArray = [];
   ngOnInit() {
+
+    // this.tempImage = document.getElementById("blankTile");
+    this.tempImage.src = '../../assets/blank.png';
+    let tmpArray = [];
+    this.myTerrain.forEach(function(terrain){
+      let newImage = new Image(16,16);
+      newImage.src = terrain.img;
+      tmpArray.push([terrain.name, newImage]);
+    });
+    this.terrain = {
+      img: this.tempImage,
+      hexcode: "rgba(100, 100, 100 , 0)",
+      name:"blank tile",
+      public: true,
+      monster:this.monster,
+      treasure: this.treasure,
+      user:"admin"
+    };// = {"#000"};
+    this.terrainImgArray = tmpArray;
+    console.log(this.myTerrain);
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth) {
@@ -97,7 +126,7 @@ export class MapComponent implements OnInit {
     this.mToken = document.getElementById("mToken");
     this.tToken = document.getElementById("tToken");
 
-    this.terrainArray = this.UserService.getTerrain();
+    // this.terrainArray = this.UserService.getTerrain();
     this.canvas = document.getElementById("map");
     this.ctx = this.canvas.getContext("2d");
 
@@ -105,30 +134,48 @@ export class MapComponent implements OnInit {
 
     this.container_tree = this.BSP.split_container(this.mainContainer, this.nIterations, true, .45,.45);//last 3 arguements are DISCARD_BY_RATIO, W_RATIO, H_RATIO... will be set with variables when map is resized to final version
 
-    this.fill();
-    this.start();
+    if(this.currentRoute === "/createmap"){
+      this.fill();
+      this.start();
 
-  setTimeout(fat=>{
-    // this.ctx.fillStyle = "#000000";
-    // this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
+      setTimeout(fat=>{
+        // this.ctx.fillStyle = "#000000";
+        // this.ctx.fillRect(0,0,this.canvasWidth, this.canvasHeight);
 
-  // this.container_tree.paint(this.ctx, terrain);
-  var leaves = this.container_tree.getLeaves();
-  console.log(leaves);
+        // this.container_tree.paint(this.ctx, terrain);
+        var leaves = this.container_tree.getLeaves();
+        console.log(leaves);
 
-  for (var i = 0; i < leaves.length; i++) {
-    this.rooms.push(new Room(leaves[i]));
-  }
-  for (var i = 0; i < this.rooms.length; i++) {
-    this.rooms[i].paint(this.ctx, {
-      hexcode: "rgba(10, 10, 10 , 1)",
-      name:"blank tile",
-      public: true,
-      user:"admin"
-    });
-  }
+        for (var i = 0; i < leaves.length; i++) {
+          this.rooms.push(new Room(leaves[i]));
+        }
+        for (var i = 0; i < this.rooms.length; i++) {
+          this.rooms[i].paint(this.ctx, {
+            hexcode: "rgba(10, 10, 10 , 1)",
+            name:"blank tile",
+            public: true,
+            user:"admin"
+          });
+        }
 
-},10)
+      },10)
+
+    } else if(this.currentRoute === "map/:i"){
+      //get map from service
+      var map = {name:"", grid:[[]], rooms:[]}
+      this.grid = map.grid;
+      this.rooms = map.rooms;
+      //this.name = map.name
+      this.start();
+      for (var i = 0; i < this.rooms.length; i++) {
+        this.rooms[i].paint(this.ctx, {
+          hexcode: "rgba(10, 10, 10 , 1)",
+          name:"blank tile",
+          public: true,
+          user:"admin"
+        });
+      }
+    }
 
 
   }
@@ -141,11 +188,13 @@ export class MapComponent implements OnInit {
   }
 
   draw(tile){
+    // console.log(tile.terrain.img);
+
     this.ctx.fillStyle = tile.terrain.hexcode;
     // this.ctx.fillStyle = "#"+((1<<24)*Math.random()|0).toString(16);
     this.ctx.strokeStyle = tile.stroke;
     this.ctx.lineWidth = 1;
-    this.ctx.fillRect(tile.x, tile.y, tile.width, tile.height);
+    this.ctx.drawImage(tile.terrain.img,tile.x, tile.y, tile.width, tile.height);
 
     this.ctx.strokeRect(tile.x, tile.y, tile.width, tile.height);
     // this.ctx.stroke();
@@ -171,6 +220,14 @@ export class MapComponent implements OnInit {
           this.draw(this.grid[x][y])
         }//end y loop
       }//end x loop
+      for (var i = 0; i < this.rooms.length; i++) {
+        this.rooms[i].paint(this.ctx, {
+          hexcode: "rgba(10, 10, 10 , 0.5)",
+          name:"blank tile",
+          public: true,
+          user:"admin"
+        });
+      }
 
 
 
@@ -213,6 +270,14 @@ export class MapComponent implements OnInit {
 
   newMap() {
     this.rooms= [];
+    this.terrain = {
+      hexcode: "rgba(100, 100, 100 , 0)",
+      name:"blank tile",
+      public: true,
+      monster:this.monster,
+      treasure: this.treasure,
+      user:"admin"
+    };
     this.ctx.clearRect(0,0,this.canvasWidth,this.canvasHeight);
 
     this.ngOnInit();

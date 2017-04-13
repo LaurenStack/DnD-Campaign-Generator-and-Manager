@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 * {
   border-radius: 1.4 !important;
 }
@@ -17,7 +18,9 @@ nav {
   background: #CDC491 !important;
   border-radius: 10px;
   vertical-align: middle;
-  padding-top: 20px;
+  padding-top: 10px;
+  height: -40px;
+  /*margin-top: 440px;*/
   /*padding: 10px;*/
   border: #CDC491 !important;
 }
@@ -43,7 +46,7 @@ nav {
 }
 
 .chest-icons {
-  max-width: 20px;
+  max-width: 30px;
   float: right;
 }
 .dragon-icons {
@@ -52,11 +55,57 @@ nav {
 }
 
 .item-inventory {
-  max-width: 20px;
+  max-width: 30px;
 }
 
 .monster-inventory {
   max-height: 30px;
+}
+
+.navbar {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+}
+
+.navbar-default {
+  background-color: #CDC491 !important;
+  border-color: #CDC491 !important;
+}
+
+.navbar-text {
+  position: absolute;
+  top: 3%;
+  left: 65%;
+}
+
+#logo {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-top: -5%;
+  margin-bottom: -100px;
+  /*position: absolute;
+  margin: relative;*/
+}
+
+#logOutIn {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 92%;
+  top: 28%;
+}
+
+#logOutIn:hover {
+  color: red;
+}
+
+#paper-bkg {
+  position: absolute;
+  margin: relative;
+  top: -100vh;
 }
 
 .monster-box {
@@ -139,12 +188,12 @@ nav {
 
 .logOutIn {
   background: none;
+  position: relative;
   border: none;
-  margin-top: 15px;
+  top: -32px;
   color: grey;
-  /*text-transform: uppercase;*/
-  /*left: 92%;*/
-  /*top: 28%;*/
+  text-transform: uppercase;
+  left: 90%;
 }
 
 .logOutIn:hover {
@@ -156,11 +205,11 @@ nav {
   float: right;
 }
 
-.content {
+/*.content {
   width: 100%;
   height: 100%;
   top: 0;
-}
+}*/
 
 
 .player-details {
@@ -191,6 +240,7 @@ nav {
   list-style: none;
 }
 
+
 #logo {
   max-width: 80%;
   margin-left: 10.5%;
@@ -204,19 +254,21 @@ nav {
 }
 
 #displayName {
-  margin-top: 17px;
+  position: relative;
+  top: -55px;
+  right: 80px;
 }
 
-#diceRoll {
+/*#diceRoll {
   position: relative;
   margin-left: 20%;
   margin-top: -16px;
-}
+}*/
 
-#diceRoller {
+#rollHolder {
   position: relative;
-  margin-left: 20%;
-  margin-top: -10.5px;
+  left: 62%;
+  top: -58px;
 }
 
 #menu {
@@ -233,8 +285,7 @@ nav {
 
 #rollBtn {
   position: relative;
-  top: -31px;
-  left: 70px;
+  top: -2px;
   border: none;
 }
 
@@ -253,4 +304,31 @@ nav {
 #saveButton:hover {
   background: #C4C6CC;
   border: solid #B5B8C0 1px;
+}
+
+.navbar-header .dropdown {
+  top: 13px;
+  font-size: 20px;
+}
+
+#rollResult {
+  width: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+#rollholder {
+  min-width: 200px;
+}
+
+.navbar ul {
+  width: 200px;
+}
+
+#nav-center {
+  margin-left: 20%;
+}
+
+.navbar-brand {
+  font-size: 25px;
 }
