@@ -2,8 +2,8 @@
   <div class="row">
     <div>
       <h1>D &amp; D Campaign Generator</h1>
-      <p>{{loggedInUser?.email}}</p>
-      <p>Get started generating your campaign:</p>
+      <h4>{{loggedInUser?.email}} | <span>Character Details</span></h4>
+      <h4>Get started generating your campaign:</h4>
 
       <div class="row">
         <div class="col-xs-4">
@@ -13,7 +13,7 @@
           <a routerLink="monsters-view">Browse Monsters</a>
           <br><br>
           <div class="user-items-list">
-            <p>Your monsters:</p>
+            <h3>Your monsters:</h3>
             <app-monsters></app-monsters>
           </div>
         </div>
@@ -21,7 +21,7 @@
           <a routerLink="items-view">Browse Items</a>
           <br><br>
           <div class="user-items-list">
-            <p>Your items:</p>
+            <h3>Your items:</h3>
             <app-items></app-items>
           </div>
         </div>

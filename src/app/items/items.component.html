@@ -1,5 +1,5 @@
 <div *ngIf="loggedInUser">
-  <ul *ngIf="loggedInUser.treasure[0]">
-    <li *ngFor="let item of loggedInUser.treasure">{{item.name}} (Count: {{item.count}}) <i class="fa fa-plus-square" aria-hidden="true" (click)="updateCount(item, 1)"></i> <i class="fa fa-minus-square" aria-hidden="true" (click)="updateCount(item, -1)"></i></li>
-  </ul>
+  <div *ngIf="loggedInUser.treasure[0]">
+    <p *ngFor="let item of loggedInUser.treasure"><span class="chosen-name">{{item.name}}</span> (Count: {{item.count}})&nbsp;&nbsp;<i class="fa fa-plus-square" aria-hidden="true" (click)="updateCount(item, 1)"></i>&nbsp;&nbsp;<i class="fa fa-minus-square" aria-hidden="true" (click)="updateCount(item, -1)"></i></p>
+  </div>
 </div>
