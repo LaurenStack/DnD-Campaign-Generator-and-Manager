@@ -4,14 +4,14 @@
   <div class="row">
     <div class="col-xs-3">
       <h3>{{loggedInUser?.charOne.name}}</h3>
-      <p>Type: {{loggedInUser?.charOne.type}}</p>
-      <p>Armor &amp; Weapons: {{loggedInUser?.charOne.armorWeapons}}</p>
-      <p>Health: {{loggedInUser?.charOne.health}}</p>
-      <p>Description: {{loggedInUser?.charOne.description}}</p>
-      <p>Copper: {{loggedInUser?.charOne.copper}}</p>
-      <p>Silver: {{loggedInUser?.charOne.silver}}</p>
-      <p>Gold: {{loggedInUser?.charOne.gold}}</p>
-      <p>Platinum: {{loggedInUser?.charOne.platinum}}</p>
+      <p><span class="char-property">Type</span>: {{loggedInUser?.charOne.type}}</p>
+      <p><span class="char-property">Armor &amp; Weapons</span>: {{loggedInUser?.charOne.armorWeapons}}</p>
+      <p><span class="char-property">Health</span>: {{loggedInUser?.charOne.health}}</p>
+      <p><span class="char-property">Description</span>: {{loggedInUser?.charOne.description}}</p>
+      <p><span class="char-property">Copper</span>: {{loggedInUser?.charOne.copper}}</p>
+      <p><span class="char-property">Silver</span>: {{loggedInUser?.charOne.silver}}</p>
+      <p><span class="char-property">Gold</span>: {{loggedInUser?.charOne.gold}}</p>
+      <p><span class="char-property">Platinum</span>: {{loggedInUser?.charOne.platinum}}</p>
       <br><br>
       <button (click)="editCharOne()" class="btn btn-success">Edit</button>
       <div *ngIf="editOneFormShown == true">
@@ -70,14 +70,14 @@
     </div>
     <div class="col-xs-3">
       <h3>{{loggedInUser?.charTwo.name}}</h3>
-      <p>Type: {{loggedInUser?.charTwo.type}}</p>
-      <p>Armor &amp; Weapons: {{loggedInUser?.charTwo.armorWeapons}}</p>
-      <p>Health: {{loggedInUser?.charTwo.health}}</p>
-      <p>Description: {{loggedInUser?.charTwo.description}}</p>
-      <p>Copper: {{loggedInUser?.charTwo.copper}}</p>
-      <p>Silver: {{loggedInUser?.charTwo.silver}}</p>
-      <p>Gold: {{loggedInUser?.charTwo.gold}}</p>
-      <p>Platinum: {{loggedInUser?.charTwo.platinum}}</p>
+      <p><span class="char-property">Type</span>: {{loggedInUser?.charTwo.type}}</p>
+      <p><span class="char-property">Armor &amp; Weapons</span>: {{loggedInUser?.charTwo.armorWeapons}}</p>
+      <p><span class="char-property">Health</span>: {{loggedInUser?.charTwo.health}}</p>
+      <p><span class="char-property">Description</span>: {{loggedInUser?.charTwo.description}}</p>
+      <p><span class="char-property">Copper</span>: {{loggedInUser?.charTwo.copper}}</p>
+      <p><span class="char-property">Silver</span>: {{loggedInUser?.charTwo.silver}}</p>
+      <p><span class="char-property">Gold</span>: {{loggedInUser?.charTwo.gold}}</p>
+      <p><span class="char-property">Platinum</span>: {{loggedInUser?.charTwo.platinum}}</p>
       <br><br>
       <button (click)="editCharTwo()" class="btn btn-success">Edit</button>
       <div *ngIf="editTwoFormShown">
@@ -136,14 +136,14 @@
     </div>
     <div class="col-xs-3">
       <h3>{{loggedInUser?.charThree.name}}</h3>
-      <p>Type: {{loggedInUser?.charThree.type}}</p>
-      <p>Armor &amp; Weapons: {{loggedInUser?.charThree.armorWeapons}}</p>
-      <p>Health: {{loggedInUser?.charThree.health}}</p>
-      <p>Description: {{loggedInUser?.charThree.description}}</p>
-      <p>Copper: {{loggedInUser?.charThree.copper}}</p>
-      <p>Silver: {{loggedInUser?.charThree.silver}}</p>
-      <p>Gold: {{loggedInUser?.charThree.gold}}</p>
-      <p>Platinum: {{loggedInUser?.charThree.platinum}}</p>
+      <p><span class="char-property">Type</span>: {{loggedInUser?.charThree.type}}</p>
+      <p><span class="char-property">Armor &amp; Weapons</span>: {{loggedInUser?.charThree.armorWeapons}}</p>
+      <p><span class="char-property">Health</span>: {{loggedInUser?.charThree.health}}</p>
+      <p><span class="char-property">Description</span>: {{loggedInUser?.charThree.description}}</p>
+      <p><span class="char-property">Copper</span>: {{loggedInUser?.charThree.copper}}</p>
+      <p><span class="char-property">Silver</span>: {{loggedInUser?.charThree.silver}}</p>
+      <p><span class="char-property">Gold</span>: {{loggedInUser?.charThree.gold}}</p>
+      <p><span class="char-property">Platinum</span>: {{loggedInUser?.charThree.platinum}}</p>
       <br><br>
       <button (click)="editCharThree()" class="btn btn-success">Edit</button>
       <div *ngIf="editThreeFormShown">
@@ -202,14 +202,14 @@
     </div>
     <div class="col-xs-3">
       <h3>{{loggedInUser?.charFour.name}}</h3>
-      <p>Type: {{loggedInUser?.charFour.type}}</p>
-      <p>Armor &amp; Weapons: {{loggedInUser?.charFour.armorWeapons}}</p>
-      <p>Health: {{loggedInUser?.charFour.health}}</p>
-      <p>Description: {{loggedInUser?.charFour.description}}</p>
-      <p>Copper: {{loggedInUser?.charFour.copper}}</p>
-      <p>Silver: {{loggedInUser?.charFour.silver}}</p>
-      <p>Gold: {{loggedInUser?.charFour.gold}}</p>
-      <p>Platinum: {{loggedInUser?.charFour.platinum}}</p>
+      <p><span class="char-property">Type</span>: {{loggedInUser?.charFour.type}}</p>
+      <p><span class="char-property">Armor &amp; Weapons</span>: {{loggedInUser?.charFour.armorWeapons}}</p>
+      <p><span class="char-property">Health</span>: {{loggedInUser?.charFour.health}}</p>
+      <p><span class="char-property">Description</span>: {{loggedInUser?.charFour.description}}</p>
+      <p><span class="char-property">Copper</span>: {{loggedInUser?.charFour.copper}}</p>
+      <p><span class="char-property">Silver</span>: {{loggedInUser?.charFour.silver}}</p>
+      <p><span class="char-property">Gold</span>: {{loggedInUser?.charFour.gold}}</p>
+      <p><span class="char-property">Platinum</span>: {{loggedInUser?.charFour.platinum}}</p>
       <br><br>
       <button (click)="editCharFour()" class="btn btn-success">Edit</button>
       <div *ngIf="editFourFormShown">
