@@ -14,7 +14,7 @@ canvas {
 
 }
 
-.monster-icons {
+.monster-icons, .item-icons {
   max-height: 50px;
 }
 
@@ -158,8 +158,8 @@ canvas {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
-  color: white;
-  background: rgba(183, 133, 115, 0.6);
+  color: black;
+  background: rgba(181, 194, 205, 0.6);
 }
 
 #diceRoll {
@@ -204,11 +204,22 @@ nav {
   padding-left: 50px;
 }
 .characters-details {
-  background: rgba(80, 96, 128, 0.5);
-  border-radius: 10px;
+  background: rgba(80, 96, 128, 0.7);
+  border-radius: 20px;
   padding: 15px;
   margin: 10px;
-  padding-left: 50px;
+  background: url('assets/warrior.jpg');
+  border: solid 1px gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid black;
+}
+
+.char-section {
+  background: rgba(181, 194, 205, 0.7);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px;
 }
 
 .user-items-list {
@@ -247,16 +258,4 @@ nav {
 
 .navbar-brand {
   font-size: 25px;
-}
-
-.characters-section {
-  background: url('assets/false_covenant.jpg');
-  border: solid 1px gray;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid black;
-  opacity: 0.6;
 }
