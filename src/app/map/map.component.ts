@@ -226,7 +226,7 @@ export class MapComponent implements OnInit {
     // this.ctx.closePath();
     // this.ctx.
     if(tile.monster){
-      this.ctx.drawImage(this.mToken, tile.x, tile.y, tile.width, tile.height);
+      this.ctx.drawImage(tile.monster.img, tile.x, tile.y, tile.width, tile.height);
     } else if(tile.treasure){
       this.ctx.drawImage(this.tToken, tile.x, tile.y, tile.width, tile.height);
 
@@ -338,9 +338,12 @@ export class MapComponent implements OnInit {
     this.grid.forEach(row=>{
       savedMap.push([]);
       row.forEach(tile=>{
-        let path = "../../assets/tiles/" + tile.terrain.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
+        let monsterImgPath = "../../assets/" + tile.monster.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
+        let terrainImgPath = "../../assets/tiles/" + tile.terrain.img.src.substring(tile.terrain.img.src.lastIndexOf("/")+1);
         let savedTile = JSON.parse(JSON.stringify(tile));
-        savedTile.terrain.img = path;
+        savedTile.terrain.img = terrainImgPath;
+        savedTile.monster.img = monsterImgPath;
+
         console.log(savedTile);
         // tile.terrain.img = tile.terrain.img.src;
         //JSON.parse(JSON.stringify(object));
@@ -353,6 +356,15 @@ export class MapComponent implements OnInit {
     console.log(savedMap);
     this.UserService.saveMap(name, this.rooms, savedMap);
 
+  }
+  getMonsterIcon(monster){
+    monster.img = new Image(16,16)
+    if(!monster.type){
+      monster.type = "dragon";
+    }
+    monster.img.src = "../../assets/" + monster.type + "-icon.png";
+
+    return monster.img.src;
   }
 
 }

@@ -43,7 +43,7 @@
   <div id="monsterSelector" *ngIf="editType == 'monster'">
     <div id="monsterSelect" *ngFor="let monster of myMonsters" class="terrain">
       <input type="radio" value="{{monster.name}}" name="monster" (click)="monsterChange(monster)">
-      <label for="monster">{{monster.name}}: </label>
+      <label for="monster">{{monster.name}}: <img style="width:16px;height16px" id="{{monster.name}}" class="tileIcon" [src]="getMonsterIcon(monster)"></label>
     </div>
   </div>
   <div id="treasureSelector" *ngIf="editType == 'treasure'">
