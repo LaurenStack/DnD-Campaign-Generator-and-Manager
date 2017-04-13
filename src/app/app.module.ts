@@ -29,6 +29,7 @@ import { AddedMonstersPipe } from './added-monsters.pipe';
 import { ItemCreatorPipe } from './item-creator.pipe';
 import { ItemsAddedPipe } from './items-added.pipe';
 import { MonsterSearchPipe } from './monster-search.pipe';
+import { MapListComponent } from './map-list/map-list.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -70,7 +71,8 @@ const routes: Routes = [
     AddedMonstersPipe,
     ItemCreatorPipe,
     ItemsAddedPipe,
-    MonsterSearchPipe
+    MonsterSearchPipe,
+    MapListComponent
   ],
   imports: [
     BrowserModule,

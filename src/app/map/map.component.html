@@ -37,7 +37,7 @@
   <div id="palatte" *ngIf="editType == 'terrain'">
     <div *ngFor="let terrain of myTerrain"  class="terrain">
       <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
-      <label for="terrain">{{terrain.name}}: <img id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
+      <label for="terrain">{{terrain.name}}: <img style="width:16px;height16px" id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
     </div>
   </div>
   <div id="monsterSelector" *ngIf="editType == 'monster'">

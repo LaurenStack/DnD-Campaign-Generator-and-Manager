@@ -94,12 +94,17 @@ export class MapComponent implements OnInit {
 
     // this.tempImage = document.getElementById("blankTile");
     this.tempImage.src = '../../assets/blank.png';
-    let tmpArray = [];
-    this.myTerrain.forEach(function(terrain){
-      let newImage = new Image(16,16);
-      newImage.src = terrain.img;
-      tmpArray.push([terrain.name, newImage]);
-    });
+
+
+    // let tmpArray = [];
+    // this.myTerrain.forEach(function(terrain){
+    //   let newImage = new Image(16,16);
+    //   newImage.src = terrain.img;
+    //   tmpArray.push([terrain.name, newImage]);
+    // });
+    // this.terrainImgArray = tmpArray;
+
+
     this.terrain = {
       img: this.tempImage,
       hexcode: "rgba(100, 100, 100 , 0)",
@@ -109,7 +114,6 @@ export class MapComponent implements OnInit {
       treasure: this.treasure,
       user:"admin"
     };// = {"#000"};
-    this.terrainImgArray = tmpArray;
     console.log(this.myTerrain);
     this.authService.af.auth.subscribe(
       (auth) => {
@@ -263,6 +267,12 @@ export class MapComponent implements OnInit {
       var mouseY = eData.clientY - mapCanvas.top;
       mouseX = Math.floor(mouseX/this.tileWidth);//changed this.gridWidth to this.tileWidth
       mouseY = Math.floor(mouseY/this.tileHeight);
+      if(mouseY < 0){
+        mouseY = 0;
+      }
+      if(mouseX<0){
+        mouseX = 0;
+      }
       this.info = this.grid[mouseX][mouseY].terrain.name + ", "+ this.grid[mouseX][mouseY].monster.name +", "+ this.grid[mouseX][mouseY].treasure.name;
       console.log(this.grid[mouseX][mouseY]);
     }
