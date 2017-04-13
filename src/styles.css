@@ -16,6 +16,7 @@ canvas {
 nav {
   /*opacity: 0.7;*/
   /*background: #8E927C;*/
+  height: 50px !important;
   position: relative;
   bottom: 10px;
   background: #CDC491 !important;
@@ -79,6 +80,7 @@ nav {
   width: 90%;
   left: 5%;
   padding-bottom: -50px !important;
+  height: 55px;
 }
 
 .navbar-default {
