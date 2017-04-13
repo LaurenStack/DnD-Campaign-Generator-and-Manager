@@ -33,7 +33,7 @@
   <option value="fey"><img src='../../assets/fey-icon.png' class="monster-icons"> fey</option>
   <option value="giant"><img src='../../assets/giant-icon.png' class="monster-icons"> giant</option>
   <option value="celestial"><img src='../../assets/celestial-icon.png' class="monster-icons"> celestial</option>
-  <option value="swarm of Tiny beasts"><img src='../../assets/swam-icon.png' class="monster-icons"> swarm of Tiny beasts</option>
+  <option value="swarmofTinybeasts"><img src='../../assets/swam-icon.png' class="monster-icons"> swarm of Tiny beasts</option>
 </select>
 
 <input type="checkbox" name="private" (click)="filterCreated()"> Created By Me&nbsp;&nbsp;
@@ -57,7 +57,7 @@
       <img src='../../assets/monstrosity-icon.png' *ngIf="monster.type == 'monstrosity'" class="monster-icons">
       <img src='../../assets/ooze-icon.png' *ngIf="monster.type == 'ooze'" class="monster-icons">
       <img src='../../assets/plant-icon.png' *ngIf="monster.type == 'plant'" class="monster-icons">
-      <img src='../../assets/swam-icon.png' *ngIf="monster.type == 'swarm of Tiny beasts'" class="monster-icons">
+      <img src='../../assets/swam-icon.png' *ngIf="monster.type == 'swarmofTinybeasts'" class="monster-icons">
       <img src='../../assets/undead-icon.png' *ngIf="monster.type == 'undead'" class="monster-icons">
       {{monster.name}}</h4>
   </div>

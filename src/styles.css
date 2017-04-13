@@ -151,14 +151,14 @@ canvas {
   color: #111927;
   margin: 10px;
   padding: 15px;
-  background: rgba(128, 150, 187, 0.5);
+  background: rgba(128, 150, 187, 0.6);
 }
 .item-body {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
   color: white;
-  background: rgba(183, 133, 115, 0.5);
+  background: rgba(183, 133, 115, 0.6);
 }
 
 #diceRoll {
