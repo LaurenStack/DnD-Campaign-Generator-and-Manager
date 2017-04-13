@@ -124,17 +124,18 @@ canvas {
 }
 
 .item-heading {
+  color: black;
   cursor: pointer;
   background-color: #9E7D65;
   border: solid 1px gray;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
   border: 2px solid black;
-  background-position: 30% 60%;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .monster-heading:hover {
@@ -246,4 +247,16 @@ nav {
 
 .navbar-brand {
   font-size: 25px;
+}
+
+.characters-section {
+  background: url('assets/false_covenant.jpg');
+  border: solid 1px gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  opacity: 0.6;
 }
