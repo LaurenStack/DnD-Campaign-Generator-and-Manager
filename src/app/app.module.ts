@@ -29,6 +29,7 @@ import { AddedMonstersPipe } from './added-monsters.pipe';
 import { ItemCreatorPipe } from './item-creator.pipe';
 import { ItemsAddedPipe } from './items-added.pipe';
 import { MonsterSearchPipe } from './monster-search.pipe';
+import { MapListComponent } from './map-list/map-list.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'createmap', component: MapComponent },
+  { path: 'my-maps', component: MapListComponent },
   { path: 'map/:i', component: MapComponent },
   { path: 'monsters-view', component: MonstersViewComponent },
   { path: 'items-view', component: ItemsViewComponent }
@@ -70,7 +72,8 @@ const routes: Routes = [
     AddedMonstersPipe,
     ItemCreatorPipe,
     ItemsAddedPipe,
-    MonsterSearchPipe
+    MonsterSearchPipe,
+    MapListComponent
   ],
   imports: [
     BrowserModule,

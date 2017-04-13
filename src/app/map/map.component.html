@@ -17,6 +17,9 @@
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 
 
+<button (click)="toggleRooms()">Toggle overlay</button>
+
+
 
 <h3>Terrain: {{info}}</h3>
 <button (click)="newMap()">New Map</button>
@@ -33,13 +36,13 @@
   <div id="palatte" *ngIf="editType == 'terrain'">
     <div *ngFor="let terrain of myTerrain"  class="terrain">
       <input type="radio" value="{{terrain.name}}" name="terrain" (click)="colorChange(terrain)">
-      <label for="terrain">{{terrain.name}}: <img id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
+      <label for="terrain">{{terrain.name}}: <img style="width:16px;height16px" id="{{terrain.name}}" class="tileIcon" src="{{terrain.img.src}}"></label>
     </div>
   </div>
   <div id="monsterSelector" *ngIf="editType == 'monster'">
     <div id="monsterSelect" *ngFor="let monster of myMonsters" class="terrain">
       <input type="radio" value="{{monster.name}}" name="monster" (click)="monsterChange(monster)">
-      <label for="monster">{{monster.name}}: </label>
+      <label for="monster">{{monster.name}}: <img style="width:16px;height16px" id="{{monster.name}}" class="tileIcon" [src]="getMonsterIcon(monster)"></label>
     </div>
   </div>
   <div id="treasureSelector" *ngIf="editType == 'treasure'">
