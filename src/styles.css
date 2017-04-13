@@ -12,6 +12,7 @@ canvas {
 
 }
 
+<<<<<<< HEAD
 nav {
   /*opacity: 0.7;*/
   /*background: #8E927C;*/
@@ -21,7 +22,7 @@ nav {
   border-radius: 10px;
   vertical-align: middle;
   padding-top: 10px;
-  height: -40px;
+  padding-bottom: 100px;
   border: #CDC491 !important;
   z-index: 1;
 }
@@ -33,6 +34,10 @@ nav {
 .btn-xs {
   background: none;
   border: none;
+}
+
+.monster-icons, .item-icons {
+  max-height: 50px;
 }
 
 .terrain {
@@ -63,10 +68,17 @@ nav {
   max-height: 30px;
 }
 
+.property-titles {
+  font-size: 130%;
+  font-weight: bold;
+}
+
 .navbar {
   position: absolute;
+  top: 300px;
   width: 90%;
   left: 5%;
+  padding-bottom: -50px !important;
 }
 
 .navbar-default {
@@ -113,47 +125,43 @@ nav {
 }
 
 .monster-heading {
+  color: black;
   cursor: pointer;
   background-color: #B98965;
   border: solid 1px gray;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 30% 20%;
+  background-position: center center;
   margin: 10px;
-  opacity: 0.6;
   padding: 20px;
   border-radius: 10px;
   border: 2px solid black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 30% 50%;
-  opacity: 0.6;
+  opacity: 0.7;
+}
+
+.monster-name-display {
+  color: white;
+  font-size: 200%;
+  font-weight: bold;
+  text-shadow: 2px 2px 3px #A8ABB0;
 }
 
 .item-heading {
+  color: black;
   cursor: pointer;
   background-color: #9E7D65;
   border: solid 1px gray;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 30% 20%;
+  background-position: center center;
   margin: 10px;
-  opacity: 0.6;
   padding: 20px;
   border-radius: 10px;
   border: 2px solid black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 30% 60%;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
-/*.item-name {
-  color: #6F4A3C;
-}*/
-
 .monster-heading:hover {
-  color: #2D5849;
   opacity: 1.0;
 }
 
@@ -164,16 +172,17 @@ nav {
 
 .monster-body {
   border-radius: 10px;
+  color: #111927;
   margin: 10px;
   padding: 15px;
-  /*background: rgba(171, 185, 52, 0.5);*/
+  background: rgba(128, 150, 187, 0.6);
 }
 .item-body {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
-  color: white;
-  /*background: rgba(183, 133, 115, 0.5);*/
+  color: black;
+  background: rgba(181, 194, 205, 0.6);
 }
 
 .navbar-default {
@@ -191,7 +200,7 @@ nav {
   background: none;
   position: relative;
   border: none;
-  top: -32px;
+  top: -50px;
   color: grey;
   text-transform: uppercase;
   left: 90%;
@@ -214,7 +223,6 @@ nav {
 
 
 .player-details {
-  /*background: rgba(80, 96, 128, 0.5);*/
   background-color: white;
   border-radius: 10px;
   padding: 15px;
@@ -222,12 +230,23 @@ nav {
   padding-left: 50px;
 }
 .characters-details {
-  /*background: rgba(80, 96, 128, 0.5);*/
-  background: white;
-  border-radius: 10px;
+
+  background: rgba(80, 96, 128, 0.7);
+  border-radius: 20px;
   padding: 15px;
   margin: 10px;
-  padding-left: 50px;
+  background: url('assets/warrior.jpg');
+  border: solid 1px gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid black;
+}
+
+.char-section {
+  background: rgba(181, 194, 205, 0.7);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px;
 }
 
 .user-items-list {
@@ -240,7 +259,6 @@ nav {
 .user-items-list li {
   list-style: none;
 }
-
 
 #logo {
   max-width: 80%;
@@ -256,15 +274,15 @@ nav {
 
 #displayName {
   position: relative;
-  top: -55px;
+  top: -29px;
   right: 80px;
 }
 
-/*#diceRoll {
+#diceRoller {
   position: relative;
-  margin-left: 20%;
-  margin-top: -16px;
-}*/
+  left: 40%;
+  top: -58px;
+}
 
 #rollHolder {
   position: relative;
@@ -286,8 +304,10 @@ nav {
 
 #rollBtn {
   position: relative;
-  top: -2px;
+  top: -58px;
+  left: 45px;
   border: none;
+
 }
 
 #diceImg {
@@ -307,6 +327,7 @@ nav {
   border: solid #B5B8C0 1px;
 }
 
+/*
 .navbar-header .dropdown {
   top: 13px;
   font-size: 20px;
@@ -320,7 +341,7 @@ nav {
 
 #rollholder {
   min-width: 200px;
-}
+}*/
 
 .navbar ul {
   width: 200px;

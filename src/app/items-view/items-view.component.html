@@ -35,43 +35,50 @@
 <input type="checkbox" name="private" (click)="filterCreator()"> Created By Me&nbsp;&nbsp;
 <input type="checkbox" name="added" (click)="filterAddItem()"> <img src="../../assets/chest.png" class="item-inventory">
 <br><br>
-<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure  | monsterSearch:searchValue" [style.background-image]="'url(' + '../../assets/armor2.jpg' + ')'" class="item-heading" (click)="showItemDetails(item)">
+<div *ngFor="let item of items | async | itemType:type | toolsFilter:toolsType | weaponFilter:weaponType | mountsFilter:mountsType | itemCreator:creatorFilter:loggedInUser?.displayName | itemsAdded:addItems:loggedInUser?.treasure  | monsterSearch:searchValue" [style.background-image]="'url(' + '../assets/' + putDashes(item.type) + '.png' + ')'" class="item-heading" (click)="showItemDetails(item)">
   <div>
     <img src="../../assets/chest.png" *ngIf="findUserItems(item)" class="chest-icons">
-    <h4 class="item-name">{{item.name}}</h4>
+    <h4 class="monster-name-display">
+    <img src='../../assets/armor-icon.png' *ngIf="item.type == 'Armor'" class="item-icons">
+    <img src='../../assets/weapon-icon.png' *ngIf="item.type == 'Weapon'" class="item-icons">
+    <img src='../../assets/gear-icon.png' *ngIf="item.type == 'Adventuring Gear'" class="item-icons">
+    <img src='../../assets/tools-icon.png' *ngIf="item.type == 'Tools'" class="item-icons">
+    <img src='../../assets/mount-icon.png' *ngIf="item.type == 'Mounts and Vehicles'" class="item-icons">
+    {{item.name}}</h4>
     <div class="item-body" *ngIf="detailsShown == item">
-      <p class="creator-name">Created by: {{item.creator}}</p>
+      <p class="creator-name"><span class="property-titles">Created by</span>: {{item.creator}}</p>
       <p *ngIf="findUserItems(item)">Current Campaign Count {{findUserItems(item)}}</p>
       <button (click)="addItem(item)" class="btn btn-xs btn-info">Add to Campaign</button>
+      <br><br>
       <ul>
-        <li *ngIf="item.category_range">Category Range: {{item.category_range}}</li>
-        <li *ngIf="item.weapon_category">Weapon Category: {{item.weapon_category}}</li>
-        <li *ngIf="item.armor_category">Armor Category: {{item.armor_category}}</li>
-        <li *ngIf="item.armor_class">Armor Class: {{item.armor_class.base}} (Dex Bonus: {{item.armor_class.dex_bonus}})</li>
-        <li *ngIf="item.weapon_range">Weapon Range: {{item.weapon_range}}</li>
-        <li *ngIf="item.throw_range">Throw Range: Normal {{item.throw_range.normal}} / Long: {{item.throw_range.long}}</li>
-        <li *ngIf="item.range">Range: Normal - {{item.range.normal}}</li>
-        <li *ngIf="item.cost">Cost: {{item.cost.quantity}}{{item.cost.unit}}</li>
-        <li *ngIf="item.type">Type: {{item.type}}</li>
-        <li *ngIf="item.subtype">Subtype: {{item.subtype}}</li>
-        <li *ngIf="item.desc">Description: <span *ngFor="let desc of item.desc">{{desc}}</span></li>
-        <li *ngIf="item.speed">Speed: {{item.speed.quantity}} {{item.speed.unit}}</li>
-        <li *ngIf="item.capacity">Description: {{item.capacity}}</li>
-        <li *ngIf="item.contents">Contents:
+        <li *ngIf="item.category_range"><span class="property-titles">Category Range</span>: {{item.category_range}}</li>
+        <li *ngIf="item.weapon_category"><span class="property-titles">Weapon Category</span>: {{item.weapon_category}}</li>
+        <li *ngIf="item.armor_category"><span class="property-titles">Armor Category</span>: {{item.armor_category}}</li>
+        <li *ngIf="item.armor_class"><span class="property-titles">Armor Class</span>: {{item.armor_class.base}} (Dex Bonus: {{item.armor_class.dex_bonus}})</li>
+        <li *ngIf="item.weapon_range"><span class="property-titles">Weapon Range</span>: {{item.weapon_range}}</li>
+        <li *ngIf="item.throw_range"><span class="property-titles">Throw Range</span>: Normal {{item.throw_range.normal}} / Long: {{item.throw_range.long}}</li>
+        <li *ngIf="item.range"><span class="property-titles">Range</span>: Normal - {{item.range.normal}}</li>
+        <li *ngIf="item.cost"><span class="property-titles">Cost</span>: {{item.cost.quantity}}{{item.cost.unit}}</li>
+        <li *ngIf="item.type"><span class="property-titles">Type</span>: {{item.type}}</li>
+        <li *ngIf="item.subtype"><span class="property-titles">Subtype</span>: {{item.subtype}}</li>
+        <li *ngIf="item.desc"><span class="property-titles">Description</span>: <span *ngFor="let desc of item.desc">{{desc}}</span></li>
+        <li *ngIf="item.speed"><span class="property-titles">Speed</span>: {{item.speed.quantity}} {{item.speed.unit}}</li>
+        <li *ngIf="item.capacity"><span class="property-titles">Description</span>: {{item.capacity}}</li>
+        <li *ngIf="item.contents"><span class="property-titles">Contents</span>:
           <ul><li *ngFor="let content of item.contents"><a (click)="goTo(content.item_url)">{{content.item_url}} (Quantity: {{content.quantity}})</a></li></ul></li>
-        <li *ngIf="item.weight">Weight: {{item.weight}}</li>
-        <li *ngIf="item.damage">Damage: ({{item.damage.dice_count}}d{{item.damage.dice_value}}) {{item.damage.damage_type}}</li>
-        <li *ngIf="item.twoH_damage">2H Damage:
+        <li *ngIf="item.weight"><span class="property-titles">Weight</span>: {{item.weight}}</li>
+        <li *ngIf="item.damage"><span class="property-titles">Damage</span>: ({{item.damage.dice_count}}d{{item.damage.dice_value}}) {{item.damage.damage_type}}</li>
+        <li *ngIf="item.twoH_damage"><span class="property-titles">2H Damage</span>:
            ({{item.twoH_damage.dice_count}}d{{item.twoH_damage.dice_value}}) {{item.twoH_damage.damage_type}}
         </li>
-        <li *ngIf="item.properties">Properties:
+        <li *ngIf="item.properties"><span class="property-titles">Properties</span>:
           <ul>
             <li *ngFor="let property of item.properties">{{property}}</li>
           </ul>
         </li>
-        <li *ngIf="item.stealth_disadvantage">Stealth Disadvantage: {{item.stealth_disadvantage}}</li>
-        <li *ngIf="item.special">Special: {{item.special[0]}}</li>
-        <li *ngIf="item.str_minimum">Strength Minimum: {{item.str_minimum}}</li>
+        <li *ngIf="item.stealth_disadvantage"><span class="property-titles">Stealth Disadvantage</span>: {{item.stealth_disadvantage}}</li>
+        <li *ngIf="item.special"><span class="property-titles">Special</span>: {{item.special[0]}}</li>
+        <li *ngIf="item.str_minimum"><span class="property-titles">Strength Minimum</span>: {{item.str_minimum}}</li>
       </ul>
     </div>
   </div>
