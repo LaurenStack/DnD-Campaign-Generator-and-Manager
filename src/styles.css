@@ -272,6 +272,11 @@ nav {
   color: red;
 }
 
+.char-property {
+  font-weight: bold;
+  font-size: 120%;
+}
+
 .navbar-header .dropdown {
   top: 13px;
   font-size: 20px;
