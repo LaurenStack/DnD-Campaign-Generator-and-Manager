@@ -49,6 +49,7 @@
       <p class="creator-name"><span class="property-titles">Created by</span>: {{item.creator}}</p>
       <p *ngIf="findUserItems(item)">Current Campaign Count {{findUserItems(item)}}</p>
       <button (click)="addItem(item)" class="btn btn-xs btn-info">Add to Campaign</button>
+      <br><br>
       <ul>
         <li *ngIf="item.category_range"><span class="property-titles">Category Range</span>: {{item.category_range}}</li>
         <li *ngIf="item.weapon_category"><span class="property-titles">Weapon Category</span>: {{item.weapon_category}}</li>
