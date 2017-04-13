@@ -20,7 +20,7 @@ nav {
   padding-top: 10px;
   padding-bottom: 100px;
   border: #CDC491 !important;
-  z-index: 1;
+  height: 55px;
 }
 
 .btn {
@@ -71,7 +71,7 @@ nav {
 
 .navbar {
   position: absolute;
-  top: 300px;
+  top: 370px;
   width: 90%;
   left: 5%;
   padding-bottom: -50px !important;
@@ -81,6 +81,7 @@ nav {
 .navbar-default {
   background-color: #CDC491 !important;
   border-color: #CDC491 !important;
+  height: 55px;
 }
 
 .navbar-text {
@@ -94,17 +95,18 @@ nav {
   display: flex;
   align-items: center;
   margin-left: 5%;
-  margin-top: -5%;
+  padding-top: -50px;
+  margin-top: -55px;
   margin-bottom: -100px;
   /*position: absolute;
   margin: relative;*/
 }
 
-#logOutIn {
+.logOutIn {
   background: none;
   border: none;
   position: absolute;
-  left: 92%;
+  left: 500px;
   top: 28%;
 }
 
@@ -194,10 +196,10 @@ nav {
   background: none;
   position: relative;
   border: none;
-  top: -50px;
+  top: 36px;
   color: grey;
   text-transform: uppercase;
-  left: 90%;
+  left: 70%;
 }
 
 .logOutIn:hover {
@@ -298,10 +300,13 @@ nav {
 }
 
 #logo {
-  max-width: 80%;
-  margin-left: 10.5%;
+  margin-left: 18%;
   margin-bottom: 2%;
-  margin-top: 2%;
+  margin-top: -.8px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  height: 80% !important;
 }
 
 #login-details {
@@ -311,14 +316,14 @@ nav {
 
 #displayName {
   position: relative;
-  top: -29px;
-  right: 80px;
+  top: 38px;
+  right: 9px;
 }
 
 #diceRoller {
   position: relative;
   left: 40%;
-  top: -58px;
+  top: 12px;
 }
 
 #rollHolder {
@@ -341,10 +346,14 @@ nav {
 
 #rollBtn {
   position: relative;
-  top: -58px;
+  top: 12px;
   left: 45px;
   border: none;
+}
 
+#dndcampgen {
+  position: absolute;
+  top: 32px;
 }
 
 #diceImg {

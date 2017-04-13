@@ -3,20 +3,17 @@
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">DND Campaign Gen</a>
+        <a id="dndcampgen" class="navbar-brand" href="/">DND Campaign Gen</a>
       </div>
-      <div *ngIf="isLoggedIn">
+      <!-- <div *ngIf="isLoggedIn">
         <button class="logOutIn" (click)="logout()">Logout</button>
-        </div>
-        <div *ngIf="isLoggedIn">
+        </div> -->
+        <!-- <div *ngIf="!isLoggedIn">
           <button class="logOutIn" (click)="login()">Login</button>
-        </div>
-            <!-- <div id="diceRoll" class="nav navbar-nav">
-          </div> -->
+        </div> -->
           <ul class="nav navbar-nav" id="nav-center">
             <br>
             <li><select id="diceRoller" class="btn" #dice>
-              <!-- <li id="rollHolder"><select #dice> -->
               <option value="4">D4</option>
               <option value="6">D6</option>
               <option value="8">D8</option>
@@ -31,7 +28,7 @@
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li *ngIf="!isLoggedIn"><button class="logOutIn" (click)="login()">Logout</button></li>
+          <li *ngIf="!isLoggedIn"><button class="logOutIn" (click)="login()">Login</button></li>
           <li *ngIf="isLoggedIn" id="displayName">{{user_displayName}} &nbsp;  &nbsp;</li>
           <li *ngIf="isLoggedIn"><button class="logOutIn" (click)="logout()">Logout</button></li>
         </ul>
