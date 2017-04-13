@@ -16,7 +16,7 @@
 </form>
 <canvas id="map" [width]="canvasWidth" [height]="canvasHeight" (mousemove)="showInfo($event); drawTile($event)" (mousedown)="isDrawing(true, $event)" (mouseup)="isDrawing(false, $event)" (mouseout)="isDrawing(false, $event)" ></canvas>
 
-<a href="https://eskerda.com/bsp-dungeon-generation/">This is a link to the tutorial we're using for proc gen.</a>
+<button (click)="toggleRooms()">Toggle overlay</button>
 
 
 <h3>Terrain: {{info}}</h3>

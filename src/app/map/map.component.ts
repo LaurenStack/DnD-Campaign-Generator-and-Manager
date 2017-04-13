@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
   info:string = "Initial Value";
   editType = "terrain";
   name:string = "";
+  showRooms = true;
 
   tempArray = terrainArray;
   myTerrain = JSON.parse(JSON.stringify(terrainArray)).map(terrain=>{
@@ -256,19 +257,26 @@ export class MapComponent implements OnInit {
           this.draw(this.grid[x][y])
         }//end y loop
       }//end x loop
-      for (var i = 0; i < this.rooms.length; i++) {
-        this.rooms[i].paint(this.ctx, {
-          hexcode: "rgba(10, 10, 10 , 0.5)",
-          name:"blank tile",
-          public: true,
-          user:"admin"
-        });
+      if(this.showRooms){
+
+        for (var i = 0; i < this.rooms.length; i++) {
+          this.rooms[i].paint(this.ctx, {
+            hexcode: "rgba(10, 10, 10 , 0.5)",
+            name:"blank tile",
+            public: true,
+            user:"admin"
+          });
+        }
       }
 
 
 
     },20);
 
+  }
+
+  toggleRooms(){
+    this.showRooms = !this.showRooms;
   }
 
   drawTile(eData) {
