@@ -4,12 +4,23 @@
 }
 
 body {
-  background: url('assets/paper.jpg');
+  background: url('assets/topography.png');
 }
 
 canvas {
 
 }
+
+nav {
+  /*opacity: 0.7;*/
+  /*background: #8E927C;*/
+  background: #CDC491 !important;
+  border-radius: 10px;
+  vertical-align: middle;
+  padding: 20px;
+  border: #CDC491 !important;
+}
+
 .terrain {
   border: 3px double grey;
   border-radius: 5px;
@@ -95,25 +106,39 @@ canvas {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
-  background: rgba(171, 185, 52, 0.5);
+  /*background: rgba(171, 185, 52, 0.5);*/
 }
 .item-body {
   border-radius: 10px;
   margin: 10px;
   padding: 15px;
   color: white;
-  background: rgba(183, 133, 115, 0.5);
+  /*background: rgba(183, 133, 115, 0.5);*/
 }
 
-#diceRoll {
-  margin-left: 20%;
-  margin-top: -20px;
+.navbar-default {
+  background-color: #CDC491 !important;
+  border-color: #CDC491 !important;
 }
-/*margin-left: */
 
-#rollResult {
-  font-weight: bold;
+.navbar-text {
+  position: absolute;
+  top: 3%;
+  left: 65%;
 }
+
+#logOutIn {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 92%;
+  top: 28%;
+}
+
+#logOutIn:hover {
+  color: red;
+}
+
 
 .creator-name {
   float: right;
@@ -125,28 +150,18 @@ canvas {
   top: 0;
 }
 
-nav {
-  opacity: 0.7;
-  background: rgba(188, 105, 73, 0.5);
-  border-radius: 10px;
-  vertical-align: middle;
-  padding: 20px;
-}
-
-#login-details {
-  margin-top: -20px;
-  float: right;
-}
 
 .player-details {
-  background: rgba(80, 96, 128, 0.5);
+  /*background: rgba(80, 96, 128, 0.5);*/
+  background-color: white;
   border-radius: 10px;
   padding: 15px;
   margin: 10px;
   padding-left: 50px;
 }
 .characters-details {
-  background: rgba(80, 96, 128, 0.5);
+  /*background: rgba(80, 96, 128, 0.5);*/
+  background: white;
   border-radius: 10px;
   padding: 15px;
   margin: 10px;
@@ -154,7 +169,7 @@ nav {
 }
 
 .user-items-list {
-  background: rgba(168, 172, 179, 0.5);
+  /*background: rgba(168, 172, 179, 0.5);*/
   border: solid 1px black;
   padding: 10px;
   margin: 10px;
@@ -169,4 +184,19 @@ nav {
   margin-left: 10.5%;
   margin-bottom: 2%;
   margin-top: 2%;
+}
+
+#login-details {
+  margin-top: -20px;
+  float: right;
+}
+
+#diceRoll {
+  margin-left: 20%;
+  margin-top: -20px;
+}
+/*margin-left: */
+
+#rollResult {
+  font-weight: bold;
 }
