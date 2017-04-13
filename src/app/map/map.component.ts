@@ -34,6 +34,7 @@ export class MapComponent implements OnInit {
   tempImage = new Image(16,16);
   info:string = "Initial Value";
   editType = "terrain";
+  name:string = "";
 
   tempArray = terrainArray;
   myTerrain = JSON.parse(JSON.stringify(terrainArray)).map(terrain=>{
@@ -127,17 +128,33 @@ export class MapComponent implements OnInit {
               var map = this.loggedInUser.maps[this.route.url.substring(this.route.url.lastIndexOf("/")+1)]
               this.grid = map.grid;
               this.rooms = map.rooms;
+
+              let x = 0;
+              let y = 0;
+              this.grid.forEach(row=>{
+
+                row.forEach(tile=>{
+                  let tmpImage = new Image(16,16);
+                  tmpImage.src=tile.terrain.img;
+                  tile.terrain.img = tmpImage;
+
+                  this.grid[x][y] = tile;
+
+                  y++;
+                });
+                x++;
+              });
               console.log(map);
-              //this.name = map.name
-              // this.start();
-              // for (var i = 0; i < this.rooms.length; i++) {
-              //   this.rooms[i].paint(this.ctx, {
-              //     hexcode: "rgba(10, 10, 10 , 1)",
-              //     name:"blank tile",
-              //     public: true,
-              //     user:"admin"
-              //   });
-              // }
+              this.name = map.name
+              this.start();
+              for (var i = 0; i < this.rooms.length; i++) {
+                this.rooms[i].paint(this.ctx, {
+                  hexcode: "rgba(10, 10, 10 , 1)",
+                  name:"blank tile",
+                  public: true,
+                  user:"admin"
+                });
+              }
             }
           });
         }
