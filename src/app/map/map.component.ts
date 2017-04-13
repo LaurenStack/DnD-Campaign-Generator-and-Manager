@@ -32,7 +32,6 @@ export class MapComponent implements OnInit {
   treasure = {name:"none"};
 
   tempImage = new Image(16,16);
-  terrain;// = {"#000"};
   info:string = "Initial Value";
   editType = "terrain";
 
@@ -44,6 +43,7 @@ export class MapComponent implements OnInit {
     terrain.img = tmpImage;
     return terrain;
   });
+  terrain = this.myTerrain[0];// = {"#000"};
 
 
 
@@ -91,6 +91,7 @@ export class MapComponent implements OnInit {
   loggedInUser;
   terrainImgArray = [];
   ngOnInit() {
+
     // this.tempImage = document.getElementById("blankTile");
     this.tempImage.src = '../../assets/blank.png';
     let tmpArray = [];
@@ -109,7 +110,7 @@ export class MapComponent implements OnInit {
       user:"admin"
     };// = {"#000"};
     this.terrainImgArray = tmpArray;
-    // console.log(this.terrainImgArray);
+    console.log(this.myTerrain);
     this.authService.af.auth.subscribe(
       (auth) => {
         if (auth) {

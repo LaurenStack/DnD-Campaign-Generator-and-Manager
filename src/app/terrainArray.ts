@@ -1,5 +1,12 @@
   export const terrainArray = [
     {
+      "img":"../assets/tiles/blank.png",
+      "hexcode" : "#ffffff",
+      "name" : "wall",
+      "public" : true,
+      "user" : "admin"
+    },
+    {
       "img":"../assets/tiles/stone.png",
       "hexcode" : "#dddddd",
       "name" : "stone",
