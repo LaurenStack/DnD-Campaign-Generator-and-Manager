@@ -113,5 +113,9 @@ export class ItemsViewComponent implements OnInit {
     this.searchValue = val;
   }
 
+  putDashes(input) {
+    return input.replace(/\s+/g, '-');
+  }
+
 
 }
