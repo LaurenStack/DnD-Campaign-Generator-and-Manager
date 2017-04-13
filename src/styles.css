@@ -202,14 +202,32 @@ nav {
   padding: 15px;
   margin: 10px;
   padding-left: 50px;
+  background: url('assets/bg.png');
+  border: solid 1px gray;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #175389;
+  text-shadow: 3px 3px 5px white;
 }
+
+.player-details a {
+  color: white;
+  text-shadow: 2px 2px 3px black;
+  font-size: 130%;
+}
+.player-details a:hover {
+  color: black;
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 130%;
+}
+
 .characters-details {
   background: rgba(80, 96, 128, 0.7);
   border-radius: 20px;
   padding: 15px;
   margin: 10px;
   background: url('assets/warrior.jpg');
-  border: solid 1px gray;
   background-repeat: no-repeat;
   background-size: cover;
   border: 2px solid black;
@@ -223,14 +241,35 @@ nav {
 }
 
 .user-items-list {
+  color: black;
+  text-shadow: none;
+  margin-left: 5px;
   background: rgba(168, 172, 179, 0.5);
   border: solid 1px black;
   padding: 10px;
   margin: 10px;
 }
 
-.user-items-list li {
-  list-style: none;
+.user-items-list p {
+  font-size: 120%;
+}
+
+.chosen-name {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.fa {
+  cursor: pointer;
+  font-size: 150%;
+}
+
+.fa-plus-square {
+  color: green;
+}
+
+.fa-minus-square {
+  color: red;
 }
 
 .navbar-header .dropdown {
