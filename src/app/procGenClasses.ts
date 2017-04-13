@@ -37,7 +37,7 @@ rchild:any;
   }
 
   paint(ctx) {
-    // 
+    //
     // this.leaf.paint(ctx);
     // if (this.lchild !== null) {
     //   this.lchild.paint(ctx);
@@ -46,7 +46,7 @@ rchild:any;
     //   this.rchild.paint(ctx);
     // }
     //
-    // 
+    //
   }
 
 
@@ -83,7 +83,7 @@ export class Container {
     // ctx.lineWidth = 2;
     // ctx.strokeRect(this.x*25, this.y*25,
     // this.width/**25*/, this.height/**25*/)//25 is SQUARE/**25*/
-    // 
+    //
   }
 
 }
@@ -93,8 +93,8 @@ export class BSP {
 
   split_container(container, iter, DISCARD_BY_RATIO, H_RATIO, W_RATIO){
     var root = new Tree(container);
-    // 
-    // 
+    //
+    //
     if(iter !== 0){
       var sr = this.random_split(container, DISCARD_BY_RATIO, H_RATIO, W_RATIO);
       root.lchild = this.split_container(sr[0],iter-1,DISCARD_BY_RATIO, H_RATIO, W_RATIO);
@@ -103,7 +103,7 @@ export class BSP {
     return root;
   }
   random_split(container, DISCARD_BY_RATIO, H_RATIO, W_RATIO){
-    // 
+    //
     var r1,r2;
     if(random(0,1)===0){//vertical
       r1 = new Container(container.x, container.y, random(1,container.width), container.height);
@@ -144,20 +144,28 @@ export class Room {
   width;
   height;
 
-  constructor(container) {
+  constructor(container, isRandom) {
     let divisor = 3;
-    this.x = container.x + random(0, Math.floor(container.width/divisor));
-    this.y = container.y + random(0, Math.floor(container.height/divisor));
-    this.width = container.width //- (this.x - container.x);
-    this.height = container.height //- (this.y - container.y);
-    this.width -= random(0, this.width/divisor);
-    this.height -= random(0, this.width/divisor);
+    if(isRandom){
+      this.x = container.x + random(0, Math.floor(container.width/divisor));
+      this.y = container.y + random(0, Math.floor(container.height/divisor));
+      this.width = container.width //- (this.x - container.x);
+      this.height = container.height //- (this.y - container.y);
+      this.width -= random(0, this.width/divisor);
+      this.height -= random(0, this.width/divisor);
+
+    } else {
+      this.x = container.x;
+      this.y = container.y;
+      this.width = container.width
+      this.height = container.height
+    }
   }
 
   paint(ctx, terrain) {
     let multiplier = 3;
     ctx.fillStyle = terrain.hexcode;
-    
+
     ctx.fillRect(this.x * multiplier, this.y *  multiplier, this.width, this.height);
   }
 }

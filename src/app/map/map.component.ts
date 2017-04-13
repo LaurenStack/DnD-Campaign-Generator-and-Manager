@@ -127,7 +127,9 @@ export class MapComponent implements OnInit {
               //get map from service
               var map = this.loggedInUser.maps[this.route.url.substring(this.route.url.lastIndexOf("/")+1)]
               this.grid = map.grid;
-              this.rooms = map.rooms;
+              this.rooms = map.rooms.map(room=>{
+                return new Room(new Container(room.x, room.y, room.width, room.height), false);
+              });
 
               let x = 0;
               let y = 0;
@@ -185,7 +187,7 @@ export class MapComponent implements OnInit {
         console.log(leaves);
 
         for (var i = 0; i < leaves.length; i++) {
-          this.rooms.push(new Room(leaves[i]));
+          this.rooms.push(new Room(leaves[i], true));
         }
         for (var i = 0; i < this.rooms.length; i++) {
           this.rooms[i].paint(this.ctx, {
