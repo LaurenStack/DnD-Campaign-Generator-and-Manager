@@ -79,7 +79,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, "test"),
     RouterModule.forRoot(routes)
   ],
   providers: [AuthService, UserService],

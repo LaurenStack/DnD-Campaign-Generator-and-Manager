@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+//import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 
@@ -11,11 +12,11 @@ export class UserService {
   items: FirebaseListObservable<any[]>;
   loggedInUser: any;
 
-  constructor(private angularFire: AngularFire) {
-    this.users = angularFire.database.list('users');
-    this.monsters = angularFire.database.list('monsters');
-    this.items = angularFire.database.list('items');
-    this.terrainArray = angularFire.database.list('terrain');
+  constructor(private db: AngularFireDatabase) {
+    this.users = db.list('users');
+    this.monsters = db.list('monsters');
+    this.items = db.list('items');
+    this.terrainArray = db.list('terrain');
   }
 
   getUsers() {
@@ -32,7 +33,7 @@ export class UserService {
   }
 
   getUserByEmail(email: string) {
-    var user = this.angularFire.database.list('/users/', {
+    var user = this.db.list('/users/', {
       query: {
         orderByChild: 'email',
         equalTo: email
@@ -50,11 +51,11 @@ export class UserService {
   }
 
   getUserById(userId: string) {
-    return this.angularFire.database.object('/users/' + userId);
+    return this.db.object('/users/' + userId);
   }
 
   getItemById(itemId: string) {
-    return this.angularFire.database.object('/items/' + itemId);
+    return this.db.object('/items/' + itemId);
   }
 
   getAllMonsters() {
